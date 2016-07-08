@@ -5,11 +5,47 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="LocalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Workers">
+        <EntityType Name="Members">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Birthdate" Type="datetime2" Precision="7" />
+          <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Modified" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMembershipType" Type="int" Nullable="false" />
+          <Property Name="IdMember" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MembershipType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Modified" Type="datetime2" Precision="7" />
+          <Property Name="MonthsNumber" Type="int" Nullable="false" />
+          <Property Name="DaysNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -20,21 +56,107 @@
           <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Modified" Type="datetime2" Precision="7" />
         </EntityType>
+        <Association Name="FK_Memberships_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="IdMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memberships_MembershipType">
+          <End Role="MembershipType" Type="Self.MembershipType" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="IdMembershipType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="LocalDBModelStoreContainer">
-          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Memberships" EntityType="Self.Memberships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipType" EntityType="Self.MembershipType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Memberships_Members" Association="Self.FK_Memberships_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memberships_MembershipType" Association="Self.FK_Memberships_MembershipType">
+            <End Role="MembershipType" EntitySet="MembershipType" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LocalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="LocalDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Workers" EntityType="LocalDBModel.Workers" />
+          <EntitySet Name="Members" EntityType="LocalDBModel.Members" />
+          <EntitySet Name="Memberships" EntityType="LocalDBModel.Memberships" />
+          <EntitySet Name="MembershipType" EntityType="LocalDBModel.MembershipType" />
+          <EntitySet Name="Users" EntityType="LocalDBModel.Users" />
+          <AssociationSet Name="FK_Memberships_Members" Association="LocalDBModel.FK_Memberships_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Memberships_MembershipType" Association="LocalDBModel.FK_Memberships_MembershipType">
+            <End Role="MembershipType" EntitySet="MembershipType" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Workers">
+        <EntityType Name="Members">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthdate" Type="DateTime" Precision="7" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Modified" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Memberships" Relationship="LocalDBModel.FK_Memberships_Members" FromRole="Members" ToRole="Memberships" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMembershipType" Type="Int32" Nullable="false" />
+          <Property Name="IdMember" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Members" Relationship="LocalDBModel.FK_Memberships_Members" FromRole="Memberships" ToRole="Members" />
+          <NavigationProperty Name="MembershipType" Relationship="LocalDBModel.FK_Memberships_MembershipType" FromRole="Memberships" ToRole="MembershipType" />
+        </EntityType>
+        <EntityType Name="MembershipType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Modified" Type="DateTime" Precision="7" />
+          <Property Name="MonthsNumber" Type="Int32" Nullable="false" />
+          <Property Name="DaysNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Memberships" Relationship="LocalDBModel.FK_Memberships_MembershipType" FromRole="MembershipType" ToRole="Memberships" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -45,15 +167,78 @@
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Modified" Type="DateTime" Precision="7" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_Memberships_Members">
+          <End Type="LocalDBModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="LocalDBModel.Memberships" Role="Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="IdMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Memberships_MembershipType">
+          <End Type="LocalDBModel.MembershipType" Role="MembershipType" Multiplicity="1" />
+          <End Type="LocalDBModel.Memberships" Role="Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="IdMembershipType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LocalDBModelStoreContainer" CdmEntityContainer="LocalDBEntities">
-          <EntitySetMapping Name="Workers">
-            <EntityTypeMapping TypeName="LocalDBModel.Workers">
-              <MappingFragment StoreEntitySet="Workers">
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="LocalDBModel.Members">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="LocalDBModel.Memberships">
+              <MappingFragment StoreEntitySet="Memberships">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="IdMember" ColumnName="IdMember" />
+                <ScalarProperty Name="IdMembershipType" ColumnName="IdMembershipType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipType">
+            <EntityTypeMapping TypeName="LocalDBModel.MembershipType">
+              <MappingFragment StoreEntitySet="MembershipType">
+                <ScalarProperty Name="DaysNumber" ColumnName="DaysNumber" />
+                <ScalarProperty Name="MonthsNumber" ColumnName="MonthsNumber" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LocalDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />

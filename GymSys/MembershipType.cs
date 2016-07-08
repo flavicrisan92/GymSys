@@ -12,17 +12,22 @@ namespace GymSys
     using System;
     using System.Collections.Generic;
     
-    public partial class Workers
+    public partial class MembershipType
     {
-        public System.Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Phone { get; set; }
-        public string Email { get; set; }
+        public MembershipType()
+        {
+            this.Memberships = new HashSet<Memberships>();
+        }
+    
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public Nullable<double> Price { get; set; }
         public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
+        public int MonthsNumber { get; set; }
+        public int DaysNumber { get; set; }
+    
+        public virtual ICollection<Memberships> Memberships { get; set; }
     }
 }

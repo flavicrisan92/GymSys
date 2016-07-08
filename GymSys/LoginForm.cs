@@ -21,23 +21,20 @@ namespace GymSys
             }
             try
             {
-                if (!db.Workers.Any())
+                if (!db.Users.Any())
                 {
-                    Workers newWorker = new Workers
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = "Crisan",
-                        Surname = "Flavius",
-                        Username = "flavicrisan",
-                        Password = "password",
-                        Created = DateTime.Now,
-                        IsActive = true
-                    };
-                    db.Workers.Add(newWorker);
+                    Users user = new Users();
+                    user.Name = "Crisan";
+                    user.Surname = "Flavius";
+                    user.Username = "flavicrisan";
+                    user.Password = "password";
+                    user.Created = DateTime.Now;
+                    user.IsActive = true;
+                    db.Users.Add(user);
                     db.SaveChanges();
                 }
                 var worker =
-                    db.Workers
+                    db.Users
                         .FirstOrDefault(w => w.Username == txt_UserName.Text && w.Password == txt_Password.Text && w.IsActive);
                 if (worker != null)
                 {

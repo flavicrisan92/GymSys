@@ -98,9 +98,18 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Members.cs">
+      <DependentUpon>LocalDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Memberships.cs">
+      <DependentUpon>LocalDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MembershipType.cs">
+      <DependentUpon>LocalDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Workers.cs">
+    <Compile Include="Users.cs">
       <DependentUpon>LocalDbModel.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="LoginForm.resx">
@@ -142,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LocalDB.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="LocalDbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -156,7 +165,7 @@
     </Content>
     <Content Include="LocalDB_log.ldf">
       <DependentUpon>LocalDB.mdf</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
