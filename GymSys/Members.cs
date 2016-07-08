@@ -26,6 +26,7 @@ namespace GymSys
         public Nullable<System.DateTime> Birthdate { get; set; }
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
+        public bool IsActive { get; set; }
     
         public virtual ICollection<Memberships> Memberships { get; set; }
     }

@@ -16,6 +16,7 @@
           <Property Name="Birthdate" Type="datetime2" Precision="7" />
           <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Modified" Type="datetime2" Precision="7" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Memberships">
           <Key>
@@ -123,6 +124,7 @@
           <Property Name="Birthdate" Type="DateTime" Precision="7" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Modified" Type="DateTime" Precision="7" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Memberships" Relationship="LocalDBModel.FK_Memberships_Members" FromRole="Members" ToRole="Memberships" />
         </EntityType>
         <EntityType Name="Memberships">
@@ -200,6 +202,7 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="LocalDBModel.Members">
               <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />

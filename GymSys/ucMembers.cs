@@ -27,9 +27,10 @@ namespace GymSys
             LoadMembers();
         }
 
-        private void LoadMembers()
+        public void LoadMembers()
         {
             var members = from member in db.Members
+                          where member.IsActive
                           orderby member.Created descending
                           select new
                           {
@@ -45,6 +46,58 @@ namespace GymSys
 
             var dataGridViewColumn = dataGVMembers.Columns["Id"];
             if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+        }
+
+        private void btnNewMember_Click(object sender, EventArgs e)
+        {
+            NewMemberForm newMemberForm = new NewMemberForm();
+            newMemberForm.Show();
+        }
+
+        private void dataGVMembers_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenuStrip myMenu = new ContextMenuStrip();
+                int position = dataGVMembers.HitTest(e.X, e.Y).RowIndex;
+                
+
+                if (position >= 0 && dataGVMembers.SelectedRows.Count == 1)
+                {
+                    myMenu.Items.Add("Editare").Name = "Editare";
+                    myMenu.Items.Add("Stergere").Name = "Stergere";
+                }
+                else if(position >= 0 && dataGVMembers.SelectedRows.Count > 1)
+                {
+                    myMenu.Items.Add("Stergere").Name = "Stergere";
+                }
+                myMenu.Show(dataGVMembers, new Point(e.X, e.Y));
+                myMenu.ItemClicked += MyMenu_ItemClicked;
+            }
+        }
+
+        private void MyMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch (e.ClickedItem.Name)
+            {
+                case "Editare":
+                    foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
+                    {
+                        string id = row.Cells[0].Value.ToString();
+                    }
+                    break;
+                case "Stergere":
+                    //Todo
+                    foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
+                    {
+                        string id = row.Cells[0].Value.ToString();
+                        var memberToDelete = db.Members.FirstOrDefault(m => m.Id == int.Parse(id));
+                        if (memberToDelete != null) memberToDelete.IsActive = false;
+                        db.SaveChanges();
+                    }
+                    Instance.LoadMembers();
+                    break;
+            }
         }
     }
 }
