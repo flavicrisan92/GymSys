@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.btnMembers = new System.Windows.Forms.Button();
+            this.panelMain = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btnLogOut
@@ -42,14 +44,34 @@
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
+            // btnMembers
+            // 
+            this.btnMembers.Location = new System.Drawing.Point(13, 11);
+            this.btnMembers.Name = "btnMembers";
+            this.btnMembers.Size = new System.Drawing.Size(75, 23);
+            this.btnMembers.TabIndex = 2;
+            this.btnMembers.Text = "Abonati";
+            this.btnMembers.UseVisualStyleBackColor = true;
+            this.btnMembers.Click += new System.EventHandler(this.btnMembers_Click);
+            // 
+            // panelMain
+            // 
+            this.panelMain.Location = new System.Drawing.Point(12, 64);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(925, 476);
+            this.panelMain.TabIndex = 3;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 552);
+            this.Controls.Add(this.panelMain);
+            this.Controls.Add(this.btnMembers);
             this.Controls.Add(this.btnLogOut);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -57,6 +79,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnMembers;
+        private System.Windows.Forms.Panel panelMain;
     }
 }
 

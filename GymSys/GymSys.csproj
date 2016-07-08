@@ -109,6 +109,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucMembers.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucMembers.Designer.cs">
+      <DependentUpon>ucMembers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users.cs">
       <DependentUpon>LocalDbModel.tt</DependentUpon>
     </Compile>
@@ -128,6 +134,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ucMembers.resx">
+      <DependentUpon>ucMembers.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="LocalDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LocalDbModel.Designer.cs</LastGenOutput>
@@ -147,11 +156,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="LocalDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="LocalDbModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -165,7 +176,7 @@
     </Content>
     <Content Include="LocalDB_log.ldf">
       <DependentUpon>LocalDB.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +193,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -23,5 +23,24 @@ namespace GymSys
             LoginForm loginForm = new LoginForm();
             loginForm.Show();
         }
+
+        private void btnMembers_Click(object sender, EventArgs e)
+        {
+            if (!panelMain.Controls.Contains(ucMembers.Instance))
+            {
+                panelMain.Controls.Add(ucMembers.Instance);
+                ucMembers.Instance.Dock = DockStyle.Fill;
+                ucMembers.Instance.BringToFront();
+            }
+            else
+            {
+                ucMembers.Instance.BringToFront();
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Maximized;
+        }
     }
 }

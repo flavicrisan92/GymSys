@@ -27,7 +27,7 @@ namespace GymSys
                     user.Name = "Crisan";
                     user.Surname = "Flavius";
                     user.Username = "flavicrisan";
-                    user.Password = "password";
+                    user.Password = "123";
                     user.Created = DateTime.Now;
                     user.IsActive = true;
                     db.Users.Add(user);
@@ -50,6 +50,14 @@ namespace GymSys
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txt_Password_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_Login_Click(sender, e);
             }
         }
     }
