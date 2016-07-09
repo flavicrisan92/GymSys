@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GymSys
@@ -14,12 +9,75 @@ namespace GymSys
     public partial class NewMemberForm : Form
     {
         LocalDBEntities db = new LocalDBEntities();
-        public NewMemberForm()
+        private Actions.Operations _operation;
+        public NewMemberForm(Members member, Actions.Operations operation)
         {
+            _operation = operation;
+            
             InitializeComponent();
+            CheckOperation(operation, member);
             SetUpDatetimeFields();
             SetUpComboBoxMembershipTypeSource();
+            SetUpPeriod("1");
+        }
 
+        private void CheckOperation(Actions.Operations operation, Members member)
+        {
+            switch (operation)
+            {
+                case Actions.Operations.AddMember:
+                    break;
+                case Actions.Operations.EditMember:
+                    break;
+                case Actions.Operations.AddSubscription:
+                    SetUpMember(member);
+                    SetupFrameAddSubscription();
+                    break;
+                case Actions.Operations.EditSubscription:
+                    break;
+
+            }
+        }
+
+        private void SetupFrameAddSubscription()
+        {
+            this.Text = "Abonament nou";
+            
+            //Set readonly
+            txtCode.ReadOnly = true;
+            txtName.ReadOnly = true;
+            txtSurname.ReadOnly = true;
+            dateTimePickerBirthDate.Enabled = false;
+        }
+        private void SetupFrameAddAddMember()
+        {
+            this.Text = "Abonat nou";
+        }
+
+        private void SetUpMember(Members member)
+        {
+            txtCode.Text = member.Code.ToString();
+            txtName.Text = member.Name;
+            txtSurname.Text = member.Surname;
+            if (member.Birthdate != null) dateTimePickerBirthDate.Value = member.Birthdate.Value;
+        }
+
+        private void SetUpPeriod(string number)
+        {
+            List<string> periodList = new List<string>();
+            if (number != "1")
+            {
+                periodList.Add("Luni");
+                periodList.Add("Zile");
+                periodList.Add("Saptamani");
+            }
+            else
+            {
+                periodList.Add("Luna");
+                periodList.Add("Zi");
+                periodList.Add("Saptamana");
+            }
+            comboBoxPeriod.DataSource = periodList;
         }
 
         private void SetUpComboBoxMembershipTypeSource()
@@ -32,49 +90,56 @@ namespace GymSys
         private void SetUpDatetimeFields()
         {
             dateTimePickerStartMembership.Format = DateTimePickerFormat.Custom;
-            dateTimePickerStartMembership.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            dateTimePickerStartMembership.CustomFormat = "dd/MM/yyyy";
+
+            dateTimePickerEndDateMembership.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEndDateMembership.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerEndDateMembership.Value = dateTimePickerStartMembership.Value.AddMonths(1);
 
             dateTimePickerBirthDate.Format = DateTimePickerFormat.Custom;
-            dateTimePickerBirthDate.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            dateTimePickerBirthDate.CustomFormat = "dd/MM/yyyy";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Validate())
+            if(Utils.ValidateNewUserAndMembership(txtName.Text,txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex))
             {
-                Members member = new Members();
-                member.Code = int.Parse(txtCode.Text);
-                member.Name = txtName.Text;
-                member.Surname = txtSurname.Text;
-                member.Birthdate = DateTime.Parse(dateTimePickerBirthDate.Text);
-                member.Created = DateTime.Now;
-                member.IsActive = true;
-
-                Memberships memberships = new Memberships();
-                memberships.IdMember = memberships.Id;
-                memberships.IdMembershipType = db.MembershipType.Where(m=>m.Type == comboBoxMembershipType.Text).Select(m=>m.Id).FirstOrDefault();
-                memberships.StartDate = DateTime.Parse(dateTimePickerStartMembership.Text);
-                switch (comboBoxPeriod.Text)
+                int code;
+                int.TryParse(txtCode.Text, out code);
+                Members member = null;
+                if (_operation == Actions.Operations.AddMember)
                 {
-                    case "Luni":
-                        memberships.EndDate =
-                            memberships.StartDate.AddMonths(
-                                int.Parse(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture)));
-                        break;
-                    case "Zile":
-                        memberships.EndDate =
-                memberships.StartDate.AddDays(
-                    int.Parse(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture)));
-                        break;
-                    case "Saptamani":
-                        memberships.EndDate =
-                memberships.StartDate.AddDays(7 *
-                    int.Parse(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture)));
-                        break;
+                    member = new Members
+                    {
+                        Code = code,
+                        Name = txtName.Text,
+                        Surname = txtSurname.Text,
+                        Birthdate = DateTime.Parse(dateTimePickerBirthDate.Text),
+                        Created = DateTime.Now,
+                        IsActive = true
+                    };
+                    db.Members.Add(member);
                 }
-                memberships.IsActive = true;
-                db.Members.Add(member);
-                db.Memberships.Add(memberships);
+                else if(_operation == Actions.Operations.AddSubscription)
+                {
+                    member = db.Members.FirstOrDefault(m => m.Code == code);
+                }
+                if (member != null)
+                {
+                    Memberships memberships = new Memberships
+                    {
+                        IdMember = member.Id,
+                        IdMembershipType =
+                            db.MembershipType.Where(m => m.Type == comboBoxMembershipType.Text)
+                                .Select(m => m.Id)
+                                .FirstOrDefault(),
+                        StartDate = Utils.GetDateTimeParsed(dateTimePickerStartMembership.Text),
+                        EndDate = Utils.GetDateTimeParsed(dateTimePickerEndDateMembership.Text + " 23:59:59"),
+                        IsActive = true
+                    };
+
+                    db.Memberships.Add(memberships);
+                }
                 try
                 {
                     db.SaveChanges();
@@ -83,39 +148,53 @@ namespace GymSys
                 {
                     // ignored
                 }
-                this.Close();
-             ucMembers.Instance.LoadMembers();
+                Close();
+                ucMembers.Instance.LoadMembers();
+                //ucMembers.Instance.LoadSubscription();
             }
         }
 
-        private new bool Validate()
+        private void numericUpDownPeriod_ValueChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCode.Text))
-            {
-                return false;
-            }
-            if(string.IsNullOrEmpty(txtName.Text))
-            {
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtSurname.Text))
-            {
-                return false;
-            }
-            if (numericUpDownPeriod.Text == "0")
-            {
-                return false;
-            }
-            if (comboBoxMembershipType.SelectedIndex < 0)
-            {
-                return false;
-            }
-            return true;
+            GetNumbericDropdownNumber();
         }
 
-        private void txtCode_KeyUp(object sender, KeyEventArgs e)
+        private void GetNumbericDropdownNumber()
         {
+            var selectedcomboPeriodValue = comboBoxPeriod.SelectedIndex;
+            SetUpPeriod(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture));
+            comboBoxPeriod.SelectedIndex = selectedcomboPeriodValue;
+            SetEndDate();
+        }
 
+        private void SetEndDate()
+        {
+            var startDate = Utils.GetDateTimeParsed(dateTimePickerStartMembership.Text);
+            if (comboBoxPeriod.Text.StartsWith("Lun"))
+            {
+                dateTimePickerEndDateMembership.Value =
+                    startDate.AddMonths(
+                        int.Parse(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture)));
+            }
+            else if (comboBoxPeriod.Text.StartsWith("Zi"))
+            {
+                dateTimePickerEndDateMembership.Value =
+                   startDate.AddDays(
+                        int.Parse(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture)));
+            }
+            else if (comboBoxPeriod.Text.StartsWith("Sapt"))
+            {
+                dateTimePickerEndDateMembership.Value =
+                    startDate.AddDays(7 *
+                                                  int.Parse(
+                                                      numericUpDownPeriod.Value.ToString(
+                                                          CultureInfo.InvariantCulture)));
+            }
+        }
+
+        private void comboBoxPeriod_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetEndDate();
         }
     }
 }

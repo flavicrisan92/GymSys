@@ -36,7 +36,7 @@
             // btnLogOut
             // 
             this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(862, 12);
+            this.btnLogOut.Location = new System.Drawing.Point(1494, 12);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(75, 23);
             this.btnLogOut.TabIndex = 0;
@@ -56,16 +56,19 @@
             // 
             // panelMain
             // 
+            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMain.Location = new System.Drawing.Point(12, 64);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(925, 476);
+            this.panelMain.Size = new System.Drawing.Size(1557, 476);
             this.panelMain.TabIndex = 3;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 552);
+            this.ClientSize = new System.Drawing.Size(1581, 552);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.btnMembers);
             this.Controls.Add(this.btnLogOut);
