@@ -32,7 +32,7 @@
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtCode = new System.Windows.Forms.TextBox();
-            this.btnCode = new System.Windows.Forms.Label();
+            this.lblCode = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblBirthDate = new System.Windows.Forms.Label();
             this.lblSurname = new System.Windows.Forms.Label();
@@ -46,11 +46,14 @@
             this.comboBoxMembershipType = new System.Windows.Forms.ComboBox();
             this.dateTimePickerEndDateMembership = new System.Windows.Forms.DateTimePicker();
             this.lblEndDateMembership = new System.Windows.Forms.Label();
+            this.txtIdMembership = new System.Windows.Forms.TextBox();
+            this.txtIdMember = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriod)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePickerBirthDate
             // 
+            this.dateTimePickerBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePickerBirthDate.Location = new System.Drawing.Point(185, 139);
             this.dateTimePickerBirthDate.Name = "dateTimePickerBirthDate";
             this.dateTimePickerBirthDate.Size = new System.Drawing.Size(209, 20);
@@ -80,21 +83,18 @@
             this.txtCode.Size = new System.Drawing.Size(209, 20);
             this.txtCode.TabIndex = 17;
             // 
-            // btnCode
+            // lblCode
             // 
-            this.btnCode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCode.AutoSize = true;
-            this.btnCode.Location = new System.Drawing.Point(28, 27);
-            this.btnCode.Name = "btnCode";
-            this.btnCode.Size = new System.Drawing.Size(56, 15);
-            this.btnCode.TabIndex = 16;
-            this.btnCode.Text = "Cod card";
+            this.lblCode.AutoSize = true;
+            this.lblCode.Location = new System.Drawing.Point(28, 27);
+            this.lblCode.Name = "lblCode";
+            this.lblCode.Size = new System.Drawing.Size(56, 15);
+            this.lblCode.TabIndex = 16;
+            this.lblCode.Text = "Cod card";
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Location = new System.Drawing.Point(185, 388);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(209, 23);
@@ -105,7 +105,6 @@
             // 
             // lblBirthDate
             // 
-            this.lblBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBirthDate.AutoSize = true;
             this.lblBirthDate.Location = new System.Drawing.Point(28, 139);
             this.lblBirthDate.Name = "lblBirthDate";
@@ -115,7 +114,6 @@
             // 
             // lblSurname
             // 
-            this.lblSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSurname.AutoSize = true;
             this.lblSurname.Location = new System.Drawing.Point(28, 102);
             this.lblSurname.Name = "lblSurname";
@@ -125,7 +123,6 @@
             // 
             // lblName
             // 
-            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(28, 66);
             this.lblName.Name = "lblName";
@@ -135,7 +132,7 @@
             // 
             // lblStartDate
             // 
-            this.lblStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStartDate.AutoSize = true;
             this.lblStartDate.Location = new System.Drawing.Point(28, 263);
             this.lblStartDate.Name = "lblStartDate";
@@ -145,7 +142,7 @@
             // 
             // lblPeriod
             // 
-            this.lblPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPeriod.AutoSize = true;
             this.lblPeriod.Location = new System.Drawing.Point(29, 308);
             this.lblPeriod.Name = "lblPeriod";
@@ -155,6 +152,7 @@
             // 
             // dateTimePickerStartMembership
             // 
+            this.dateTimePickerStartMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePickerStartMembership.Location = new System.Drawing.Point(194, 263);
             this.dateTimePickerStartMembership.Name = "dateTimePickerStartMembership";
             this.dateTimePickerStartMembership.Size = new System.Drawing.Size(200, 20);
@@ -162,6 +160,7 @@
             // 
             // numericUpDownPeriod
             // 
+            this.numericUpDownPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDownPeriod.Location = new System.Drawing.Point(194, 308);
             this.numericUpDownPeriod.Minimum = new decimal(new int[] {
             1,
@@ -181,6 +180,7 @@
             // 
             // comboBoxPeriod
             // 
+            this.comboBoxPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPeriod.FormattingEnabled = true;
             this.comboBoxPeriod.Location = new System.Drawing.Point(275, 307);
@@ -191,7 +191,7 @@
             // 
             // lblMembershipType
             // 
-            this.lblMembershipType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMembershipType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMembershipType.AutoSize = true;
             this.lblMembershipType.Location = new System.Drawing.Point(29, 227);
             this.lblMembershipType.Name = "lblMembershipType";
@@ -201,6 +201,7 @@
             // 
             // comboBoxMembershipType
             // 
+            this.comboBoxMembershipType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxMembershipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMembershipType.FormattingEnabled = true;
             this.comboBoxMembershipType.Location = new System.Drawing.Point(194, 221);
@@ -210,6 +211,7 @@
             // 
             // dateTimePickerEndDateMembership
             // 
+            this.dateTimePickerEndDateMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePickerEndDateMembership.Location = new System.Drawing.Point(193, 348);
             this.dateTimePickerEndDateMembership.Name = "dateTimePickerEndDateMembership";
             this.dateTimePickerEndDateMembership.Size = new System.Drawing.Size(200, 20);
@@ -217,7 +219,7 @@
             // 
             // lblEndDateMembership
             // 
-            this.lblEndDateMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEndDateMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblEndDateMembership.AutoSize = true;
             this.lblEndDateMembership.Location = new System.Drawing.Point(27, 348);
             this.lblEndDateMembership.Name = "lblEndDateMembership";
@@ -225,11 +227,31 @@
             this.lblEndDateMembership.TabIndex = 29;
             this.lblEndDateMembership.Text = "Data sfarsit abonament";
             // 
+            // txtIdMembership
+            // 
+            this.txtIdMembership.Location = new System.Drawing.Point(358, 180);
+            this.txtIdMembership.Name = "txtIdMembership";
+            this.txtIdMembership.ReadOnly = true;
+            this.txtIdMembership.Size = new System.Drawing.Size(35, 20);
+            this.txtIdMembership.TabIndex = 31;
+            this.txtIdMembership.Visible = false;
+            // 
+            // txtIdMember
+            // 
+            this.txtIdMember.Location = new System.Drawing.Point(193, 180);
+            this.txtIdMember.Name = "txtIdMember";
+            this.txtIdMember.ReadOnly = true;
+            this.txtIdMember.Size = new System.Drawing.Size(44, 20);
+            this.txtIdMember.TabIndex = 32;
+            this.txtIdMember.Visible = false;
+            // 
             // NewMemberForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 430);
+            this.Controls.Add(this.txtIdMember);
+            this.Controls.Add(this.txtIdMembership);
             this.Controls.Add(this.dateTimePickerEndDateMembership);
             this.Controls.Add(this.lblEndDateMembership);
             this.Controls.Add(this.comboBoxMembershipType);
@@ -243,7 +265,7 @@
             this.Controls.Add(this.txtSurname);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtCode);
-            this.Controls.Add(this.btnCode);
+            this.Controls.Add(this.lblCode);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblBirthDate);
             this.Controls.Add(this.lblSurname);
@@ -265,7 +287,7 @@
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtCode;
-        private System.Windows.Forms.Label btnCode;
+        private System.Windows.Forms.Label lblCode;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblBirthDate;
         private System.Windows.Forms.Label lblSurname;
@@ -279,5 +301,7 @@
         private System.Windows.Forms.ComboBox comboBoxMembershipType;
         private System.Windows.Forms.DateTimePicker dateTimePickerEndDateMembership;
         private System.Windows.Forms.Label lblEndDateMembership;
+        private System.Windows.Forms.TextBox txtIdMembership;
+        private System.Windows.Forms.TextBox txtIdMember;
     }
 }

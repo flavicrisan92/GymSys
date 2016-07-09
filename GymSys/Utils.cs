@@ -4,11 +4,13 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GymSys
 {
     public class Utils
     {
+        static LocalDBEntities db = new LocalDBEntities();
         public static DateTime GetDateTimeParsed(string datetimeString)
         {
             if (!datetimeString.Contains(":"))
@@ -29,10 +31,17 @@ namespace GymSys
             return result;
         }
 
-        public static bool ValidateNewUserAndMembership(string name, string surname, string code, string numericPeriod, int membershipType)
+        public static bool ValidateNewUserAndMembership(int id, string name, string surname, string code, string numericPeriod, int membershipType, Actions.Operations operation)
         {
-            if (string.IsNullOrEmpty(code))
+            int codeint;
+            int.TryParse(code, out codeint);
+            if (codeint == 0)
             {
+                return false;
+            }
+            if (operation != Actions.Operations.AddSubscription && db.Members.Any(m => m.Code == codeint && m.Id != id))
+            {
+                MessageBox.Show("Acest cod este atasat altui abonat!");
                 return false;
             }
             if (string.IsNullOrEmpty(name))

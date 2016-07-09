@@ -102,16 +102,23 @@
             // 
             // dataGvMembershipHist
             // 
+            this.dataGvMembershipHist.AllowUserToAddRows = false;
+            this.dataGvMembershipHist.AllowUserToDeleteRows = false;
             this.dataGvMembershipHist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGvMembershipHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGvMembershipHist.Location = new System.Drawing.Point(939, 56);
+            this.dataGvMembershipHist.MultiSelect = false;
             this.dataGvMembershipHist.Name = "dataGvMembershipHist";
+            this.dataGvMembershipHist.ReadOnly = true;
+            this.dataGvMembershipHist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGvMembershipHist.Size = new System.Drawing.Size(558, 616);
             this.dataGvMembershipHist.TabIndex = 9;
+            this.dataGvMembershipHist.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGvMembershipHist_MouseClick);
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Window;
             this.panel1.Controls.Add(this.btnMembership);
             this.panel1.Controls.Add(this.lblUserMembership);
             this.panel1.Controls.Add(this.dataGvMembershipHist);

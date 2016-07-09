@@ -13,7 +13,10 @@ namespace GymSys
             AddMember,
             EditMember,
             AddSubscription,
-            EditSubscription
+            EditSubscription,
+            DeleteMember,
+            NotSpecified,
+            DeleteMemberhip
         }
     }
 }
