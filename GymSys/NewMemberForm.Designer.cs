@@ -229,21 +229,19 @@
             // 
             // txtIdMembership
             // 
-            this.txtIdMembership.Location = new System.Drawing.Point(358, 180);
+            this.txtIdMembership.Location = new System.Drawing.Point(30, 177);
             this.txtIdMembership.Name = "txtIdMembership";
             this.txtIdMembership.ReadOnly = true;
             this.txtIdMembership.Size = new System.Drawing.Size(35, 20);
             this.txtIdMembership.TabIndex = 31;
-            this.txtIdMembership.Visible = false;
             // 
             // txtIdMember
             // 
-            this.txtIdMember.Location = new System.Drawing.Point(193, 180);
+            this.txtIdMember.Location = new System.Drawing.Point(126, 27);
             this.txtIdMember.Name = "txtIdMember";
             this.txtIdMember.ReadOnly = true;
             this.txtIdMember.Size = new System.Drawing.Size(44, 20);
             this.txtIdMember.TabIndex = 32;
-            this.txtIdMember.Visible = false;
             // 
             // NewMemberForm
             // 

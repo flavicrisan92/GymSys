@@ -36,8 +36,8 @@
             this.lblUserMembership = new System.Windows.Forms.Label();
             this.dataGvMembershipHist = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnMembership = new System.Windows.Forms.Button();
             this.lblMembersList = new System.Windows.Forms.Label();
+            this.btnMembership = new System.Windows.Forms.Button();
             this.membersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGVMembers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGvMembershipHist)).BeginInit();
@@ -110,12 +110,12 @@
             this.dataGvMembershipHist.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGvMembershipHist.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGvMembershipHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGvMembershipHist.Location = new System.Drawing.Point(932, 76);
+            this.dataGvMembershipHist.Location = new System.Drawing.Point(939, 76);
             this.dataGvMembershipHist.MultiSelect = false;
             this.dataGvMembershipHist.Name = "dataGvMembershipHist";
             this.dataGvMembershipHist.ReadOnly = true;
             this.dataGvMembershipHist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGvMembershipHist.Size = new System.Drawing.Size(565, 596);
+            this.dataGvMembershipHist.Size = new System.Drawing.Size(558, 596);
             this.dataGvMembershipHist.TabIndex = 9;
             this.dataGvMembershipHist.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGvMembershipHist_MouseClick);
             // 
@@ -135,16 +135,6 @@
             this.panel1.Size = new System.Drawing.Size(1514, 696);
             this.panel1.TabIndex = 13;
             // 
-            // btnMembership
-            // 
-            this.btnMembership.Location = new System.Drawing.Point(1374, 20);
-            this.btnMembership.Name = "btnMembership";
-            this.btnMembership.Size = new System.Drawing.Size(123, 23);
-            this.btnMembership.TabIndex = 13;
-            this.btnMembership.Text = "Abonament nou";
-            this.btnMembership.UseVisualStyleBackColor = true;
-            this.btnMembership.Click += new System.EventHandler(this.btnMembership_Click);
-            // 
             // lblMembersList
             // 
             this.lblMembersList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -154,6 +144,16 @@
             this.lblMembersList.Size = new System.Drawing.Size(77, 15);
             this.lblMembersList.TabIndex = 14;
             this.lblMembersList.Text = "Lista abonati";
+            // 
+            // btnMembership
+            // 
+            this.btnMembership.Location = new System.Drawing.Point(1374, 20);
+            this.btnMembership.Name = "btnMembership";
+            this.btnMembership.Size = new System.Drawing.Size(123, 23);
+            this.btnMembership.TabIndex = 13;
+            this.btnMembership.Text = "Abonament nou";
+            this.btnMembership.UseVisualStyleBackColor = true;
+            this.btnMembership.Click += new System.EventHandler(this.btnMembership_Click);
             // 
             // ucMembers
             // 

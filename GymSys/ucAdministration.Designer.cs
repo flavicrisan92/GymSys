@@ -35,12 +35,12 @@
             this.dataGridViewMembershipTypes = new System.Windows.Forms.DataGridView();
             this.tabPageUsers = new System.Windows.Forms.TabPage();
             this.btnAddNewUser = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewUsers = new System.Windows.Forms.DataGridView();
             this.tabControlAdministration.SuspendLayout();
             this.tabPageMembershipType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembershipTypes)).BeginInit();
             this.tabPageUsers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlAdministration
@@ -83,6 +83,7 @@
             this.btnNewMembershipType.TabIndex = 1;
             this.btnNewMembershipType.Text = "Adauga tip abonament";
             this.btnNewMembershipType.UseVisualStyleBackColor = true;
+            this.btnNewMembershipType.Click += new System.EventHandler(this.btnNewMembershipType_Click);
             // 
             // dataGridViewMembershipTypes
             // 
@@ -100,7 +101,7 @@
             // tabPageUsers
             // 
             this.tabPageUsers.Controls.Add(this.btnAddNewUser);
-            this.tabPageUsers.Controls.Add(this.dataGridView1);
+            this.tabPageUsers.Controls.Add(this.dataGridViewUsers);
             this.tabPageUsers.Location = new System.Drawing.Point(4, 22);
             this.tabPageUsers.Name = "tabPageUsers";
             this.tabPageUsers.Padding = new System.Windows.Forms.Padding(3);
@@ -117,14 +118,16 @@
             this.btnAddNewUser.TabIndex = 1;
             this.btnAddNewUser.Text = "Adauga utilizator nou";
             this.btnAddNewUser.UseVisualStyleBackColor = true;
+            this.btnAddNewUser.Click += new System.EventHandler(this.btnAddNewUser_Click);
             // 
-            // dataGridView1
+            // dataGridViewUsers
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(6, 60);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1444, 649);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewUsers.Location = new System.Drawing.Point(6, 60);
+            this.dataGridViewUsers.Name = "dataGridViewUsers";
+            this.dataGridViewUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewUsers.Size = new System.Drawing.Size(1444, 649);
+            this.dataGridViewUsers.TabIndex = 0;
             // 
             // ucAdministration
             // 
@@ -138,7 +141,7 @@
             this.tabPageMembershipType.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembershipTypes)).EndInit();
             this.tabPageUsers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -151,7 +154,7 @@
         private System.Windows.Forms.TabPage tabPageUsers;
         private System.Windows.Forms.Button btnNewMembershipType;
         private System.Windows.Forms.Button btnAddNewUser;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewUsers;
         private System.Windows.Forms.Label label1;
     }
 }

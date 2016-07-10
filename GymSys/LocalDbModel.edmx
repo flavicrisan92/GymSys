@@ -41,6 +41,7 @@
           <Property Name="Modified" Type="datetime2" Precision="7" />
           <Property Name="MonthsNumber" Type="int" Nullable="false" />
           <Property Name="DaysNumber" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -152,6 +153,7 @@
           <Property Name="Modified" Type="DateTime" Precision="7" />
           <Property Name="MonthsNumber" Type="Int32" Nullable="false" />
           <Property Name="DaysNumber" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Memberships" Relationship="LocalDBModel.FK_Memberships_MembershipType" FromRole="MembershipType" ToRole="Memberships" />
         </EntityType>
         <EntityType Name="Users">
@@ -228,6 +230,7 @@
           <EntitySetMapping Name="MembershipType">
             <EntityTypeMapping TypeName="LocalDBModel.MembershipType">
               <MappingFragment StoreEntitySet="MembershipType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DaysNumber" ColumnName="DaysNumber" />
                 <ScalarProperty Name="MonthsNumber" ColumnName="MonthsNumber" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />

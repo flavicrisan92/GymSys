@@ -78,8 +78,8 @@ namespace GymSys
 
                     dataGvMembershipHist.Visible = true;
                     var dataGridViewColumn = dataGvMembershipHist.Columns["Id"];
-                    if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
-                    dataGvMembershipHist.Columns[0].Width = 135;
+                    //if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+                    dataGvMembershipHist.Columns[0].Width = 25;
                     dataGvMembershipHist.Columns[1].Width = 135;
                     dataGvMembershipHist.Columns[2].Width = 135;
                     dataGvMembershipHist.Columns[3].Width = 135;
@@ -119,8 +119,8 @@ namespace GymSys
             dataGVMembers.DataSource = members.ToList();
 
             var dataGridViewColumn = dataGVMembers.Columns["Id"];
-            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
-            dataGVMembers.Columns[0].Width = 150;
+            //if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+            dataGVMembers.Columns[0].Width = 25;
             dataGVMembers.Columns[1].Width = 150;
             dataGVMembers.Columns[2].Width = 150;
             dataGVMembers.Columns[3].Width = 120;

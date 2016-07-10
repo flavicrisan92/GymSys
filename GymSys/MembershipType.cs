@@ -27,6 +27,7 @@ namespace GymSys
         public Nullable<System.DateTime> Modified { get; set; }
         public int MonthsNumber { get; set; }
         public int DaysNumber { get; set; }
+        public string Description { get; set; }
     
         public virtual ICollection<Memberships> Memberships { get; set; }
     }

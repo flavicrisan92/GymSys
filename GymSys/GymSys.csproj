@@ -69,6 +69,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormMembershipTypeOperations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMembershipTypeOperations.Designer.cs">
+      <DependentUpon>FormMembershipTypeOperations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUserOperations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUserOperations.Designer.cs">
+      <DependentUpon>FormUserOperations.cs</DependentUpon>
+    </Compile>
     <Compile Include="LocalDbModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,6 +144,12 @@
       <DependentUpon>LocalDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils.cs" />
+    <EmbeddedResource Include="FormMembershipTypeOperations.resx">
+      <DependentUpon>FormMembershipTypeOperations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUserOperations.resx">
+      <DependentUpon>FormUserOperations.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

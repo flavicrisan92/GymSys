@@ -16,7 +16,11 @@ namespace GymSys
             EditSubscription,
             DeleteMember,
             NotSpecified,
-            DeleteMemberhip
+            DeleteMemberhip,
+            AddUser,
+            EditUser,
+            AddMembershipType,
+            EditMembershipType
         }
     }
 }
