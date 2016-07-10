@@ -10,6 +10,7 @@ namespace GymSys
         LocalDBEntities db = new LocalDBEntities();
         private static ucMembers _instanceMembers;
         private int _membersSelectedRow = 0;
+        private int _membershipSelectedRow = 0;
 
         public static ucMembers Instance
         {
@@ -63,16 +64,16 @@ namespace GymSys
                     int.TryParse(id, out idint);
 
                     var membershipHist = from membership in db.Memberships
-                                         where membership.IdMember == idint && membership.IsActive
-                                         orderby membership.Id descending
-                                         select new
-                                         {
-                                             membership.Id,
-                                             TipAbonament = membership.MembershipType.Type,
-                                             DataInceput = membership.StartDate,
-                                             DataSfarsit = membership.EndDate,
-                                             Status = DateTime.Now < membership.EndDate ? "Activ" : "Expirat"
-                                         };
+                        where membership.IdMember == idint && membership.IsActive
+                        orderby membership.Id descending
+                        select new
+                        {
+                            membership.Id,
+                            TipAbonament = membership.MembershipType.Type,
+                            DataInceput = membership.StartDate,
+                            DataSfarsit = membership.EndDate,
+                            Status = DateTime.Now < membership.EndDate ? "Activ" : "Expirat"
+                        };
 
                     dataGvMembershipHist.DataSource = membershipHist.ToList();
 
@@ -97,6 +98,14 @@ namespace GymSys
                 {
                     dataGVMembers.ClearSelection();
                     dataGVMembers.Rows[_membersSelectedRow].Selected = true;
+                }
+            }
+            if (operation == Actions.Operations.EditSubscription)
+            {
+                if (_membershipSelectedRow > 0)
+                {
+                    dataGvMembershipHist.ClearSelection();
+                    dataGvMembershipHist.Rows[_membershipSelectedRow].Selected = true;
                 }
             }
         }
@@ -225,6 +234,7 @@ namespace GymSys
         private void dataGvMembershipHist_MouseClick(object sender, MouseEventArgs e)
         {
             int position = dataGvMembershipHist.HitTest(e.X, e.Y).RowIndex;
+            _membershipSelectedRow = position;
             if (position >= 0)
             {
                 dataGvMembershipHist.Rows[position].Selected = true;
@@ -266,16 +276,14 @@ namespace GymSys
                                                     select new
                                                     {
                                                         item.StartDate,
-                                                        item.EndDate,
-                                                        IdMembershipType = item.IdMember
+                                                        item.EndDate, item.IdMembershipType
                                                     };
 
                             if (membership != null)
                             {
                                 membership.StartDate = membershipUpdated.Select(m => m.StartDate).FirstOrDefault();
                                 membership.EndDate = membershipUpdated.Select(m => m.EndDate).FirstOrDefault();
-                                membership.IdMembershipType =
-                                    membershipUpdated.Select(m => m.IdMembershipType).FirstOrDefault();
+                                membership.IdMembershipType = membershipUpdated.Select(m => m.IdMembershipType).FirstOrDefault();
 
                                 NewMemberForm editSubscription = new NewMemberForm(null, membership,
                                     Actions.Operations.EditSubscription);

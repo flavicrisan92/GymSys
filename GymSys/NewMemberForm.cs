@@ -23,9 +23,9 @@ namespace GymSys
                 _currentMemberOnEdit = member.Id;
             }
             InitializeComponent();
+            SetUpComboBoxMembershipTypeSource();
             CheckOperation(operation, member, membership);
             SetUpDatetimeFields(membership, operation);
-            SetUpComboBoxMembershipTypeSource();
             SetUpPeriod("1");
         }
 
@@ -64,6 +64,7 @@ namespace GymSys
             txtName.Visible = false;
             txtSurname.Visible = false;
             dateTimePickerBirthDate.Visible = false;
+            comboBoxMembershipType.SelectedValue = membership.IdMembershipType;
             txtIdMembership.Text = membership.Id.ToString();
         }
 
@@ -277,8 +278,7 @@ namespace GymSys
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember);
             }
         }
-
-
+        
         private void ProcessAddMember()
         {
             if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddMember))

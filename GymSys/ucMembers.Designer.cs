@@ -162,7 +162,7 @@
             this.AutoSize = true;
             this.Controls.Add(this.panel1);
             this.Name = "ucMembers";
-            this.Size = new System.Drawing.Size(20782, 701);
+            this.Size = new System.Drawing.Size(1521, 701);
             this.Load += new System.EventHandler(this.ucMembers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGVMembers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGvMembershipHist)).EndInit();
