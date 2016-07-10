@@ -55,6 +55,7 @@ namespace GymSys
         {
             if (dataGVMembers.SelectedRows.Count == 1)
             {
+                lblUserMembership.Visible = true;
                 foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
                 {
                     int idint;
@@ -88,6 +89,7 @@ namespace GymSys
             else
             {
                 dataGvMembershipHist.Visible = false;
+                lblUserMembership.Visible = false;
             }
             if (operation == Actions.Operations.DeleteMemberhip)
             {
@@ -121,7 +123,7 @@ namespace GymSys
             dataGVMembers.Columns[0].Width = 150;
             dataGVMembers.Columns[1].Width = 150;
             dataGVMembers.Columns[2].Width = 150;
-            dataGVMembers.Columns[3].Width = 115;
+            dataGVMembers.Columns[3].Width = 120;
             dataGVMembers.Columns[4].Width = 150;
             dataGVMembers.Columns[5].Width = 150;
             dataGVMembers.Columns[6].Width = 150;

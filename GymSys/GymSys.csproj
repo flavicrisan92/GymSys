@@ -122,6 +122,12 @@
     <Compile Include="ucMembers.Designer.cs">
       <DependentUpon>ucMembers.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucAdministration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucAdministration.Designer.cs">
+      <DependentUpon>ucAdministration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Users.cs">
       <DependentUpon>LocalDbModel.tt</DependentUpon>
     </Compile>
@@ -144,9 +150,13 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ucMembers.resx">
       <DependentUpon>ucMembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucAdministration.resx">
+      <DependentUpon>ucAdministration.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="LocalDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -172,6 +182,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\logout_img.png" />
     <Content Include="LocalDB.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

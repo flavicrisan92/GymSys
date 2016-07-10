@@ -31,26 +31,30 @@
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.btnAdministration = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogOut
             // 
             this.btnLogOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogOut.Location = new System.Drawing.Point(1494, 12);
+            this.btnLogOut.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.btnLogOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnLogOut.FlatAppearance.BorderSize = 0;
+            this.btnLogOut.Image = global::GymSys.Properties.Resources.logout_img;
+            this.btnLogOut.Location = new System.Drawing.Point(1532, 12);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(75, 23);
+            this.btnLogOut.Size = new System.Drawing.Size(37, 26);
             this.btnLogOut.TabIndex = 0;
-            this.btnLogOut.Text = "Delogare";
-            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.UseVisualStyleBackColor = false;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnMembers
             // 
             this.btnMembers.Location = new System.Drawing.Point(13, 11);
             this.btnMembers.Name = "btnMembers";
-            this.btnMembers.Size = new System.Drawing.Size(75, 23);
+            this.btnMembers.Size = new System.Drawing.Size(93, 23);
             this.btnMembers.TabIndex = 2;
-            this.btnMembers.Text = "Abonati";
+            this.btnMembers.Text = "Abonamente";
             this.btnMembers.UseVisualStyleBackColor = true;
             this.btnMembers.Click += new System.EventHandler(this.btnMembers_Click);
             // 
@@ -64,12 +68,23 @@
             this.panelMain.Size = new System.Drawing.Size(1557, 476);
             this.panelMain.TabIndex = 3;
             // 
+            // btnAdministration
+            // 
+            this.btnAdministration.Location = new System.Drawing.Point(112, 11);
+            this.btnAdministration.Name = "btnAdministration";
+            this.btnAdministration.Size = new System.Drawing.Size(88, 23);
+            this.btnAdministration.TabIndex = 4;
+            this.btnAdministration.Text = "Administrare";
+            this.btnAdministration.UseVisualStyleBackColor = true;
+            this.btnAdministration.Click += new System.EventHandler(this.btnAdministration_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1581, 552);
+            this.Controls.Add(this.btnAdministration);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.btnMembers);
             this.Controls.Add(this.btnLogOut);
@@ -85,6 +100,7 @@
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnMembers;
         private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.Button btnAdministration;
     }
 }
 

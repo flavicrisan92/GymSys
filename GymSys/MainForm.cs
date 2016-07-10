@@ -42,5 +42,19 @@ namespace GymSys
         {
             WindowState = FormWindowState.Maximized;
         }
+
+        private void btnAdministration_Click(object sender, EventArgs e)
+        {
+            if (!panelMain.Controls.Contains(ucAdministration.Instance))
+            {
+                panelMain.Controls.Add(ucAdministration.Instance);
+                ucAdministration.Instance.Dock = DockStyle.Fill;
+                ucAdministration.Instance.BringToFront();
+            }
+            else
+            {
+                ucAdministration.Instance.BringToFront();
+            }
+        }
     }
 }
