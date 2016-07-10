@@ -23,7 +23,7 @@ namespace GymSys
                 _currentMemberOnEdit = member.Id;
             }
             InitializeComponent();
-            SetUpComboBoxMembershipTypeSource();
+            SetUpComboBoxMembershipTypeSourceOnlyActive(membership);
             CheckOperation(operation, member, membership);
             SetUpDatetimeFields(membership, operation);
             SetUpPeriod("1");
@@ -40,10 +40,12 @@ namespace GymSys
                     SetupFrameEditMember();
                     break;
                 case Actions.Operations.AddSubscription:
+                    SetUpComboBoxMembershipTypeSourceOnlyActive(null);
                     SetUpMember(member);
                     SetupFrameAddSubscription();
                     break;
                 case Actions.Operations.EditSubscription:
+
                     SetupEditSubscription(membership);
                     break;
 
@@ -136,12 +138,21 @@ namespace GymSys
             }
             comboBoxPeriod.DataSource = periodList;
         }
-
-        private void SetUpComboBoxMembershipTypeSource()
+        
+        private void SetUpComboBoxMembershipTypeSourceOnlyActive(Memberships membership)
         {
-            comboBoxMembershipType.DataSource = db.MembershipType.ToList();
-            comboBoxMembershipType.ValueMember = "id";
-            comboBoxMembershipType.DisplayMember = "type";
+            if (membership == null)
+            {
+                comboBoxMembershipType.DataSource = db.MembershipType.Where(a => a.IsActive).ToList();
+                comboBoxMembershipType.ValueMember = "id";
+                comboBoxMembershipType.DisplayMember = "type";
+            }
+            else
+            {
+                comboBoxMembershipType.DataSource = db.MembershipType.Where(a => a.IsActive || a.Id == membership.IdMembershipType).ToList();
+                comboBoxMembershipType.ValueMember = "id";
+                comboBoxMembershipType.DisplayMember = "type";
+            }
         }
 
         private void SetUpDatetimeFields(Memberships memberships, Actions.Operations operation)

@@ -14,19 +14,27 @@ namespace GymSys
     {
         LocalDBEntities db = new LocalDBEntities();
         private Actions.Operations _operation;
-        public FormUserOperations(Actions.Operations operation)
+        private static Users _userToEdit;
+
+        public FormUserOperations(Users user, Actions.Operations operation)
         {
             InitializeComponent();
             _operation = operation;
             if (_operation == Actions.Operations.EditUser)
             {
-                SetupUser();
+                _userToEdit = user;
+                SetupUser(user);
             }
         }
 
-        private void SetupUser()
+        private void SetupUser(Users user)
         {
-            throw new NotImplementedException();
+            txtName.Text = user.Name;
+            txtSurname.Text = user.Surname;
+            txtUsername.Text = user.Username;
+            txtUsername.ReadOnly = true;
+            this.Text = "Editare utilizator";
+            btnSave.Text = "Salveaza";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -46,17 +54,26 @@ namespace GymSys
                     };
                     db.Users.Add(newUser);
                     db.SaveChanges();
+                    Close();
+                    ucAdministration.Instance.LoadUsers(Actions.Operations.AddUser);
                 }
                 else if (_operation == Actions.Operations.EditUser)
                 {
 
-                }
-                this.Close();
-                ucAdministration.Instance.LoadUsers();
-            }
-            else
-            {
+                    var userToEdit = db.Users.FirstOrDefault(m => m.Id == _userToEdit.Id);
 
+                    if (userToEdit != null)
+                    {
+                        userToEdit.Name = txtName.Text;
+                        userToEdit.Surname = txtSurname.Text;
+                    }
+                    db.SaveChanges();
+                    Close();
+                    ucAdministration.Instance.LoadUsers(Actions.Operations.EditUser);
+                    Close();
+                    ucAdministration.Instance.LoadUsers(Actions.Operations.AddUser);
+
+                }
             }
         }
 
@@ -80,11 +97,11 @@ namespace GymSys
                 ShowMessageRequired();
                 return false;
             }
-            if (string.IsNullOrEmpty(txtPassword.Text))
-            {
-                ShowMessageRequired();
-                return false;
-            }
+            //if (string.IsNullOrEmpty(txtPassword.Text))
+            //{
+            //    ShowMessageRequired();
+            //    return false;
+            //}
             if (string.IsNullOrEmpty(txtSurname.Text))
             {
                 ShowMessageRequired();

@@ -64,16 +64,16 @@ namespace GymSys
                     int.TryParse(id, out idint);
 
                     var membershipHist = from membership in db.Memberships
-                        where membership.IdMember == idint && membership.IsActive
-                        orderby membership.Id descending
-                        select new
-                        {
-                            membership.Id,
-                            TipAbonament = membership.MembershipType.Type,
-                            DataInceput = membership.StartDate,
-                            DataSfarsit = membership.EndDate,
-                            Status = DateTime.Now < membership.EndDate ? "Activ" : "Expirat"
-                        };
+                                         where membership.IdMember == idint && membership.IsActive
+                                         orderby membership.Id descending
+                                         select new
+                                         {
+                                             membership.Id,
+                                             TipAbonament = membership.MembershipType.Type,
+                                             DataInceput = membership.StartDate,
+                                             DataSfarsit = membership.EndDate,
+                                             Status = DateTime.Now < membership.EndDate ? "Activ" : "Expirat"
+                                         };
 
                     dataGvMembershipHist.DataSource = membershipHist.ToList();
 
@@ -276,7 +276,8 @@ namespace GymSys
                                                     select new
                                                     {
                                                         item.StartDate,
-                                                        item.EndDate, item.IdMembershipType
+                                                        item.EndDate,
+                                                        item.IdMembershipType
                                                     };
 
                             if (membership != null)
@@ -306,10 +307,8 @@ namespace GymSys
         }
 
 
-        private
-            void ProcessDeleteMembership()
+        private void ProcessDeleteMembership()
         {
-
             int idmembership;
             Memberships membershipToDelete = null;
             foreach (DataGridViewRow row in dataGvMembershipHist.SelectedRows)
@@ -331,8 +330,6 @@ namespace GymSys
                     Instance.LoadSubscription(Actions.Operations.DeleteMemberhip);
                 }
             }
-
-
         }
     }
 }

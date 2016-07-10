@@ -14,6 +14,8 @@ namespace GymSys
     {
         LocalDBEntities db = new LocalDBEntities();
         private static ucAdministration _instanceMembers;
+        private static int _membershipTypeSelectedRow;
+        private static int _userSelectedRow;
 
         public static ucAdministration Instance
         {
@@ -22,23 +24,23 @@ namespace GymSys
         public ucAdministration()
         {
             InitializeComponent();
-            LoadMembershipTypes();
-            LoadUsers();
+            LoadMembershipTypes(Actions.Operations.NotSpecified);
+            LoadUsers(Actions.Operations.NotSpecified);
         }
 
-        public void LoadUsers()
+        public void LoadUsers(Actions.Operations operation)
         {
             var usersList = from user in db.Users
-                                     where user.IsActive
-                                     orderby user.Name
-                                     select new
-                                     {
-                                         user.Id,
-                                         Nume = user.Name,
-                                         Prenume = user.Surname,
-                                         NumeUtilizator = user.Username,
-                                         DataIntroducerii = user.Created
-                                     };
+                            where user.IsActive
+                            orderby user.Name
+                            select new
+                            {
+                                user.Id,
+                                Nume = user.Name,
+                                Prenume = user.Surname,
+                                NumeUtilizator = user.Username,
+                                DataIntroducerii = user.Created
+                            };
             dataGridViewUsers.DataSource = usersList.ToList();
 
             var dataGridViewUsersId = dataGridViewUsers.Columns["Id"];
@@ -47,9 +49,15 @@ namespace GymSys
             dataGridViewUsers.Columns[1].Width = 350;
             dataGridViewUsers.Columns[2].Width = 250;
             dataGridViewUsers.Columns[3].Width = 250;
+
+            if (_userSelectedRow > 0 && operation != Actions.Operations.DeleteUser)
+            {
+                dataGridViewUsers.ClearSelection();
+                dataGridViewUsers.Rows[_userSelectedRow].Selected = true;
+            }
         }
 
-        public void LoadMembershipTypes()
+        public void LoadMembershipTypes(Actions.Operations operation)
         {
             var membershiptypeList = from membershiptype in db.MembershipType
                                      where membershiptype.IsActive
@@ -71,18 +79,181 @@ namespace GymSys
             dataGridViewMembershipTypes.Columns[2].Width = 250;
             dataGridViewMembershipTypes.Columns[3].Width = 250;
             dataGridViewMembershipTypes.Columns[4].Width = 550;
+
+            if (_membershipTypeSelectedRow > 0 && operation != Actions.Operations.DeleteMemberhipType)
+            {
+                dataGridViewMembershipTypes.ClearSelection();
+                dataGridViewMembershipTypes.Rows[_membershipTypeSelectedRow].Selected = true;
+            }
         }
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            FormUserOperations formUserOperation = new FormUserOperations(Actions.Operations.AddUser);
+            FormUserOperations formUserOperation = new FormUserOperations(null, Actions.Operations.AddUser);
             formUserOperation.Show();
         }
 
         private void btnNewMembershipType_Click(object sender, EventArgs e)
         {
-            FormMembershipTypeOperations formMembershipType = new FormMembershipTypeOperations(Actions.Operations.AddMembershipType);
+            FormMembershipTypeOperations formMembershipType = new FormMembershipTypeOperations(null, Actions.Operations.AddMembershipType);
             formMembershipType.Show();
+        }
+
+        private void dataGridViewMembershipTypes_MouseClick(object sender, MouseEventArgs e)
+        {
+            int position = dataGridViewMembershipTypes.HitTest(e.X, e.Y).RowIndex;
+            _membershipTypeSelectedRow = position;
+            dataGridViewMembershipTypes.Rows[_membershipTypeSelectedRow].Selected = true;
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenuStrip myMenu = new ContextMenuStrip();
+
+                if (position >= 0 && dataGridViewMembershipTypes.SelectedRows.Count == 1)
+                {
+                    myMenu.Items.Add("Editare").Name = "Editare";
+                    myMenu.Items.Add("Stergere").Name = "Stergere";
+                }
+                myMenu.Show(dataGridViewMembershipTypes, new Point(e.X, e.Y));
+                myMenu.ItemClicked += MyMenu_ItemClicked;
+            }
+        }
+
+        private void MyMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch (e.ClickedItem.Name)
+            {
+                case "Editare":
+                    foreach (DataGridViewRow row in dataGridViewMembershipTypes.SelectedRows)
+                    {
+                        int idint;
+                        string id = row.Cells[0].Value.ToString();
+                        int.TryParse(id, out idint);
+                        var membershipType = db.MembershipType.FirstOrDefault(m => m.Id == idint);
+                        var membershiptypeList = from membershiptype in db.MembershipType
+                                                 where membershiptype.Id == idint
+                                                 select new
+                                                 {
+                                                     type = membershiptype.Type,
+                                                     price = membershiptype.Price,
+                                                     description = membershiptype.Description
+                                                 };
+                        if (membershipType != null)
+                        {
+                            membershipType.Type = membershiptypeList.Select(m => m.type).FirstOrDefault();
+                            membershipType.Price = membershiptypeList.Select(m => m.price).FirstOrDefault();
+                            membershipType.Description = membershiptypeList.Select(m => m.description).FirstOrDefault();
+                            FormMembershipTypeOperations addSubscription = new FormMembershipTypeOperations(membershipType, Actions.Operations.EditMembershipType);
+                            addSubscription.Show();
+                        }
+                    }
+                    break;
+                case "Stergere":
+                    ProcessDeleteMemberhipType();
+                    break;
+            }
+        }
+
+        private void ProcessDeleteMemberhipType()
+        {
+            int idmembership;
+            MembershipType membershipTypeToDelete = null;
+            foreach (DataGridViewRow row in dataGridViewMembershipTypes.SelectedRows)
+            {
+                string id = row.Cells[0].Value.ToString();
+                int.TryParse(id, out idmembership);
+                membershipTypeToDelete = db.MembershipType.FirstOrDefault(m => m.Id == idmembership);
+            }
+            if (membershipTypeToDelete != null)
+            {
+                var confirmResult =
+                    MessageBox.Show(
+                        "Sunteti siguri ca doriti sa stergeti tipul de abonament selectat?", "Confirm!",
+                        MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    membershipTypeToDelete.IsActive = false;
+                    db.SaveChanges();
+                    Instance.LoadMembershipTypes(Actions.Operations.DeleteMemberhipType);
+                }
+            }
+        }
+
+        private void dataGridViewUsers_MouseClick(object sender, MouseEventArgs e)
+        {
+            int position = dataGridViewUsers.HitTest(e.X, e.Y).RowIndex;
+            _userSelectedRow = position;
+            dataGridViewUsers.Rows[_userSelectedRow].Selected = true;
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenuStrip myMenuUsers = new ContextMenuStrip();
+
+                if (position >= 0 && dataGridViewUsers.SelectedRows.Count == 1)
+                {
+                    myMenuUsers.Items.Add("Editare").Name = "Editare";
+                    myMenuUsers.Items.Add("Stergere").Name = "Stergere";
+                }
+                myMenuUsers.Show(dataGridViewUsers, new Point(e.X, e.Y));
+                myMenuUsers.ItemClicked += MyMenuUsers_ItemClicked;
+            }
+        }
+
+        private void MyMenuUsers_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            switch (e.ClickedItem.Name)
+            {
+                case "Editare":
+                    foreach (DataGridViewRow row in dataGridViewUsers.SelectedRows)
+                    {
+                        int idint;
+                        string id = row.Cells[0].Value.ToString();
+                        int.TryParse(id, out idint);
+                        var user = db.Users.FirstOrDefault(m => m.Id == idint);
+                        var usersList = from item in db.Users
+                                                 where item.Id == idint
+                                                 select new
+                                                 {
+                                                     name = item.Name,
+                                                     surname = item.Surname
+                                                 };
+                        if (user != null)
+                        {
+                            user.Name = usersList.Select(m => m.name).FirstOrDefault();
+                            user.Surname = usersList.Select(m => m.surname).FirstOrDefault();
+                            
+                            FormUserOperations addSubscription = new FormUserOperations(user, Actions.Operations.EditUser);
+                            addSubscription.Show();
+                        }
+                    }
+                    break;
+                case "Stergere":
+                    ProcessDeleteUser();
+                    break;
+            }
+        }
+
+        private void ProcessDeleteUser()
+        {
+            int iduser;
+            Users userToDelete = null;
+            foreach (DataGridViewRow row in dataGridViewUsers.SelectedRows)
+            {
+                string id = row.Cells[0].Value.ToString();
+                int.TryParse(id, out iduser);
+                userToDelete = db.Users.FirstOrDefault(m => m.Id == iduser);
+            }
+            if (userToDelete != null)
+            {
+                var confirmResult =
+                    MessageBox.Show(
+                        "Sunteti siguri ca doriti sa stergeti utilizatorul selectat?", "Confirm!",
+                        MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    userToDelete.IsActive = false;
+                    db.SaveChanges();
+                    Instance.LoadUsers(Actions.Operations.DeleteUser);
+                }
+            }
         }
     }
 }

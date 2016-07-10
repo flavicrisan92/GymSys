@@ -20,7 +20,9 @@ namespace GymSys
             AddUser,
             EditUser,
             AddMembershipType,
-            EditMembershipType
+            EditMembershipType,
+            DeleteMemberhipType,
+            DeleteUser
         }
     }
 }

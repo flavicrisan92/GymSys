@@ -92,11 +92,13 @@
             this.dataGridViewMembershipTypes.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridViewMembershipTypes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMembershipTypes.Location = new System.Drawing.Point(0, 51);
+            this.dataGridViewMembershipTypes.MultiSelect = false;
             this.dataGridViewMembershipTypes.Name = "dataGridViewMembershipTypes";
             this.dataGridViewMembershipTypes.ReadOnly = true;
             this.dataGridViewMembershipTypes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMembershipTypes.Size = new System.Drawing.Size(1450, 661);
             this.dataGridViewMembershipTypes.TabIndex = 0;
+            this.dataGridViewMembershipTypes.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewMembershipTypes_MouseClick);
             // 
             // tabPageUsers
             // 
@@ -124,10 +126,12 @@
             // 
             this.dataGridViewUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewUsers.Location = new System.Drawing.Point(6, 60);
+            this.dataGridViewUsers.MultiSelect = false;
             this.dataGridViewUsers.Name = "dataGridViewUsers";
             this.dataGridViewUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewUsers.Size = new System.Drawing.Size(1444, 649);
             this.dataGridViewUsers.TabIndex = 0;
+            this.dataGridViewUsers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewUsers_MouseClick);
             // 
             // ucAdministration
             // 
