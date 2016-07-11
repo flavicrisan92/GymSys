@@ -17,10 +17,11 @@ namespace GymSys
         public Members()
         {
             this.Memberships = new HashSet<Memberships>();
+            this.Scans = new HashSet<Scans>();
         }
     
         public int Id { get; set; }
-        public int Code { get; set; }
+        public string Code { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public Nullable<System.DateTime> Birthdate { get; set; }
@@ -29,5 +30,6 @@ namespace GymSys
         public bool IsActive { get; set; }
     
         public virtual ICollection<Memberships> Memberships { get; set; }
+        public virtual ICollection<Scans> Scans { get; set; }
     }
 }

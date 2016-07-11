@@ -10,7 +10,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Birthdate" Type="datetime2" Precision="7" />
@@ -42,6 +42,14 @@
           <Property Name="MonthsNumber" Type="int" Nullable="false" />
           <Property Name="DaysNumber" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="iduser" Type="int" Nullable="false" />
+          <Property Name="scandate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -83,10 +91,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Scans_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Scans" Type="Self.Scans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scans">
+              <PropertyRef Name="iduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="LocalDBModelStoreContainer">
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Memberships" EntityType="Self.Memberships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MembershipType" EntityType="Self.MembershipType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scans" EntityType="Self.Scans" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Memberships_Members" Association="Self.FK_Memberships_Members">
             <End Role="Members" EntitySet="Members" />
@@ -95,6 +116,10 @@
           <AssociationSet Name="FK_Memberships_MembershipType" Association="Self.FK_Memberships_MembershipType">
             <End Role="MembershipType" EntitySet="MembershipType" />
             <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scans_Members" Association="Self.FK_Scans_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Scans" EntitySet="Scans" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -105,10 +130,15 @@
           <EntitySet Name="Members" EntityType="LocalDBModel.Members" />
           <EntitySet Name="Memberships" EntityType="LocalDBModel.Memberships" />
           <EntitySet Name="MembershipType" EntityType="LocalDBModel.MembershipType" />
+          <EntitySet Name="Scans" EntityType="LocalDBModel.Scans" />
           <EntitySet Name="Users" EntityType="LocalDBModel.Users" />
           <AssociationSet Name="FK_Memberships_Members" Association="LocalDBModel.FK_Memberships_Members">
             <End Role="Members" EntitySet="Members" />
             <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scans_Members" Association="LocalDBModel.FK_Scans_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Scans" EntitySet="Scans" />
           </AssociationSet>
           <AssociationSet Name="FK_Memberships_MembershipType" Association="LocalDBModel.FK_Memberships_MembershipType">
             <End Role="MembershipType" EntitySet="MembershipType" />
@@ -120,7 +150,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Birthdate" Type="DateTime" Precision="7" />
@@ -128,6 +158,7 @@
           <Property Name="Modified" Type="DateTime" Precision="7" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Memberships" Relationship="LocalDBModel.FK_Memberships_Members" FromRole="Members" ToRole="Memberships" />
+          <NavigationProperty Name="Scans" Relationship="LocalDBModel.FK_Scans_Members" FromRole="Members" ToRole="Scans" />
         </EntityType>
         <EntityType Name="Memberships">
           <Key>
@@ -157,6 +188,15 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Memberships" Relationship="LocalDBModel.FK_Memberships_MembershipType" FromRole="MembershipType" ToRole="Memberships" />
         </EntityType>
+        <EntityType Name="Scans">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="iduser" Type="Int32" Nullable="false" />
+          <Property Name="scandate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Members" Relationship="LocalDBModel.FK_Scans_Members" FromRole="Scans" ToRole="Members" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -182,6 +222,18 @@
             </Principal>
             <Dependent Role="Memberships">
               <PropertyRef Name="IdMember" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scans_Members">
+          <End Type="LocalDBModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="LocalDBModel.Scans" Role="Scans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Scans">
+              <PropertyRef Name="iduser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -240,6 +292,15 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scans">
+            <EntityTypeMapping TypeName="LocalDBModel.Scans">
+              <MappingFragment StoreEntitySet="Scans">
+                <ScalarProperty Name="scandate" ColumnName="scandate" />
+                <ScalarProperty Name="iduser" ColumnName="iduser" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

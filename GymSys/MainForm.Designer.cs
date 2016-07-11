@@ -32,6 +32,7 @@
             this.btnMembers = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
             this.btnAdministration = new System.Windows.Forms.Button();
+            this.btnDashboard = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogOut
@@ -50,7 +51,7 @@
             // 
             // btnMembers
             // 
-            this.btnMembers.Location = new System.Drawing.Point(13, 11);
+            this.btnMembers.Location = new System.Drawing.Point(101, 12);
             this.btnMembers.Name = "btnMembers";
             this.btnMembers.Size = new System.Drawing.Size(93, 23);
             this.btnMembers.TabIndex = 2;
@@ -70,7 +71,7 @@
             // 
             // btnAdministration
             // 
-            this.btnAdministration.Location = new System.Drawing.Point(112, 11);
+            this.btnAdministration.Location = new System.Drawing.Point(200, 12);
             this.btnAdministration.Name = "btnAdministration";
             this.btnAdministration.Size = new System.Drawing.Size(88, 23);
             this.btnAdministration.TabIndex = 4;
@@ -78,12 +79,23 @@
             this.btnAdministration.UseVisualStyleBackColor = true;
             this.btnAdministration.Click += new System.EventHandler(this.btnAdministration_Click);
             // 
+            // btnDashboard
+            // 
+            this.btnDashboard.Location = new System.Drawing.Point(12, 12);
+            this.btnDashboard.Name = "btnDashboard";
+            this.btnDashboard.Size = new System.Drawing.Size(79, 23);
+            this.btnDashboard.TabIndex = 5;
+            this.btnDashboard.Text = "Dashboard";
+            this.btnDashboard.UseVisualStyleBackColor = true;
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1581, 552);
+            this.Controls.Add(this.btnDashboard);
             this.Controls.Add(this.btnAdministration);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.btnMembers);
@@ -101,6 +113,7 @@
         private System.Windows.Forms.Button btnMembers;
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Button btnAdministration;
+        private System.Windows.Forms.Button btnDashboard;
     }
 }
 

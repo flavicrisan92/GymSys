@@ -33,13 +33,11 @@ namespace GymSys
 
         public static bool ValidateNewUserAndMembership(int id, string name, string surname, string code, string numericPeriod, int membershipType, Actions.Operations operation)
         {
-            int codeint;
-            int.TryParse(code, out codeint);
-            if (codeint == 0)
+            if (string.IsNullOrEmpty(code))
             {
                 return false;
             }
-            if (operation != Actions.Operations.AddSubscription && db.Members.Any(m => m.Code == codeint && m.Id != id))
+            if (operation != Actions.Operations.AddSubscription && db.Members.Any(m => m.Code == code && m.Id != id))
             {
                 MessageBox.Show("Acest cod este atasat altui abonat!");
                 return false;

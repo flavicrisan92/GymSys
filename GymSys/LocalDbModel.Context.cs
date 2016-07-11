@@ -28,6 +28,7 @@ namespace GymSys
         public DbSet<Members> Members { get; set; }
         public DbSet<Memberships> Memberships { get; set; }
         public DbSet<MembershipType> MembershipType { get; set; }
+        public DbSet<Scans> Scans { get; set; }
         public DbSet<Users> Users { get; set; }
     }
 }

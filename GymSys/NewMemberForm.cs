@@ -224,16 +224,15 @@ namespace GymSys
 
         private void ProcessEditMember()
         {
-            int code;
-            int.TryParse(txtCode.Text, out code);
+            //Add validation
             var member = db.Members.FirstOrDefault(m => m.Id == _currentMemberOnEdit);
-            if (!db.Members.Any(m => m.Code == code && m.Id != _currentMemberOnEdit))
+            if (!db.Members.Any(m => m.Code == txtCode.Text && m.Id != _currentMemberOnEdit))
             {
                 if (member != null)
                 {
                     member.Name = txtName.Text;
                     member.Surname = txtSurname.Text;
-                    member.Code = code;
+                    member.Code = txtCode.Text;
                     member.Birthdate = Utils.GetDateTimeParsed(dateTimePickerBirthDate.Text);
                 }
                 db.SaveChanges();
@@ -251,13 +250,11 @@ namespace GymSys
         {
             if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddSubscription))
             {
-                int code;
-                int.TryParse(txtCode.Text, out code);
                 Members member = null;
                 //Get member
                 if (_operation == Actions.Operations.AddSubscription)
                 {
-                    member = db.Members.FirstOrDefault(m => m.Code == code);
+                    member = db.Members.FirstOrDefault(m => m.Code == txtCode.Text);
                 }
                 //Add subscription on add member/subscription
                 if (member != null && _operation == Actions.Operations.AddSubscription)
@@ -303,7 +300,7 @@ namespace GymSys
                 {
                     member = new Members
                     {
-                        Code = code,
+                        Code = txtCode.Text,
                         Name = txtName.Text,
                         Surname = txtSurname.Text,
                         Birthdate = DateTime.Parse(dateTimePickerBirthDate.Text),

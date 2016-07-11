@@ -128,6 +128,15 @@
     <Compile Include="Actions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scans.cs">
+      <DependentUpon>LocalDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ucDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucDashboard.Designer.cs">
+      <DependentUpon>ucDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucMembers.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,6 +179,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucDashboard.resx">
+      <DependentUpon>ucDashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucMembers.resx">
       <DependentUpon>ucMembers.cs</DependentUpon>
     </EmbeddedResource>

@@ -18,6 +18,7 @@ namespace GymSys
         {
             _user = user;
             InitializeComponent();
+            LoadDashboard();
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -63,6 +64,36 @@ namespace GymSys
                 ucAdministration.Instance.BringToFront();
             }
             ucAdministration.Instance.SetLoggedUser(_user);
+        }
+
+        private void LoadDashboard()
+        {
+            if (!panelMain.Controls.Contains(ucDashboard.Instance))
+            {
+                panelMain.Controls.Add(ucDashboard.Instance);
+                ucDashboard.Instance.Dock = DockStyle.Fill;
+                ucDashboard.Instance.BringToFront();
+            }
+            else
+            {
+                ucDashboard.Instance.BringToFront();
+            }
+            ucDashboard.Instance.SetFocusOnScan();
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            if (!panelMain.Controls.Contains(ucDashboard.Instance))
+            {
+                panelMain.Controls.Add(ucDashboard.Instance);
+                ucDashboard.Instance.Dock = DockStyle.Fill;
+                ucDashboard.Instance.BringToFront();
+            }
+            else
+            {
+                ucDashboard.Instance.BringToFront();
+            }
+            ucDashboard.Instance.SetFocusOnScan();
         }
     }
 }
