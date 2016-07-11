@@ -23,23 +23,24 @@ namespace GymSys
             {
                 if (!db.Users.Any())
                 {
-                    Users user = new Users();
-                    user.Name = "Crisan";
-                    user.Surname = "Flavius";
-                    user.Username = "flavicrisan";
-                    user.Password = "123";
-                    user.Created = DateTime.Now;
-                    user.IsActive = true;
-                    db.Users.Add(user);
+                    Users newUser = new Users();
+                    newUser.Name = "Crisan";
+                    newUser.Surname = "Flavius";
+                    newUser.Username = "flavicrisan";
+                    newUser.Password = "123";
+                    newUser.Created = DateTime.Now;
+                    newUser.IsActive = true;
+                    newUser.IsAdmin = true;
+                    db.Users.Add(newUser);
                     db.SaveChanges();
                 }
-                var worker =
+                var user =
                     db.Users
                         .FirstOrDefault(w => w.Username == txt_UserName.Text && w.Password == txt_Password.Text && w.IsActive);
-                if (worker != null)
+                if (user != null)
                 {
                     this.Hide();
-                    MainForm mainForm = new MainForm();
+                    MainForm mainForm = new MainForm(user);
                     mainForm.Show();
                 }
                 else

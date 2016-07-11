@@ -12,8 +12,11 @@ namespace GymSys
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private Users _user;
+
+        public MainForm(Users user)
         {
+            _user = user;
             InitializeComponent();
         }
 
@@ -40,6 +43,10 @@ namespace GymSys
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            if (!_user.IsAdmin)
+            {
+                btnAdministration.Visible = false;
+            }
             WindowState = FormWindowState.Maximized;
         }
 
@@ -55,6 +62,7 @@ namespace GymSys
             {
                 ucAdministration.Instance.BringToFront();
             }
+            ucAdministration.Instance.SetLoggedUser(_user);
         }
     }
 }

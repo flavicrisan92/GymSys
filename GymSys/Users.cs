@@ -24,5 +24,6 @@ namespace GymSys
         public bool IsActive { get; set; }
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

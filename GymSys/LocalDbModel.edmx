@@ -57,6 +57,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Created" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="Modified" Type="datetime2" Precision="7" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Memberships_Members">
           <End Role="Members" Type="Self.Members" Multiplicity="1" />
@@ -170,6 +171,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="Modified" Type="DateTime" Precision="7" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Memberships_Members">
           <End Type="LocalDBModel.Members" Role="Members" Multiplicity="1" />
@@ -245,6 +247,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="LocalDBModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />

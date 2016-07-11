@@ -16,6 +16,7 @@ namespace GymSys
         private static ucAdministration _instanceMembers;
         private static int _membershipTypeSelectedRow;
         private static int _userSelectedRow;
+        private Users _loggedUser;
 
         public static ucAdministration Instance
         {
@@ -89,7 +90,7 @@ namespace GymSys
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            FormUserOperations formUserOperation = new FormUserOperations(null, Actions.Operations.AddUser);
+            FormUserOperations formUserOperation = new FormUserOperations(null, Actions.Operations.AddUser, _loggedUser);
             formUserOperation.Show();
         }
 
@@ -209,18 +210,21 @@ namespace GymSys
                         int.TryParse(id, out idint);
                         var user = db.Users.FirstOrDefault(m => m.Id == idint);
                         var usersList = from item in db.Users
-                                                 where item.Id == idint
-                                                 select new
-                                                 {
-                                                     name = item.Name,
-                                                     surname = item.Surname
-                                                 };
+                                        where item.Id == user.Id
+                                        select new
+                                        {
+                                            name = item.Name,
+                                            surname = item.Surname,
+                                            item.Password,
+                                            item.IsAdmin
+                                        };
                         if (user != null)
                         {
                             user.Name = usersList.Select(m => m.name).FirstOrDefault();
                             user.Surname = usersList.Select(m => m.surname).FirstOrDefault();
-                            
-                            FormUserOperations addSubscription = new FormUserOperations(user, Actions.Operations.EditUser);
+                            user.Password = usersList.Select(s => s.Password).FirstOrDefault();
+                            user.IsAdmin = usersList.Select(s => s.IsAdmin).FirstOrDefault();
+                            FormUserOperations addSubscription = new FormUserOperations(user, Actions.Operations.EditUser, _loggedUser);
                             addSubscription.Show();
                         }
                     }
@@ -254,6 +258,11 @@ namespace GymSys
                     Instance.LoadUsers(Actions.Operations.DeleteUser);
                 }
             }
+        }
+
+        public void SetLoggedUser(Users user)
+        {
+            _loggedUser = user;
         }
     }
 }
