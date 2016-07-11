@@ -124,8 +124,12 @@
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.lblType);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormMembershipTypeOperations";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Adaugare tip abonament";
+            this.Load += new System.EventHandler(this.FormMembershipTypeOperations_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

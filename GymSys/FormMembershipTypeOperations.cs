@@ -111,5 +111,10 @@ namespace GymSys
         {
             MessageBox.Show("Denumirea abonamentului exista deja in baza de date!");
         }
+
+        private void FormMembershipTypeOperations_Load(object sender, EventArgs e)
+        {
+            txtType.Select();
+        }
     }
 }

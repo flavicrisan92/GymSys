@@ -82,6 +82,7 @@
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(209, 20);
             this.txtCode.TabIndex = 17;
+            this.txtCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCode_KeyDown);
             // 
             // lblCode
             // 
@@ -273,6 +274,7 @@
             this.Name = "NewMemberForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Abonat nou";
+            this.Load += new System.EventHandler(this.NewMemberForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriod)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -61,5 +61,10 @@ namespace GymSys
                 btn_Login_Click(sender, e);
             }
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            txt_UserName.Select();
+        }
     }
 }

@@ -48,8 +48,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="iduser" Type="int" Nullable="false" />
-          <Property Name="scandate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IdMember" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -99,7 +99,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Scans">
-              <PropertyRef Name="iduser" />
+              <PropertyRef Name="IdMember" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -193,8 +193,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="iduser" Type="Int32" Nullable="false" />
-          <Property Name="scandate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IdMember" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Members" Relationship="LocalDBModel.FK_Scans_Members" FromRole="Scans" ToRole="Members" />
         </EntityType>
         <EntityType Name="Users">
@@ -233,7 +233,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Scans">
-              <PropertyRef Name="iduser" />
+              <PropertyRef Name="IdMember" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -299,8 +299,8 @@
           <EntitySetMapping Name="Scans">
             <EntityTypeMapping TypeName="LocalDBModel.Scans">
               <MappingFragment StoreEntitySet="Scans">
-                <ScalarProperty Name="scandate" ColumnName="scandate" />
-                <ScalarProperty Name="iduser" ColumnName="iduser" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdMember" ColumnName="IdMember" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -19,6 +19,7 @@ namespace GymSys
             _user = user;
             InitializeComponent();
             LoadDashboard();
+            ucDashboard.Instance.SetFocusOnScan();
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
@@ -93,6 +94,8 @@ namespace GymSys
             {
                 ucDashboard.Instance.BringToFront();
             }
+
+            ucDashboard.Instance.LoadScanList();
             ucDashboard.Instance.SetFocusOnScan();
         }
     }

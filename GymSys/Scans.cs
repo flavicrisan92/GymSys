@@ -15,8 +15,8 @@ namespace GymSys
     public partial class Scans
     {
         public int Id { get; set; }
-        public int iduser { get; set; }
-        public System.DateTime scandate { get; set; }
+        public int IdMember { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual Members Members { get; set; }
     }

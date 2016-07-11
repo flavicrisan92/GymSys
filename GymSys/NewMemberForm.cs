@@ -104,16 +104,16 @@ namespace GymSys
         private void SetUpMember(Members member)
         {
             var memberUpdated = from item in db.Members
-                                    where item.Id == member.Id
+                                where item.Id == member.Id
                                 select new
-                                    {
-                                        item.Code,
-                                        item.Name,
-                                        item.Surname,
-                                        item.Birthdate
-                                    };
+                                {
+                                    item.Code,
+                                    item.Name,
+                                    item.Surname,
+                                    item.Birthdate
+                                };
             txtIdMember.Text = member.Id.ToString();
-            txtCode.Text = memberUpdated.Select(m=>m.Code).FirstOrDefault().ToString();
+            txtCode.Text = memberUpdated.Select(m => m.Code).FirstOrDefault().ToString();
             txtName.Text = memberUpdated.Select(m => m.Name).FirstOrDefault();
             txtSurname.Text = memberUpdated.Select(m => m.Surname).FirstOrDefault();
             var memberBirthday = memberUpdated.Select(m => m.Birthdate).FirstOrDefault();
@@ -138,7 +138,7 @@ namespace GymSys
             }
             comboBoxPeriod.DataSource = periodList;
         }
-        
+
         private void SetUpComboBoxMembershipTypeSourceOnlyActive(Memberships membership)
         {
             if (membership == null)
@@ -286,7 +286,7 @@ namespace GymSys
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember);
             }
         }
-        
+
         private void ProcessAddMember()
         {
             if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddMember))
@@ -325,6 +325,11 @@ namespace GymSys
                     };
 
                     db.Memberships.Add(memberships);
+
+                    Scans scanNewUser = new Scans();
+                    scanNewUser.IdMember = member.Id;
+                    scanNewUser.Date = DateTime.Now;
+                    db.Scans.Add(scanNewUser);
                 }
                 try
                 {
@@ -375,12 +380,25 @@ namespace GymSys
 
         private void comboBoxPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-                SetEndDate();
+            SetEndDate();
         }
 
         private void numericUpDownPeriod_ValueChanged(object sender, EventArgs e)
         {
-                GetNumbericDropdownNumber();
+            GetNumbericDropdownNumber();
+        }
+
+        private void NewMemberForm_Load(object sender, EventArgs e)
+        {
+            txtCode.Select();
+        }
+
+        private void txtCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                txtName.Select();
+            }
         }
     }
 }
