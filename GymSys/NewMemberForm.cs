@@ -88,7 +88,7 @@ namespace GymSys
 
         private void SetupFrameAddSubscription()
         {
-            this.Text = "Abonament nou";
+            this.Text = "Prelungire abonament";
 
             //Set readonly
             txtCode.ReadOnly = true;
@@ -202,14 +202,15 @@ namespace GymSys
 
         private void ProcessEditSubscription()
         {
+            //Todo validation for dates
             int idMembership;
             int.TryParse(txtIdMembership.Text, out idMembership);
 
             var membership = db.Memberships.FirstOrDefault(m => m.Id == idMembership);
             if (membership != null)
             {
-                membership.StartDate = Utils.GetDateTimeParsed(dateTimePickerStartMembership.Text);
-                membership.EndDate = Utils.GetDateTimeParsed(dateTimePickerEndDateMembership.Text);
+                membership.StartDate = dateTimePickerStartMembership.Value;
+                membership.EndDate = dateTimePickerEndDateMembership.Value.AddDays(1).AddSeconds(-10);
                 membership.IdMembershipType =
                     db.MembershipType.Where(m => m.Type == comboBoxMembershipType.Text)
                         .Select(m => m.Id)
@@ -266,8 +267,8 @@ namespace GymSys
                             db.MembershipType.Where(m => m.Type == comboBoxMembershipType.Text)
                                 .Select(m => m.Id)
                                 .FirstOrDefault(),
-                        StartDate = Utils.GetDateTimeParsed(dateTimePickerStartMembership.Text),
-                        EndDate = Utils.GetDateTimeParsed(dateTimePickerEndDateMembership.Text + " 23:59:59"),
+                        StartDate = dateTimePickerStartMembership.Value,
+                        EndDate = dateTimePickerEndDateMembership.Value.AddDays(1).AddSeconds(-5),
                         IsActive = true
                     };
 
@@ -287,6 +288,7 @@ namespace GymSys
             }
         }
 
+        //Crate new member, add new membership and add scan
         private void ProcessAddMember()
         {
             if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddMember))
@@ -303,7 +305,7 @@ namespace GymSys
                         Code = txtCode.Text,
                         Name = txtName.Text,
                         Surname = txtSurname.Text,
-                        Birthdate = DateTime.Parse(dateTimePickerBirthDate.Text),
+                        Birthdate = dateTimePickerBirthDate.Value,
                         Created = DateTime.Now,
                         IsActive = true
                     };
@@ -319,16 +321,18 @@ namespace GymSys
                             db.MembershipType.Where(m => m.Type == comboBoxMembershipType.Text)
                                 .Select(m => m.Id)
                                 .FirstOrDefault(),
-                        StartDate = Utils.GetDateTimeParsed(dateTimePickerStartMembership.Text),
-                        EndDate = Utils.GetDateTimeParsed(dateTimePickerEndDateMembership.Text + " 23:59:59"),
+                        StartDate = dateTimePickerStartMembership.Value,
+                        EndDate = dateTimePickerEndDateMembership.Value.Date.AddDays(1).AddSeconds(-10),
                         IsActive = true
                     };
 
                     db.Memberships.Add(memberships);
 
-                    Scans scanNewUser = new Scans();
-                    scanNewUser.IdMember = member.Id;
-                    scanNewUser.Date = DateTime.Now;
+                    Scans scanNewUser = new Scans
+                    {
+                        IdMember = member.Id,
+                        Date = DateTime.Now
+                    };
                     db.Scans.Add(scanNewUser);
                 }
                 try
@@ -390,15 +394,15 @@ namespace GymSys
 
         private void NewMemberForm_Load(object sender, EventArgs e)
         {
-            txtCode.Select();
+            txtName.Select();
         }
 
-        private void txtCode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtName.Select();
-            }
-        }
+        //private void txtCode_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        txtName.Select();
+        //    }
+        //}
     }
 }

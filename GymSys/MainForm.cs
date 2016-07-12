@@ -41,6 +41,7 @@ namespace GymSys
             {
                 ucMembers.Instance.BringToFront();
             }
+            ucMembers.Instance.LoadMembers(Actions.Operations.NotSpecified);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -97,6 +98,27 @@ namespace GymSys
 
             ucDashboard.Instance.LoadScanList();
             ucDashboard.Instance.SetFocusOnScan();
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            if (!panelMain.Controls.Contains(ucReports.Instance))
+            {
+                panelMain.Controls.Add(ucReports.Instance);
+                ucReports.Instance.Dock = DockStyle.Fill;
+                ucReports.Instance.BringToFront();
+            }
+            else
+            {
+                ucReports.Instance.BringToFront();
+            }
+
+            ucReports.Instance.LoadMembersReport(DateTime.Now.AddYears(-1), DateTime.MaxValue.AddDays(-2));
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

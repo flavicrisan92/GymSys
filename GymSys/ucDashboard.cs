@@ -15,31 +15,17 @@ namespace GymSys
     {
         LocalDBEntities db = new LocalDBEntities();
         private static ucDashboard _instanceMembers;
+        DateTime dateToday = DateTime.Now.Date;
 
         //private System.Timers.Timer aTimer;
 
         private ucDashboard()
         {
             InitializeComponent();
+            lblTodayCount.Text = db.Scans.Count(d => d.Date > dateToday).ToString();
             LoadScanList();
-            //SetTimer();
         }
-
-        //private void SetTimer()
-        //{
-        //    // Create a timer with a two second interval.
-        //    aTimer = new System.Timers.Timer(2000);
-        //    // Hook up the Elapsed event for the timer. 
-        //    aTimer.Elapsed += OnTimedEvent;
-        //    aTimer.AutoReset = true;
-        //    aTimer.Enabled = true;
-        //}
-
-        //private void OnTimedEvent(object sender, ElapsedEventArgs e)
-        //{
-        //    txtScanedCode.Select();
-        //}
-
+        
         public void LoadScanList()
         {
             dataGridViewScans.DataSource = db.Scans.OrderByDescending(s=>s.Id).ToList();
@@ -54,23 +40,29 @@ namespace GymSys
         {
             if (e.KeyCode == Keys.Enter)
             {
-                DateTime dateToday = DateTime.Today.Date;
+                DateTime dateTodayMax = dateToday.AddDays(1).Date.AddSeconds(-5);
                 var scannedMember = db.Members.FirstOrDefault(m => m.Code == txtScanedCode.Text);
                
                 if (scannedMember != null)
                 {
-                    if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > dateToday) == 0)
+                    if (db.Memberships.Any(s => s.IdMember == scannedMember.Id && s.EndDate > dateTodayMax))
                     {
-                        Scans scan = new Scans
+                        if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > dateToday) == 0)
                         {
-                            IdMember = scannedMember.Id,
-                            Date = DateTime.Now
-                        };
-                        db.Scans.Add(scan);
-                        db.SaveChanges();
-                        LoadScanList();
-                        DateTime todayDate = DateTime.Now.Date;
-                        lblTodayCount.Text = db.Scans.Count(d => d.Date > todayDate).ToString();
+                            Scans scan = new Scans
+                            {
+                                IdMember = scannedMember.Id,
+                                Date = DateTime.Now
+                            };
+                            db.Scans.Add(scan);
+                            db.SaveChanges();
+                            LoadScanList();
+                            lblTodayCount.Text = db.Scans.Count(d => d.Date > dateToday).ToString();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Abonamentul este expirat!");
                     }
                 }
                 else

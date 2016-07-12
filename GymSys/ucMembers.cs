@@ -123,7 +123,8 @@ namespace GymSys
                               Cod = member.Code,
                               Activ = member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                               Data_Nastere = member.Birthdate,
-                              Data_inregistrare = member.Created
+                              Data_inregistrare = member.Created,
+                              Ultima_scanare = db.Scans.Where(s=>s.IdMember == member.Id).OrderByDescending(s=>s.Id).Select(s=>s.Date).FirstOrDefault()
                           };
             dataGVMembers.DataSource = members.ToList();
 

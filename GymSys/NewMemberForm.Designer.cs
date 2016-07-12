@@ -54,40 +54,39 @@
             // dateTimePickerBirthDate
             // 
             this.dateTimePickerBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePickerBirthDate.Location = new System.Drawing.Point(185, 139);
+            this.dateTimePickerBirthDate.Location = new System.Drawing.Point(185, 96);
             this.dateTimePickerBirthDate.Name = "dateTimePickerBirthDate";
             this.dateTimePickerBirthDate.Size = new System.Drawing.Size(209, 20);
-            this.dateTimePickerBirthDate.TabIndex = 20;
+            this.dateTimePickerBirthDate.TabIndex = 3;
             // 
             // txtSurname
             // 
             this.txtSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSurname.Location = new System.Drawing.Point(187, 102);
+            this.txtSurname.Location = new System.Drawing.Point(187, 59);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(209, 20);
-            this.txtSurname.TabIndex = 19;
+            this.txtSurname.TabIndex = 2;
             // 
             // txtName
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.Location = new System.Drawing.Point(187, 66);
+            this.txtName.Location = new System.Drawing.Point(187, 23);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(209, 20);
-            this.txtName.TabIndex = 18;
+            this.txtName.TabIndex = 1;
             // 
             // txtCode
             // 
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCode.Location = new System.Drawing.Point(187, 27);
+            this.txtCode.Location = new System.Drawing.Point(187, 132);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(209, 20);
-            this.txtCode.TabIndex = 17;
-            this.txtCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCode_KeyDown);
+            this.txtCode.TabIndex = 4;
             // 
             // lblCode
             // 
             this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(28, 27);
+            this.lblCode.Location = new System.Drawing.Point(28, 132);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(56, 15);
             this.lblCode.TabIndex = 16;
@@ -99,7 +98,7 @@
             this.btnSave.Location = new System.Drawing.Point(185, 388);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(209, 23);
-            this.btnSave.TabIndex = 15;
+            this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Creare";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -107,7 +106,7 @@
             // lblBirthDate
             // 
             this.lblBirthDate.AutoSize = true;
-            this.lblBirthDate.Location = new System.Drawing.Point(28, 139);
+            this.lblBirthDate.Location = new System.Drawing.Point(28, 96);
             this.lblBirthDate.Name = "lblBirthDate";
             this.lblBirthDate.Size = new System.Drawing.Size(77, 15);
             this.lblBirthDate.TabIndex = 14;
@@ -116,7 +115,7 @@
             // lblSurname
             // 
             this.lblSurname.AutoSize = true;
-            this.lblSurname.Location = new System.Drawing.Point(28, 102);
+            this.lblSurname.Location = new System.Drawing.Point(28, 59);
             this.lblSurname.Name = "lblSurname";
             this.lblSurname.Size = new System.Drawing.Size(58, 15);
             this.lblSurname.TabIndex = 13;
@@ -125,7 +124,7 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(28, 66);
+            this.lblName.Location = new System.Drawing.Point(28, 23);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(41, 15);
             this.lblName.TabIndex = 12;
@@ -157,7 +156,7 @@
             this.dateTimePickerStartMembership.Location = new System.Drawing.Point(194, 263);
             this.dateTimePickerStartMembership.Name = "dateTimePickerStartMembership";
             this.dateTimePickerStartMembership.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerStartMembership.TabIndex = 23;
+            this.dateTimePickerStartMembership.TabIndex = 6;
             // 
             // numericUpDownPeriod
             // 
@@ -171,7 +170,7 @@
             this.numericUpDownPeriod.Name = "numericUpDownPeriod";
             this.numericUpDownPeriod.ReadOnly = true;
             this.numericUpDownPeriod.Size = new System.Drawing.Size(72, 20);
-            this.numericUpDownPeriod.TabIndex = 25;
+            this.numericUpDownPeriod.TabIndex = 7;
             this.numericUpDownPeriod.Value = new decimal(new int[] {
             1,
             0,
@@ -208,7 +207,7 @@
             this.comboBoxMembershipType.Location = new System.Drawing.Point(194, 221);
             this.comboBoxMembershipType.Name = "comboBoxMembershipType";
             this.comboBoxMembershipType.Size = new System.Drawing.Size(200, 21);
-            this.comboBoxMembershipType.TabIndex = 28;
+            this.comboBoxMembershipType.TabIndex = 5;
             // 
             // dateTimePickerEndDateMembership
             // 
@@ -216,7 +215,7 @@
             this.dateTimePickerEndDateMembership.Location = new System.Drawing.Point(193, 348);
             this.dateTimePickerEndDateMembership.Name = "dateTimePickerEndDateMembership";
             this.dateTimePickerEndDateMembership.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerEndDateMembership.TabIndex = 30;
+            this.dateTimePickerEndDateMembership.TabIndex = 8;
             // 
             // lblEndDateMembership
             // 

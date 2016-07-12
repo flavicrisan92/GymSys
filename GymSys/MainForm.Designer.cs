@@ -33,6 +33,7 @@
             this.panelMain = new System.Windows.Forms.Panel();
             this.btnAdministration = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
+            this.btnReports = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogOut
@@ -71,7 +72,7 @@
             // 
             // btnAdministration
             // 
-            this.btnAdministration.Location = new System.Drawing.Point(200, 12);
+            this.btnAdministration.Location = new System.Drawing.Point(294, 12);
             this.btnAdministration.Name = "btnAdministration";
             this.btnAdministration.Size = new System.Drawing.Size(88, 23);
             this.btnAdministration.TabIndex = 4;
@@ -89,12 +90,23 @@
             this.btnDashboard.UseVisualStyleBackColor = true;
             this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
+            // btnReports
+            // 
+            this.btnReports.Location = new System.Drawing.Point(200, 12);
+            this.btnReports.Name = "btnReports";
+            this.btnReports.Size = new System.Drawing.Size(88, 23);
+            this.btnReports.TabIndex = 6;
+            this.btnReports.Text = "Rapoarte";
+            this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1581, 552);
+            this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnDashboard);
             this.Controls.Add(this.btnAdministration);
             this.Controls.Add(this.panelMain);
@@ -102,6 +114,7 @@
             this.Controls.Add(this.btnLogOut);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
@@ -114,6 +127,7 @@
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Button btnAdministration;
         private System.Windows.Forms.Button btnDashboard;
+        private System.Windows.Forms.Button btnReports;
     }
 }
 

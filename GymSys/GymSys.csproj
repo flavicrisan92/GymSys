@@ -119,6 +119,7 @@
     <Compile Include="MembershipType.cs">
       <DependentUpon>LocalDbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="MembersOperations\AddMember.cs" />
     <Compile Include="NewMemberForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +149,12 @@
     </Compile>
     <Compile Include="ucAdministration.Designer.cs">
       <DependentUpon>ucAdministration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucReports.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucReports.Designer.cs">
+      <DependentUpon>ucReports.cs</DependentUpon>
     </Compile>
     <Compile Include="Users.cs">
       <DependentUpon>LocalDbModel.tt</DependentUpon>
@@ -187,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucAdministration.resx">
       <DependentUpon>ucAdministration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucReports.resx">
+      <DependentUpon>ucReports.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="LocalDbModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
