@@ -80,11 +80,11 @@ namespace GymSys
                     dataGvMembershipHist.Visible = true;
                     var dataGridViewColumn = dataGvMembershipHist.Columns["Id"];
                     //if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
-                    dataGvMembershipHist.Columns[0].Width = 25;
-                    dataGvMembershipHist.Columns[1].Width = 135;
-                    dataGvMembershipHist.Columns[2].Width = 135;
-                    dataGvMembershipHist.Columns[3].Width = 135;
-                    dataGvMembershipHist.Columns[4].Width = 100;
+                    dataGvMembershipHist.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGvMembershipHist.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGvMembershipHist.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGvMembershipHist.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGvMembershipHist.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             else
@@ -130,13 +130,13 @@ namespace GymSys
 
             var dataGridViewColumn = dataGVMembers.Columns["Id"];
             //if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
-            dataGVMembers.Columns[0].Width = 25;
-            dataGVMembers.Columns[1].Width = 150;
-            dataGVMembers.Columns[2].Width = 150;
-            dataGVMembers.Columns[3].Width = 120;
-            dataGVMembers.Columns[4].Width = 150;
-            dataGVMembers.Columns[5].Width = 150;
-            dataGVMembers.Columns[6].Width = 150;
+            dataGVMembers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGVMembers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGVMembers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGVMembers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGVMembers.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGVMembers.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGVMembers.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (operation != Actions.Operations.DeleteMember)
             {

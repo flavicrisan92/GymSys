@@ -113,7 +113,7 @@ namespace GymSys
                 ucReports.Instance.BringToFront();
             }
 
-            ucReports.Instance.LoadMembersReport(DateTime.Now.AddYears(-1), DateTime.MaxValue.AddDays(-2));
+            ucReports.Instance.LoadMembersReport(DateTime.Now.AddYears(-1), DateTime.MaxValue.AddDays(-2), string.Empty);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
