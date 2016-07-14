@@ -43,12 +43,6 @@
             this.lblMembershipDate = new System.Windows.Forms.Label();
             this.dataGridViewMembersRep = new System.Windows.Forms.DataGridView();
             this.tabPageScans = new System.Windows.Forms.TabPage();
-            this.btnGenerateScansR = new System.Windows.Forms.Button();
-            this.lblToDateScans = new System.Windows.Forms.Label();
-            this.dateTimePickerScansToDate = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerScandFromDate = new System.Windows.Forms.DateTimePicker();
-            this.lblScanDate = new System.Windows.Forms.Label();
-            this.dataGridViewScansReport = new System.Windows.Forms.DataGridView();
             this.RptAbPage = new System.Windows.Forms.TabPage();
             this.lblActiveCount = new System.Windows.Forms.Label();
             this.lblTotalActive = new System.Windows.Forms.Label();
@@ -63,18 +57,37 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePickerTDMembershipR = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerFDMembershipR = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblMembershipFrom = new System.Windows.Forms.Label();
             this.dataGridViewMembershipR = new System.Windows.Forms.DataGridView();
             this.panelReports = new System.Windows.Forms.Panel();
+            this.lblInactiveCount = new System.Windows.Forms.Label();
+            this.lblInactive = new System.Windows.Forms.Label();
+            this.lblCountActiveMembers = new System.Windows.Forms.Label();
+            this.lblActiveMembers = new System.Windows.Forms.Label();
+            this.dataGridViewMembershipGroupByMonthR = new System.Windows.Forms.DataGridView();
+            this.dataGridViewScandGBM = new System.Windows.Forms.DataGridView();
+            this.dataGridViewScansR = new System.Windows.Forms.DataGridView();
+            this.btnResetGenerate = new System.Windows.Forms.Button();
+            this.lblSearcScan = new System.Windows.Forms.Label();
+            this.txtScanMember = new System.Windows.Forms.TextBox();
+            this.btnScansGenerate = new System.Windows.Forms.Button();
+            this.lblTotalScansCount = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.DTPScansTD = new System.Windows.Forms.DateTimePicker();
+            this.DTPScansFD = new System.Windows.Forms.DateTimePicker();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControlReports.SuspendLayout();
             this.tabPage1MembersReport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCountByMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembersRep)).BeginInit();
             this.tabPageScans.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScansReport)).BeginInit();
             this.RptAbPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembershipR)).BeginInit();
             this.panelReports.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembershipGroupByMonthR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScandGBM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScansR)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlReports
@@ -86,15 +99,16 @@
             this.tabControlReports.Controls.Add(this.tabPageScans);
             this.tabControlReports.Controls.Add(this.RptAbPage);
             this.tabControlReports.Location = new System.Drawing.Point(0, 0);
-            this.tabControlReports.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlReports.Name = "tabControlReports";
             this.tabControlReports.SelectedIndex = 0;
-            this.tabControlReports.Size = new System.Drawing.Size(1500, 725);
+            this.tabControlReports.Size = new System.Drawing.Size(1300, 747);
             this.tabControlReports.TabIndex = 0;
             // 
             // tabPage1MembersReport
             // 
             this.tabPage1MembersReport.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage1MembersReport.Controls.Add(this.lblCountActiveMembers);
+            this.tabPage1MembersReport.Controls.Add(this.lblActiveMembers);
             this.tabPage1MembersReport.Controls.Add(this.btnReset);
             this.tabPage1MembersReport.Controls.Add(this.lblSearchBoxName);
             this.tabPage1MembersReport.Controls.Add(this.txtMember);
@@ -107,20 +121,18 @@
             this.tabPage1MembersReport.Controls.Add(this.dateTimePickerFromDateTime);
             this.tabPage1MembersReport.Controls.Add(this.lblMembershipDate);
             this.tabPage1MembersReport.Controls.Add(this.dataGridViewMembersRep);
-            this.tabPage1MembersReport.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1MembersReport.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPage1MembersReport.Location = new System.Drawing.Point(4, 22);
             this.tabPage1MembersReport.Name = "tabPage1MembersReport";
-            this.tabPage1MembersReport.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1MembersReport.Size = new System.Drawing.Size(1492, 696);
+            this.tabPage1MembersReport.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1MembersReport.Size = new System.Drawing.Size(1292, 721);
             this.tabPage1MembersReport.TabIndex = 0;
             this.tabPage1MembersReport.Text = "Raport abonati noi";
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(1002, 32);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReset.Location = new System.Drawing.Point(770, 25);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(100, 28);
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 18;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
@@ -128,20 +140,19 @@
             // 
             // lblSearchBoxName
             // 
-            this.lblSearchBoxName.Location = new System.Drawing.Point(8, 87);
-            this.lblSearchBoxName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSearchBoxName.Location = new System.Drawing.Point(6, 70);
             this.lblSearchBoxName.Name = "lblSearchBoxName";
-            this.lblSearchBoxName.Size = new System.Drawing.Size(88, 16);
+            this.lblSearchBoxName.Size = new System.Drawing.Size(84, 13);
             this.lblSearchBoxName.TabIndex = 16;
             this.lblSearchBoxName.Text = "Cauta abonat";
             // 
             // txtMember
             // 
-            this.txtMember.Location = new System.Drawing.Point(151, 85);
-            this.txtMember.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMember.Location = new System.Drawing.Point(113, 63);
             this.txtMember.Name = "txtMember";
-            this.txtMember.Size = new System.Drawing.Size(277, 22);
+            this.txtMember.Size = new System.Drawing.Size(226, 20);
             this.txtMember.TabIndex = 17;
+            this.txtMember.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMember_KeyPress);
             this.txtMember.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMember_KeyUp);
             // 
             // dataGridViewCountByMonth
@@ -153,19 +164,19 @@
             this.dataGridViewCountByMonth.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridViewCountByMonth.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewCountByMonth.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCountByMonth.Location = new System.Drawing.Point(1002, 138);
+            this.dataGridViewCountByMonth.Location = new System.Drawing.Point(946, 112);
+            this.dataGridViewCountByMonth.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridViewCountByMonth.Name = "dataGridViewCountByMonth";
             this.dataGridViewCountByMonth.ReadOnly = true;
             this.dataGridViewCountByMonth.RowTemplate.Height = 24;
-            this.dataGridViewCountByMonth.Size = new System.Drawing.Size(461, 551);
+            this.dataGridViewCountByMonth.Size = new System.Drawing.Size(341, 604);
             this.dataGridViewCountByMonth.TabIndex = 15;
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(883, 31);
-            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGenerate.Location = new System.Drawing.Point(680, 24);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(100, 28);
+            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
             this.btnGenerate.TabIndex = 14;
             this.btnGenerate.Text = "Generare";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -175,10 +186,9 @@
             // 
             this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalCount.AutoSize = true;
-            this.lblTotalCount.Location = new System.Drawing.Point(970, 108);
-            this.lblTotalCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalCount.Location = new System.Drawing.Point(903, 88);
             this.lblTotalCount.Name = "lblTotalCount";
-            this.lblTotalCount.Size = new System.Drawing.Size(15, 16);
+            this.lblTotalCount.Size = new System.Drawing.Size(13, 13);
             this.lblTotalCount.TabIndex = 11;
             this.lblTotalCount.Text = "0";
             // 
@@ -186,48 +196,43 @@
             // 
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(912, 107);
-            this.lblTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotal.Location = new System.Drawing.Point(825, 88);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(42, 16);
+            this.lblTotal.Size = new System.Drawing.Size(72, 13);
             this.lblTotal.TabIndex = 10;
-            this.lblTotal.Text = "Total:";
+            this.lblTotal.Text = "Total abonati:";
             // 
             // lblToDateMembers
             // 
             this.lblToDateMembers.AutoSize = true;
-            this.lblToDateMembers.Location = new System.Drawing.Point(475, 32);
-            this.lblToDateMembers.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblToDateMembers.Location = new System.Drawing.Point(368, 29);
             this.lblToDateMembers.Name = "lblToDateMembers";
-            this.lblToDateMembers.Size = new System.Drawing.Size(49, 16);
+            this.lblToDateMembers.Size = new System.Drawing.Size(39, 13);
             this.lblToDateMembers.TabIndex = 8;
             this.lblToDateMembers.Text = "la data";
             // 
             // dateTimePickerToDateTime
             // 
-            this.dateTimePickerToDateTime.Location = new System.Drawing.Point(541, 32);
-            this.dateTimePickerToDateTime.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePickerToDateTime.Location = new System.Drawing.Point(424, 25);
             this.dateTimePickerToDateTime.Name = "dateTimePickerToDateTime";
-            this.dateTimePickerToDateTime.Size = new System.Drawing.Size(305, 22);
+            this.dateTimePickerToDateTime.Size = new System.Drawing.Size(230, 20);
             this.dateTimePickerToDateTime.TabIndex = 4;
             // 
             // dateTimePickerFromDateTime
             // 
-            this.dateTimePickerFromDateTime.Location = new System.Drawing.Point(151, 31);
-            this.dateTimePickerFromDateTime.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePickerFromDateTime.Location = new System.Drawing.Point(110, 25);
             this.dateTimePickerFromDateTime.Name = "dateTimePickerFromDateTime";
-            this.dateTimePickerFromDateTime.Size = new System.Drawing.Size(305, 22);
+            this.dateTimePickerFromDateTime.Size = new System.Drawing.Size(230, 20);
             this.dateTimePickerFromDateTime.TabIndex = 2;
             // 
             // lblMembershipDate
             // 
             this.lblMembershipDate.AutoSize = true;
-            this.lblMembershipDate.Location = new System.Drawing.Point(8, 31);
-            this.lblMembershipDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMembershipDate.Location = new System.Drawing.Point(6, 25);
             this.lblMembershipDate.Name = "lblMembershipDate";
-            this.lblMembershipDate.Size = new System.Drawing.Size(107, 16);
+            this.lblMembershipDate.Size = new System.Drawing.Size(82, 13);
             this.lblMembershipDate.TabIndex = 1;
-            this.lblMembershipDate.Text = "Membrii din data";
+            this.lblMembershipDate.Text = "Membri din data";
             // 
             // dataGridViewMembersRep
             // 
@@ -237,87 +242,39 @@
             this.dataGridViewMembersRep.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridViewMembersRep.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewMembersRep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMembersRep.Location = new System.Drawing.Point(5, 138);
-            this.dataGridViewMembersRep.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewMembersRep.Location = new System.Drawing.Point(4, 112);
             this.dataGridViewMembersRep.Name = "dataGridViewMembersRep";
-            this.dataGridViewMembersRep.Size = new System.Drawing.Size(990, 551);
+            this.dataGridViewMembersRep.Size = new System.Drawing.Size(937, 603);
             this.dataGridViewMembersRep.TabIndex = 0;
             // 
             // tabPageScans
             // 
-            this.tabPageScans.Controls.Add(this.btnGenerateScansR);
-            this.tabPageScans.Controls.Add(this.lblToDateScans);
-            this.tabPageScans.Controls.Add(this.dateTimePickerScansToDate);
-            this.tabPageScans.Controls.Add(this.dateTimePickerScandFromDate);
-            this.tabPageScans.Controls.Add(this.lblScanDate);
-            this.tabPageScans.Controls.Add(this.dataGridViewScansReport);
-            this.tabPageScans.Location = new System.Drawing.Point(4, 25);
-            this.tabPageScans.Margin = new System.Windows.Forms.Padding(4);
+            this.tabPageScans.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPageScans.Controls.Add(this.btnResetGenerate);
+            this.tabPageScans.Controls.Add(this.lblSearcScan);
+            this.tabPageScans.Controls.Add(this.txtScanMember);
+            this.tabPageScans.Controls.Add(this.btnScansGenerate);
+            this.tabPageScans.Controls.Add(this.lblTotalScansCount);
+            this.tabPageScans.Controls.Add(this.label8);
+            this.tabPageScans.Controls.Add(this.label9);
+            this.tabPageScans.Controls.Add(this.DTPScansTD);
+            this.tabPageScans.Controls.Add(this.DTPScansFD);
+            this.tabPageScans.Controls.Add(this.label10);
+            this.tabPageScans.Controls.Add(this.dataGridViewScandGBM);
+            this.tabPageScans.Controls.Add(this.dataGridViewScansR);
+            this.tabPageScans.Location = new System.Drawing.Point(4, 22);
             this.tabPageScans.Name = "tabPageScans";
-            this.tabPageScans.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPageScans.Size = new System.Drawing.Size(1492, 696);
+            this.tabPageScans.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageScans.Size = new System.Drawing.Size(1292, 721);
             this.tabPageScans.TabIndex = 1;
             this.tabPageScans.Text = "Raport scanri";
-            this.tabPageScans.UseVisualStyleBackColor = true;
-            // 
-            // btnGenerateScansR
-            // 
-            this.btnGenerateScansR.Location = new System.Drawing.Point(852, 60);
-            this.btnGenerateScansR.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGenerateScansR.Name = "btnGenerateScansR";
-            this.btnGenerateScansR.Size = new System.Drawing.Size(100, 28);
-            this.btnGenerateScansR.TabIndex = 14;
-            this.btnGenerateScansR.Text = "Generare";
-            this.btnGenerateScansR.UseVisualStyleBackColor = true;
-            // 
-            // lblToDateScans
-            // 
-            this.lblToDateScans.AutoSize = true;
-            this.lblToDateScans.Location = new System.Drawing.Point(457, 60);
-            this.lblToDateScans.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblToDateScans.Name = "lblToDateScans";
-            this.lblToDateScans.Size = new System.Drawing.Size(49, 16);
-            this.lblToDateScans.TabIndex = 13;
-            this.lblToDateScans.Text = "la data";
-            // 
-            // dateTimePickerScansToDate
-            // 
-            this.dateTimePickerScansToDate.Location = new System.Drawing.Point(524, 60);
-            this.dateTimePickerScansToDate.Margin = new System.Windows.Forms.Padding(4);
-            this.dateTimePickerScansToDate.Name = "dateTimePickerScansToDate";
-            this.dateTimePickerScansToDate.Size = new System.Drawing.Size(265, 22);
-            this.dateTimePickerScansToDate.TabIndex = 12;
-            // 
-            // dateTimePickerScandFromDate
-            // 
-            this.dateTimePickerScandFromDate.Location = new System.Drawing.Point(160, 60);
-            this.dateTimePickerScandFromDate.Margin = new System.Windows.Forms.Padding(4);
-            this.dateTimePickerScandFromDate.Name = "dateTimePickerScandFromDate";
-            this.dateTimePickerScandFromDate.Size = new System.Drawing.Size(265, 22);
-            this.dateTimePickerScandFromDate.TabIndex = 11;
-            // 
-            // lblScanDate
-            // 
-            this.lblScanDate.AutoSize = true;
-            this.lblScanDate.Location = new System.Drawing.Point(24, 60);
-            this.lblScanDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblScanDate.Name = "lblScanDate";
-            this.lblScanDate.Size = new System.Drawing.Size(105, 16);
-            this.lblScanDate.TabIndex = 10;
-            this.lblScanDate.Text = "Scanari din data";
-            // 
-            // dataGridViewScansReport
-            // 
-            this.dataGridViewScansReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewScansReport.Location = new System.Drawing.Point(9, 194);
-            this.dataGridViewScansReport.Margin = new System.Windows.Forms.Padding(4);
-            this.dataGridViewScansReport.Name = "dataGridViewScansReport";
-            this.dataGridViewScansReport.Size = new System.Drawing.Size(1415, 494);
-            this.dataGridViewScansReport.TabIndex = 0;
             // 
             // RptAbPage
             // 
             this.RptAbPage.BackColor = System.Drawing.Color.AliceBlue;
+            this.RptAbPage.Controls.Add(this.dataGridViewMembershipGroupByMonthR);
+            this.RptAbPage.Controls.Add(this.lblInactiveCount);
+            this.RptAbPage.Controls.Add(this.lblInactive);
             this.RptAbPage.Controls.Add(this.lblActiveCount);
             this.RptAbPage.Controls.Add(this.lblTotalActive);
             this.RptAbPage.Controls.Add(this.label5);
@@ -331,12 +288,11 @@
             this.RptAbPage.Controls.Add(this.label1);
             this.RptAbPage.Controls.Add(this.dateTimePickerTDMembershipR);
             this.RptAbPage.Controls.Add(this.dateTimePickerFDMembershipR);
-            this.RptAbPage.Controls.Add(this.label2);
+            this.RptAbPage.Controls.Add(this.lblMembershipFrom);
             this.RptAbPage.Controls.Add(this.dataGridViewMembershipR);
-            this.RptAbPage.Location = new System.Drawing.Point(4, 25);
-            this.RptAbPage.Margin = new System.Windows.Forms.Padding(4);
+            this.RptAbPage.Location = new System.Drawing.Point(4, 22);
             this.RptAbPage.Name = "RptAbPage";
-            this.RptAbPage.Size = new System.Drawing.Size(1492, 696);
+            this.RptAbPage.Size = new System.Drawing.Size(1292, 721);
             this.RptAbPage.TabIndex = 2;
             this.RptAbPage.Text = "Raport abonamente";
             // 
@@ -344,10 +300,9 @@
             // 
             this.lblActiveCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblActiveCount.AutoSize = true;
-            this.lblActiveCount.Location = new System.Drawing.Point(886, 110);
-            this.lblActiveCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblActiveCount.Location = new System.Drawing.Point(606, 87);
             this.lblActiveCount.Name = "lblActiveCount";
-            this.lblActiveCount.Size = new System.Drawing.Size(15, 16);
+            this.lblActiveCount.Size = new System.Drawing.Size(13, 13);
             this.lblActiveCount.TabIndex = 28;
             this.lblActiveCount.Text = "0";
             // 
@@ -355,28 +310,25 @@
             // 
             this.lblTotalActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalActive.AutoSize = true;
-            this.lblTotalActive.Location = new System.Drawing.Point(828, 109);
-            this.lblTotalActive.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalActive.Location = new System.Drawing.Point(498, 87);
             this.lblTotalActive.Name = "lblTotalActive";
-            this.lblTotalActive.Size = new System.Drawing.Size(48, 16);
+            this.lblTotalActive.Size = new System.Drawing.Size(102, 13);
             this.lblTotalActive.TabIndex = 27;
-            this.lblTotalActive.Text = "Active:";
+            this.lblTotalActive.Text = "Abonamente active:";
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(8, 79);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(6, 70);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 16);
+            this.label5.Size = new System.Drawing.Size(84, 13);
             this.label5.TabIndex = 25;
             this.label5.Text = "Cauta abonat";
             // 
             // txtMemberMembershipR
             // 
-            this.txtMemberMembershipR.Location = new System.Drawing.Point(151, 77);
-            this.txtMemberMembershipR.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMemberMembershipR.Location = new System.Drawing.Point(113, 63);
             this.txtMemberMembershipR.Name = "txtMemberMembershipR";
-            this.txtMemberMembershipR.Size = new System.Drawing.Size(300, 22);
+            this.txtMemberMembershipR.Size = new System.Drawing.Size(226, 20);
             this.txtMemberMembershipR.TabIndex = 26;
             this.txtMemberMembershipR.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMemberMembershipR_KeyPress);
             this.txtMemberMembershipR.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtMemberMembershipR_KeyUp);
@@ -385,10 +337,9 @@
             // 
             this.lblTotalMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalMembership.AutoSize = true;
-            this.lblTotalMembership.Location = new System.Drawing.Point(976, 111);
-            this.lblTotalMembership.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTotalMembership.Location = new System.Drawing.Point(826, 87);
             this.lblTotalMembership.Name = "lblTotalMembership";
-            this.lblTotalMembership.Size = new System.Drawing.Size(15, 16);
+            this.lblTotalMembership.Size = new System.Drawing.Size(13, 13);
             this.lblTotalMembership.TabIndex = 24;
             this.lblTotalMembership.Text = "0";
             // 
@@ -396,37 +347,35 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(918, 110);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(786, 87);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 16);
+            this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 23;
             this.label4.Text = "Total:";
             // 
             // lblMembershipType
             // 
             this.lblMembershipType.AutoSize = true;
-            this.lblMembershipType.Location = new System.Drawing.Point(459, 79);
-            this.lblMembershipType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMembershipType.Location = new System.Drawing.Point(344, 64);
             this.lblMembershipType.Name = "lblMembershipType";
-            this.lblMembershipType.Size = new System.Drawing.Size(99, 16);
+            this.lblMembershipType.Size = new System.Drawing.Size(78, 13);
             this.lblMembershipType.TabIndex = 22;
             this.lblMembershipType.Text = "Tip abonament";
             // 
             // cbMembershipType
             // 
             this.cbMembershipType.FormattingEnabled = true;
-            this.cbMembershipType.Location = new System.Drawing.Point(565, 79);
+            this.cbMembershipType.Location = new System.Drawing.Point(424, 64);
+            this.cbMembershipType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbMembershipType.Name = "cbMembershipType";
-            this.cbMembershipType.Size = new System.Drawing.Size(305, 24);
+            this.cbMembershipType.Size = new System.Drawing.Size(230, 21);
             this.cbMembershipType.TabIndex = 21;
             // 
             // btnResetMembershipR
             // 
-            this.btnResetMembershipR.Location = new System.Drawing.Point(1026, 31);
-            this.btnResetMembershipR.Margin = new System.Windows.Forms.Padding(4);
+            this.btnResetMembershipR.Location = new System.Drawing.Point(770, 25);
             this.btnResetMembershipR.Name = "btnResetMembershipR";
-            this.btnResetMembershipR.Size = new System.Drawing.Size(100, 28);
+            this.btnResetMembershipR.Size = new System.Drawing.Size(75, 23);
             this.btnResetMembershipR.TabIndex = 20;
             this.btnResetMembershipR.Text = "Reset";
             this.btnResetMembershipR.UseVisualStyleBackColor = true;
@@ -434,10 +383,9 @@
             // 
             // btnGenerateMembershipR
             // 
-            this.btnGenerateMembershipR.Location = new System.Drawing.Point(907, 30);
-            this.btnGenerateMembershipR.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGenerateMembershipR.Location = new System.Drawing.Point(680, 24);
             this.btnGenerateMembershipR.Name = "btnGenerateMembershipR";
-            this.btnGenerateMembershipR.Size = new System.Drawing.Size(100, 28);
+            this.btnGenerateMembershipR.Size = new System.Drawing.Size(75, 23);
             this.btnGenerateMembershipR.TabIndex = 19;
             this.btnGenerateMembershipR.Text = "Generare";
             this.btnGenerateMembershipR.UseVisualStyleBackColor = true;
@@ -446,38 +394,34 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(492, 31);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(368, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 16);
+            this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 12;
             this.label1.Text = "la data";
             // 
             // dateTimePickerTDMembershipR
             // 
-            this.dateTimePickerTDMembershipR.Location = new System.Drawing.Point(565, 31);
-            this.dateTimePickerTDMembershipR.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePickerTDMembershipR.Location = new System.Drawing.Point(424, 25);
             this.dateTimePickerTDMembershipR.Name = "dateTimePickerTDMembershipR";
-            this.dateTimePickerTDMembershipR.Size = new System.Drawing.Size(305, 22);
+            this.dateTimePickerTDMembershipR.Size = new System.Drawing.Size(230, 20);
             this.dateTimePickerTDMembershipR.TabIndex = 11;
             // 
             // dateTimePickerFDMembershipR
             // 
-            this.dateTimePickerFDMembershipR.Location = new System.Drawing.Point(146, 31);
-            this.dateTimePickerFDMembershipR.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePickerFDMembershipR.Location = new System.Drawing.Point(110, 25);
             this.dateTimePickerFDMembershipR.Name = "dateTimePickerFDMembershipR";
-            this.dateTimePickerFDMembershipR.Size = new System.Drawing.Size(305, 22);
+            this.dateTimePickerFDMembershipR.Size = new System.Drawing.Size(230, 20);
             this.dateTimePickerFDMembershipR.TabIndex = 10;
             // 
-            // label2
+            // lblMembershipFrom
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 31);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 16);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Membrii din data";
+            this.lblMembershipFrom.AutoSize = true;
+            this.lblMembershipFrom.Location = new System.Drawing.Point(6, 25);
+            this.lblMembershipFrom.Name = "lblMembershipFrom";
+            this.lblMembershipFrom.Size = new System.Drawing.Size(84, 13);
+            this.lblMembershipFrom.TabIndex = 9;
+            this.lblMembershipFrom.Text = "Abonati din data";
             // 
             // dataGridViewMembershipR
             // 
@@ -487,10 +431,9 @@
             this.dataGridViewMembershipR.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridViewMembershipR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewMembershipR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewMembershipR.Location = new System.Drawing.Point(5, 138);
-            this.dataGridViewMembershipR.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewMembershipR.Location = new System.Drawing.Point(4, 112);
             this.dataGridViewMembershipR.Name = "dataGridViewMembershipR";
-            this.dataGridViewMembershipR.Size = new System.Drawing.Size(990, 551);
+            this.dataGridViewMembershipR.Size = new System.Drawing.Size(937, 603);
             this.dataGridViewMembershipR.TabIndex = 1;
             // 
             // panelReports
@@ -498,21 +441,194 @@
             this.panelReports.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelReports.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.panelReports.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panelReports.Controls.Add(this.tabControlReports);
-            this.panelReports.Location = new System.Drawing.Point(3, 0);
+            this.panelReports.Location = new System.Drawing.Point(0, 0);
             this.panelReports.Name = "panelReports";
-            this.panelReports.Size = new System.Drawing.Size(1508, 729);
+            this.panelReports.Size = new System.Drawing.Size(1300, 747);
             this.panelReports.TabIndex = 1;
+            // 
+            // lblInactiveCount
+            // 
+            this.lblInactiveCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInactiveCount.AutoSize = true;
+            this.lblInactiveCount.Location = new System.Drawing.Point(756, 87);
+            this.lblInactiveCount.Name = "lblInactiveCount";
+            this.lblInactiveCount.Size = new System.Drawing.Size(13, 13);
+            this.lblInactiveCount.TabIndex = 30;
+            this.lblInactiveCount.Text = "0";
+            // 
+            // lblInactive
+            // 
+            this.lblInactive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInactive.AutoSize = true;
+            this.lblInactive.Location = new System.Drawing.Point(640, 87);
+            this.lblInactive.Name = "lblInactive";
+            this.lblInactive.Size = new System.Drawing.Size(110, 13);
+            this.lblInactive.TabIndex = 29;
+            this.lblInactive.Text = "Abonamente inactive:";
+            // 
+            // lblCountActiveMembers
+            // 
+            this.lblCountActiveMembers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCountActiveMembers.AutoSize = true;
+            this.lblCountActiveMembers.Location = new System.Drawing.Point(790, 88);
+            this.lblCountActiveMembers.Name = "lblCountActiveMembers";
+            this.lblCountActiveMembers.Size = new System.Drawing.Size(13, 13);
+            this.lblCountActiveMembers.TabIndex = 20;
+            this.lblCountActiveMembers.Text = "0";
+            // 
+            // lblActiveMembers
+            // 
+            this.lblActiveMembers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblActiveMembers.AutoSize = true;
+            this.lblActiveMembers.Location = new System.Drawing.Point(712, 88);
+            this.lblActiveMembers.Name = "lblActiveMembers";
+            this.lblActiveMembers.Size = new System.Drawing.Size(74, 13);
+            this.lblActiveMembers.TabIndex = 19;
+            this.lblActiveMembers.Text = "Abonati activi:";
+            // 
+            // dataGridViewMembershipGroupByMonthR
+            // 
+            this.dataGridViewMembershipGroupByMonthR.AllowUserToAddRows = false;
+            this.dataGridViewMembershipGroupByMonthR.AllowUserToDeleteRows = false;
+            this.dataGridViewMembershipGroupByMonthR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewMembershipGroupByMonthR.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridViewMembershipGroupByMonthR.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewMembershipGroupByMonthR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMembershipGroupByMonthR.Location = new System.Drawing.Point(946, 112);
+            this.dataGridViewMembershipGroupByMonthR.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewMembershipGroupByMonthR.Name = "dataGridViewMembershipGroupByMonthR";
+            this.dataGridViewMembershipGroupByMonthR.ReadOnly = true;
+            this.dataGridViewMembershipGroupByMonthR.RowTemplate.Height = 24;
+            this.dataGridViewMembershipGroupByMonthR.Size = new System.Drawing.Size(341, 604);
+            this.dataGridViewMembershipGroupByMonthR.TabIndex = 31;
+            // 
+            // dataGridViewScandGBM
+            // 
+            this.dataGridViewScandGBM.AllowUserToAddRows = false;
+            this.dataGridViewScandGBM.AllowUserToDeleteRows = false;
+            this.dataGridViewScandGBM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewScandGBM.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridViewScandGBM.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewScandGBM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewScandGBM.Location = new System.Drawing.Point(946, 112);
+            this.dataGridViewScandGBM.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewScandGBM.Name = "dataGridViewScandGBM";
+            this.dataGridViewScandGBM.ReadOnly = true;
+            this.dataGridViewScandGBM.RowTemplate.Height = 24;
+            this.dataGridViewScandGBM.Size = new System.Drawing.Size(341, 604);
+            this.dataGridViewScandGBM.TabIndex = 24;
+            // 
+            // dataGridViewScansR
+            // 
+            this.dataGridViewScansR.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewScansR.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridViewScansR.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewScansR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewScansR.Location = new System.Drawing.Point(4, 112);
+            this.dataGridViewScansR.Name = "dataGridViewScansR";
+            this.dataGridViewScansR.Size = new System.Drawing.Size(937, 603);
+            this.dataGridViewScansR.TabIndex = 21;
+            // 
+            // btnResetGenerate
+            // 
+            this.btnResetGenerate.Location = new System.Drawing.Point(770, 25);
+            this.btnResetGenerate.Name = "btnResetGenerate";
+            this.btnResetGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnResetGenerate.TabIndex = 34;
+            this.btnResetGenerate.Text = "Reset";
+            this.btnResetGenerate.UseVisualStyleBackColor = true;
+            // 
+            // lblSearcScan
+            // 
+            this.lblSearcScan.Location = new System.Drawing.Point(6, 70);
+            this.lblSearcScan.Name = "lblSearcScan";
+            this.lblSearcScan.Size = new System.Drawing.Size(84, 13);
+            this.lblSearcScan.TabIndex = 32;
+            this.lblSearcScan.Text = "Cauta abonat";
+            // 
+            // txtScanMember
+            // 
+            this.txtScanMember.Location = new System.Drawing.Point(113, 63);
+            this.txtScanMember.Name = "txtScanMember";
+            this.txtScanMember.Size = new System.Drawing.Size(226, 20);
+            this.txtScanMember.TabIndex = 33;
+            this.txtScanMember.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtScanMember_KeyPress);
+            this.txtScanMember.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtScanMember_KeyUp);
+            // 
+            // btnScansGenerate
+            // 
+            this.btnScansGenerate.Location = new System.Drawing.Point(680, 24);
+            this.btnScansGenerate.Name = "btnScansGenerate";
+            this.btnScansGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnScansGenerate.TabIndex = 31;
+            this.btnScansGenerate.Text = "Generare";
+            this.btnScansGenerate.UseVisualStyleBackColor = true;
+            // 
+            // lblTotalScansCount
+            // 
+            this.lblTotalScansCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTotalScansCount.AutoSize = true;
+            this.lblTotalScansCount.Location = new System.Drawing.Point(903, 88);
+            this.lblTotalScansCount.Name = "lblTotalScansCount";
+            this.lblTotalScansCount.Size = new System.Drawing.Size(13, 13);
+            this.lblTotalScansCount.TabIndex = 30;
+            this.lblTotalScansCount.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(825, 88);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(71, 13);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "Total scanari:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(368, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "la data";
+            // 
+            // DTPScansTD
+            // 
+            this.DTPScansTD.Location = new System.Drawing.Point(424, 25);
+            this.DTPScansTD.Name = "DTPScansTD";
+            this.DTPScansTD.Size = new System.Drawing.Size(230, 20);
+            this.DTPScansTD.TabIndex = 27;
+            // 
+            // DTPScansFD
+            // 
+            this.DTPScansFD.Location = new System.Drawing.Point(110, 25);
+            this.DTPScansFD.Name = "DTPScansFD";
+            this.DTPScansFD.Size = new System.Drawing.Size(230, 20);
+            this.DTPScansFD.TabIndex = 26;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(84, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Scanari din data";
             // 
             // ucReports
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelReports);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucReports";
-            this.Size = new System.Drawing.Size(1514, 732);
+            this.Size = new System.Drawing.Size(1300, 747);
             this.tabControlReports.ResumeLayout(false);
             this.tabPage1MembersReport.ResumeLayout(false);
             this.tabPage1MembersReport.PerformLayout();
@@ -520,11 +636,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembersRep)).EndInit();
             this.tabPageScans.ResumeLayout(false);
             this.tabPageScans.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScansReport)).EndInit();
             this.RptAbPage.ResumeLayout(false);
             this.RptAbPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembershipR)).EndInit();
             this.panelReports.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembershipGroupByMonthR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScandGBM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScansR)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -541,13 +659,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerFromDateTime;
         private System.Windows.Forms.Label lblMembershipDate;
         private System.Windows.Forms.DataGridView dataGridViewMembersRep;
-        private System.Windows.Forms.Label lblToDateScans;
-        private System.Windows.Forms.DateTimePicker dateTimePickerScansToDate;
-        private System.Windows.Forms.DateTimePicker dateTimePickerScandFromDate;
-        private System.Windows.Forms.Label lblScanDate;
-        private System.Windows.Forms.DataGridView dataGridViewScansReport;
         private System.Windows.Forms.Button btnGenerate;
-        private System.Windows.Forms.Button btnGenerateScansR;
         private System.Windows.Forms.TabPage RptAbPage;
         private System.Windows.Forms.DataGridView dataGridViewCountByMonth;
         private System.Windows.Forms.Panel panelReports;
@@ -557,7 +669,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerTDMembershipR;
         private System.Windows.Forms.DateTimePicker dateTimePickerFDMembershipR;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblMembershipFrom;
         private System.Windows.Forms.DataGridView dataGridViewMembershipR;
         private System.Windows.Forms.Button btnResetMembershipR;
         private System.Windows.Forms.Button btnGenerateMembershipR;
@@ -569,5 +681,22 @@
         private System.Windows.Forms.TextBox txtMemberMembershipR;
         private System.Windows.Forms.Label lblActiveCount;
         private System.Windows.Forms.Label lblTotalActive;
+        private System.Windows.Forms.Label lblInactiveCount;
+        private System.Windows.Forms.Label lblInactive;
+        private System.Windows.Forms.Label lblCountActiveMembers;
+        private System.Windows.Forms.Label lblActiveMembers;
+        private System.Windows.Forms.DataGridView dataGridViewMembershipGroupByMonthR;
+        private System.Windows.Forms.DataGridView dataGridViewScandGBM;
+        private System.Windows.Forms.DataGridView dataGridViewScansR;
+        private System.Windows.Forms.Button btnResetGenerate;
+        private System.Windows.Forms.Label lblSearcScan;
+        private System.Windows.Forms.TextBox txtScanMember;
+        private System.Windows.Forms.Button btnScansGenerate;
+        private System.Windows.Forms.Label lblTotalScansCount;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker DTPScansTD;
+        private System.Windows.Forms.DateTimePicker DTPScansFD;
+        private System.Windows.Forms.Label label10;
     }
 }

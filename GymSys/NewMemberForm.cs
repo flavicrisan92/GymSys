@@ -14,9 +14,11 @@ namespace GymSys
         LocalDBEntities db = new LocalDBEntities();
         private Actions.Operations _operation;
         private int _currentMemberOnEdit = 0;
+        private string _txtMemberValue;
 
-        public NewMemberForm(Members member, Memberships membership, Actions.Operations operation)
+        public NewMemberForm(Members member, Memberships membership, Actions.Operations operation, string txtMemberValue)
         {
+            _txtMemberValue = txtMemberValue;
             _operation = operation;
             if (operation == Actions.Operations.EditMember)
             {
@@ -238,7 +240,7 @@ namespace GymSys
                 }
                 db.SaveChanges();
                 this.Close();
-                ucMembers.Instance.LoadMembers(Actions.Operations.EditMember);
+                ucMembers.Instance.LoadMembers(Actions.Operations.EditMember, _txtMemberValue);
                 ucMembers.Instance.LoadSubscription(Actions.Operations.EditMember);
             }
             else
@@ -284,7 +286,7 @@ namespace GymSys
                     // ignored
                 }
                 Close();
-                ucMembers.Instance.LoadMembers(Actions.Operations.AddMember);
+                ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
             }
         }
 
@@ -344,7 +346,7 @@ namespace GymSys
                     // ignored
                 }
                 Close();
-                ucMembers.Instance.LoadMembers(Actions.Operations.AddMember);
+                ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
             }
         }
 

@@ -22,7 +22,7 @@ namespace GymSys
             InitializeComponent();
             lblUserMembership.Visible = false;
             dataGvMembershipHist.Visible = false;
-            LoadMembers(Actions.Operations.NotSpecified);
+            LoadMembers(Actions.Operations.NotSpecified, txtSearchMembers.Text);
         }
 
         private void ProcessDeleteMember()
@@ -47,7 +47,7 @@ namespace GymSys
                 {
                     memberToDelete.IsActive = false;
                     db.SaveChanges();
-                    Instance.LoadMembers(Actions.Operations.DeleteMember);
+                    Instance.LoadMembers(Actions.Operations.DeleteMember, txtSearchMembers.Text);
                 }
             }
         }
@@ -110,7 +110,7 @@ namespace GymSys
             }
         }
 
-        public void LoadMembers(Actions.Operations operation)
+        public void LoadMembers(Actions.Operations operation, string searchValue)
         {
             var members = from member in db.Members
                           where member.IsActive
@@ -126,6 +126,52 @@ namespace GymSys
                               Data_inregistrare = member.Created,
                               Ultima_scanare = db.Scans.Where(s=>s.IdMember == member.Id).OrderByDescending(s=>s.Id).Select(s=>s.Date).FirstOrDefault()
                           };
+
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                if (searchValue.Contains(" "))
+                {
+                    var delimiter = ' ';
+                    var substrings = searchValue.Split(delimiter);
+                    var firstSubstring = substrings[0];
+                    if (substrings.Length == 1)
+                    {
+                        members =
+                            members.Where(
+                                m =>
+                                    m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                    }
+                    else if (substrings.Length == 2)
+                    {
+                        var secondSubstring = substrings[1];
+                        if (!string.IsNullOrEmpty(secondSubstring))
+                        {
+                            members =
+                                members.Where(
+                                    m =>
+                                        (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
+                                        (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                        }
+                        else
+                        {
+                            members =
+                           members.Where(
+                               m =>
+                                   m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                        }
+                    }
+                }
+                else
+                {
+                    members =
+                     members.Where(
+                         m =>
+                             m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
+                             m.Cod.StartsWith(searchValue));
+                }
+
+            }
+            lblTotalCount.Text = members.Count().ToString();
             dataGVMembers.DataSource = members.ToList();
 
             var dataGridViewColumn = dataGVMembers.Columns["Id"];
@@ -155,7 +201,7 @@ namespace GymSys
 
         private void btnNewMember_Click(object sender, EventArgs e)
         {
-            NewMemberForm newMemberForm = new NewMemberForm(null, null, Actions.Operations.AddMember);
+            NewMemberForm newMemberForm = new NewMemberForm(null, null, Actions.Operations.AddMember, txtSearchMembers.Text);
             newMemberForm.Show();
         }
 
@@ -197,7 +243,7 @@ namespace GymSys
                         string id = row.Cells[0].Value.ToString();
                         int.TryParse(id, out idint);
                         var member = db.Members.FirstOrDefault(m => m.Id == idint);
-                        NewMemberForm addSubscription = new NewMemberForm(member, null, Actions.Operations.EditMember);
+                        NewMemberForm addSubscription = new NewMemberForm(member, null, Actions.Operations.EditMember, txtSearchMembers.Text);
                         addSubscription.Show();
                     }
                     break;
@@ -227,7 +273,7 @@ namespace GymSys
                     int.TryParse(id, out idint);
                     var member = db.Members.FirstOrDefault(m => m.Id == idint);
                     NewMemberForm addSubscription = new NewMemberForm(member, null,
-                        Actions.Operations.AddSubscription);
+                        Actions.Operations.AddSubscription, txtSearchMembers.Text);
                     addSubscription.Show();
                 }
         }
@@ -288,7 +334,7 @@ namespace GymSys
                                 membership.IdMembershipType = membershipUpdated.Select(m => m.IdMembershipType).FirstOrDefault();
 
                                 NewMemberForm editSubscription = new NewMemberForm(null, membership,
-                                    Actions.Operations.EditSubscription);
+                                    Actions.Operations.EditSubscription, txtSearchMembers.Text);
                                 editSubscription.Show();
                             }
                         }
@@ -331,6 +377,16 @@ namespace GymSys
                     Instance.LoadSubscription(Actions.Operations.DeleteMemberhip);
                 }
             }
+        }
+
+        private void txtSearchMembers_KeyUp(object sender, KeyEventArgs e)
+        {
+            LoadMembers(Actions.Operations.NotSpecified, txtSearchMembers.Text);
+        }
+
+        private void txtSearchMembers_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Space && !txtSearchMembers.Text.Contains(" ")));
         }
     }
 }

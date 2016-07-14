@@ -46,10 +46,10 @@ namespace GymSys
 
             var dataGridViewUsersId = dataGridViewUsers.Columns["Id"];
             //if (dataGridViewUsersId != null) dataGridViewUsersId.Visible = false;
-            dataGridViewUsers.Columns[0].Width = 350;
-            dataGridViewUsers.Columns[1].Width = 350;
-            dataGridViewUsers.Columns[2].Width = 250;
-            dataGridViewUsers.Columns[3].Width = 250;
+            dataGridViewUsers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewUsers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewUsers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewUsers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (_userSelectedRow > 0 && operation != Actions.Operations.DeleteUser)
             {
@@ -75,11 +75,11 @@ namespace GymSys
 
             var dataGridViewMembershipTypesId = dataGridViewMembershipTypes.Columns["Id"];
             if (dataGridViewMembershipTypesId != null) dataGridViewMembershipTypesId.Visible = false;
-            dataGridViewMembershipTypes.Columns[0].Width = 350;
-            dataGridViewMembershipTypes.Columns[1].Width = 350;
-            dataGridViewMembershipTypes.Columns[2].Width = 250;
-            dataGridViewMembershipTypes.Columns[3].Width = 250;
-            dataGridViewMembershipTypes.Columns[4].Width = 550;
+            dataGridViewMembershipTypes.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewMembershipTypes.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewMembershipTypes.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewMembershipTypes.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewMembershipTypes.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (_membershipTypeSelectedRow > 0 && operation != Actions.Operations.DeleteMemberhipType)
             {
