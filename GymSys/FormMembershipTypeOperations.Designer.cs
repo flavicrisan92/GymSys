@@ -129,6 +129,7 @@
             this.Name = "FormMembershipTypeOperations";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Adaugare tip abonament";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMembershipTypeOperations_FormClosed);
             this.Load += new System.EventHandler(this.FormMembershipTypeOperations_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

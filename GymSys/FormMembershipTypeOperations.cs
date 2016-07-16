@@ -116,5 +116,10 @@ namespace GymSys
         {
             txtType.Select();
         }
+
+        private void FormMembershipTypeOperations_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ucAdministration.Instance.CloserFOrmAddMembershipTytpe();
+        }
     }
 }

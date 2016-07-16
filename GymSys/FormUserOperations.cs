@@ -39,6 +39,7 @@ namespace GymSys
             if (isOwner(user, loggeduser))
             {
                 txtPassword.Text = user.Password;
+                cbAdmin.Enabled = false;
             }
             else
             {
@@ -146,6 +147,11 @@ namespace GymSys
         private void ShowMessageDuplicate()
         {
             MessageBox.Show("Numele de utilizator exista deja in baza de date!");
+        }
+
+        private void FormUserOperations_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ucAdministration.Instance.CloseFormAddNewUser();
         }
     }
 }

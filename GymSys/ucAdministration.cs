@@ -17,6 +17,8 @@ namespace GymSys
         private static int _membershipTypeSelectedRow;
         private static int _userSelectedRow;
         private Users _loggedUser;
+        private FormUserOperations formUserOperation;
+        private FormMembershipTypeOperations formMembershipType;
 
         public static ucAdministration Instance
         {
@@ -40,6 +42,7 @@ namespace GymSys
                                 Nume = user.Name,
                                 Prenume = user.Surname,
                                 NumeUtilizator = user.Username,
+                                Administrator = user.IsAdmin,
                                 DataIntroducerii = user.Created
                             };
             dataGridViewUsers.DataSource = usersList.ToList();
@@ -90,14 +93,39 @@ namespace GymSys
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            FormUserOperations formUserOperation = new FormUserOperations(null, Actions.Operations.AddUser, _loggedUser);
-            formUserOperation.Show();
+            if (formUserOperation == null)
+            {
+                formUserOperation = new FormUserOperations(null, Actions.Operations.AddUser, _loggedUser);
+                formUserOperation.Show();
+            }
+            else
+            {
+                formUserOperation.Show();
+            }
+        }
+
+        public void CloseFormAddNewUser()
+        {
+            formUserOperation = null;
+        }
+
+        public void CloserFOrmAddMembershipTytpe()
+        {
+            formMembershipType = null;
         }
 
         private void btnNewMembershipType_Click(object sender, EventArgs e)
         {
-            FormMembershipTypeOperations formMembershipType = new FormMembershipTypeOperations(null, Actions.Operations.AddMembershipType);
-            formMembershipType.Show();
+            if (formMembershipType == null)
+            {
+
+                formMembershipType = new FormMembershipTypeOperations(null, Actions.Operations.AddMembershipType);
+                formMembershipType.Show();
+            }
+            else
+            {
+                formMembershipType.Show();
+            }
         }
 
         private void dataGridViewMembershipTypes_MouseClick(object sender, MouseEventArgs e)

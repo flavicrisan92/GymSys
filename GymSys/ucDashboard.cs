@@ -28,7 +28,33 @@ namespace GymSys
         
         public void LoadScanList()
         {
-            dataGridViewScans.DataSource = db.Scans.OrderByDescending(s=>s.Id).ToList();
+            var scans = from scan in db.Scans
+                        orderby scan.Date descending
+                        select new
+                        {
+                            scan.Members.Id,
+                            Nume = scan.Members.Name,
+                            Prenume = scan.Members.Surname,
+                            Cod = scan.Members.Code,
+                            Data_Nastere = scan.Members.Birthdate,
+                            DataExpirareAbonament = scan.Members.Memberships.Select(s=>s.EndDate).Max(),
+                            Abonament_Activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
+                            Data_scanare = scan.Date,
+                            Data_inregistrare = scan.Members.Created,
+                            Ultima_scanare = db.Scans.Where(s => s.IdMember == scan.IdMember).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault()
+                        };
+            dataGridViewScans.DataSource = scans.ToList();
+
+            dataGridViewScans.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScans.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         public static ucDashboard Instance
         {

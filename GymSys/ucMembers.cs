@@ -11,6 +11,9 @@ namespace GymSys
         private static ucMembers _instanceMembers;
         private int _membersSelectedRow = 0;
         private int _membershipSelectedRow = 0;
+        private NewMemberForm editSubscription;
+        private NewMemberForm newMemberForm;
+        private NewMemberForm addSubscription;
 
         public static ucMembers Instance
         {
@@ -124,7 +127,7 @@ namespace GymSys
                               Activ = member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                               Data_Nastere = member.Birthdate,
                               Data_inregistrare = member.Created,
-                              Ultima_scanare = db.Scans.Where(s=>s.IdMember == member.Id).OrderByDescending(s=>s.Id).Select(s=>s.Date).FirstOrDefault()
+                              Ultima_scanare = db.Scans.Where(s => s.IdMember == member.Id).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault()
                           };
 
             if (!string.IsNullOrEmpty(searchValue))
@@ -201,8 +204,15 @@ namespace GymSys
 
         private void btnNewMember_Click(object sender, EventArgs e)
         {
-            NewMemberForm newMemberForm = new NewMemberForm(null, null, Actions.Operations.AddMember, txtSearchMembers.Text);
-            newMemberForm.Show();
+            if (newMemberForm == null)
+            {
+                newMemberForm = new NewMemberForm(null, null, Actions.Operations.AddMember, txtSearchMembers.Text);
+                newMemberForm.Show();
+            }
+            else
+            {
+                newMemberForm.Show();
+            }
         }
 
         private void dataGVMembers_MouseClick(object sender, MouseEventArgs e)
@@ -243,8 +253,16 @@ namespace GymSys
                         string id = row.Cells[0].Value.ToString();
                         int.TryParse(id, out idint);
                         var member = db.Members.FirstOrDefault(m => m.Id == idint);
-                        NewMemberForm addSubscription = new NewMemberForm(member, null, Actions.Operations.EditMember, txtSearchMembers.Text);
-                        addSubscription.Show();
+                        if (addSubscription == null)
+                        {
+                            addSubscription = new NewMemberForm(member, null, Actions.Operations.EditMember,
+                                txtSearchMembers.Text);
+                            addSubscription.Show();
+                        }
+                        else
+                        {
+                            addSubscription.Show();
+                        }
                     }
                     break;
                 case "Stergere":
@@ -272,9 +290,16 @@ namespace GymSys
                     string id = row.Cells[0].Value.ToString();
                     int.TryParse(id, out idint);
                     var member = db.Members.FirstOrDefault(m => m.Id == idint);
-                    NewMemberForm addSubscription = new NewMemberForm(member, null,
-                        Actions.Operations.AddSubscription, txtSearchMembers.Text);
-                    addSubscription.Show();
+                    if (addSubscription == null)
+                    {
+                        addSubscription = new NewMemberForm(member, null,
+                            Actions.Operations.AddSubscription, txtSearchMembers.Text);
+                        addSubscription.Show();
+                    }
+                    else
+                    {
+                        addSubscription.Show();
+                    }
                 }
         }
 
@@ -333,9 +358,16 @@ namespace GymSys
                                 membership.EndDate = membershipUpdated.Select(m => m.EndDate).FirstOrDefault();
                                 membership.IdMembershipType = membershipUpdated.Select(m => m.IdMembershipType).FirstOrDefault();
 
-                                NewMemberForm editSubscription = new NewMemberForm(null, membership,
-                                    Actions.Operations.EditSubscription, txtSearchMembers.Text);
-                                editSubscription.Show();
+                                if (editSubscription == null)
+                                {
+                                    editSubscription = new NewMemberForm(null, membership,
+                                        Actions.Operations.EditSubscription, txtSearchMembers.Text);
+                                    editSubscription.Show();
+                                }
+                                else
+                                {
+                                    editSubscription.Show();
+                                }
                             }
                         }
                     break;
@@ -387,6 +419,18 @@ namespace GymSys
         private void txtSearchMembers_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !(char.IsLetter(e.KeyChar) || e.KeyChar == (char)Keys.Back || char.IsDigit(e.KeyChar) || (e.KeyChar == (char)Keys.Space && !txtSearchMembers.Text.Contains(" ")));
+        }
+
+        public void CloseMembersEditForm(Actions.Operations operation)
+        {
+            if (operation == Actions.Operations.AddMember || operation == Actions.Operations.EditMember)
+            {
+                newMemberForm = null;
+            }
+            else
+            {
+                editSubscription = null;
+            }
         }
     }
 }

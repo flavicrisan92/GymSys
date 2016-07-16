@@ -273,6 +273,7 @@
             this.Name = "NewMemberForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Abonat nou";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NewMemberForm_FormClosed);
             this.Load += new System.EventHandler(this.NewMemberForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriod)).EndInit();
             this.ResumeLayout(false);

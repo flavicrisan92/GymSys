@@ -44,67 +44,60 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(17, 50);
-            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblName.Location = new System.Drawing.Point(13, 41);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(44, 16);
+            this.lblName.Size = new System.Drawing.Size(41, 15);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Nume";
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(17, 190);
-            this.lblPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPassword.Location = new System.Drawing.Point(13, 154);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(48, 16);
+            this.lblPassword.Size = new System.Drawing.Size(43, 15);
             this.lblPassword.TabIndex = 1;
             this.lblPassword.Text = "Parola";
             // 
             // lblSurname
             // 
             this.lblSurname.AutoSize = true;
-            this.lblSurname.Location = new System.Drawing.Point(17, 92);
-            this.lblSurname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSurname.Location = new System.Drawing.Point(13, 75);
             this.lblSurname.Name = "lblSurname";
-            this.lblSurname.Size = new System.Drawing.Size(62, 16);
+            this.lblSurname.Size = new System.Drawing.Size(58, 15);
             this.lblSurname.TabIndex = 2;
             this.lblSurname.Text = "Prenume";
             // 
             // txtName
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.Location = new System.Drawing.Point(155, 43);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Location = new System.Drawing.Point(116, 35);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(237, 22);
+            this.txtName.Size = new System.Drawing.Size(179, 20);
             this.txtName.TabIndex = 1;
             // 
             // txtSurname
             // 
             this.txtSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSurname.Location = new System.Drawing.Point(155, 92);
-            this.txtSurname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSurname.Location = new System.Drawing.Point(116, 75);
             this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(237, 22);
+            this.txtSurname.Size = new System.Drawing.Size(179, 20);
             this.txtSurname.TabIndex = 2;
             // 
             // txtPassword
             // 
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(155, 189);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPassword.Location = new System.Drawing.Point(116, 154);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(237, 22);
+            this.txtPassword.Size = new System.Drawing.Size(179, 20);
             this.txtPassword.TabIndex = 4;
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(155, 265);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Location = new System.Drawing.Point(116, 215);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(239, 28);
+            this.btnSave.Size = new System.Drawing.Size(179, 23);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Creare";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -113,46 +106,44 @@
             // txtUsername
             // 
             this.txtUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtUsername.Location = new System.Drawing.Point(155, 143);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsername.Location = new System.Drawing.Point(116, 116);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(237, 22);
+            this.txtUsername.Size = new System.Drawing.Size(179, 20);
             this.txtUsername.TabIndex = 3;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(17, 143);
-            this.lblUsername.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblUsername.Location = new System.Drawing.Point(13, 116);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(95, 16);
+            this.lblUsername.Size = new System.Drawing.Size(90, 15);
             this.lblUsername.TabIndex = 7;
             this.lblUsername.Text = "Nume utilizator";
             // 
             // lblAdministrator
             // 
             this.lblAdministrator.AutoSize = true;
-            this.lblAdministrator.Location = new System.Drawing.Point(17, 233);
-            this.lblAdministrator.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAdministrator.Location = new System.Drawing.Point(13, 189);
             this.lblAdministrator.Name = "lblAdministrator";
-            this.lblAdministrator.Size = new System.Drawing.Size(86, 16);
+            this.lblAdministrator.Size = new System.Drawing.Size(79, 15);
             this.lblAdministrator.TabIndex = 8;
             this.lblAdministrator.Text = "Administrator";
             // 
             // cbAdmin
             // 
             this.cbAdmin.AutoSize = true;
-            this.cbAdmin.Location = new System.Drawing.Point(155, 229);
+            this.cbAdmin.Location = new System.Drawing.Point(116, 186);
+            this.cbAdmin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbAdmin.Name = "cbAdmin";
-            this.cbAdmin.Size = new System.Drawing.Size(15, 14);
+            this.cbAdmin.Size = new System.Drawing.Size(18, 17);
             this.cbAdmin.TabIndex = 9;
             this.cbAdmin.UseVisualStyleBackColor = true;
             // 
             // FormUserOperations
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 311);
+            this.ClientSize = new System.Drawing.Size(307, 253);
             this.Controls.Add(this.cbAdmin);
             this.Controls.Add(this.lblAdministrator);
             this.Controls.Add(this.txtUsername);
@@ -164,12 +155,12 @@
             this.Controls.Add(this.lblSurname);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblName);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormUserOperations";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Adaugare utilizator";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormUserOperations_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

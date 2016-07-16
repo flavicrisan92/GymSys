@@ -307,7 +307,7 @@ namespace GymSys
                         Code = txtCode.Text,
                         Name = txtName.Text,
                         Surname = txtSurname.Text,
-                        Birthdate = dateTimePickerBirthDate.Value,
+                        Birthdate = dateTimePickerBirthDate.Value.Date,
                         Created = DateTime.Now,
                         IsActive = true
                     };
@@ -397,6 +397,11 @@ namespace GymSys
         private void NewMemberForm_Load(object sender, EventArgs e)
         {
             txtName.Select();
+        }
+
+        private void NewMemberForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+           ucMembers.Instance.CloseMembersEditForm(_operation);
         }
 
         //private void txtCode_KeyDown(object sender, KeyEventArgs e)
