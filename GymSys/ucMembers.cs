@@ -423,13 +423,21 @@ namespace GymSys
 
         public void CloseMembersEditForm(Actions.Operations operation)
         {
-            if (operation == Actions.Operations.AddMember || operation == Actions.Operations.EditMember)
+            if (operation == Actions.Operations.AddMember)
             {
                 newMemberForm = null;
             }
-            else
+            else if (operation == Actions.Operations.EditMember)
+            {
+                addSubscription = null;
+            }
+            else if (operation == Actions.Operations.EditSubscription)
             {
                 editSubscription = null;
+            }
+            else
+            {
+                addSubscription = null;
             }
         }
     }

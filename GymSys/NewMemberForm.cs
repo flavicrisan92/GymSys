@@ -90,17 +90,13 @@ namespace GymSys
 
         private void SetupFrameAddSubscription()
         {
-            this.Text = "Prelungire abonament";
+            this.Text = "Abonat abonament";
 
             //Set readonly
             txtCode.ReadOnly = true;
             txtName.ReadOnly = true;
             txtSurname.ReadOnly = true;
             dateTimePickerBirthDate.Enabled = false;
-        }
-        private void SetupFrameAddAddMember()
-        {
-            this.Text = "Abonat nou";
         }
 
         private void SetUpMember(Members member)
@@ -221,6 +217,9 @@ namespace GymSys
 
                 ((IObjectContextAdapter)db).ObjectContext.Refresh(RefreshMode.StoreWins, membership);
                 Close();
+
+                ucMembers.Instance.LoadMembers(_operation, _txtMemberValue);
+                ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadSubscription(Actions.Operations.EditSubscription);
             }
         }
@@ -236,10 +235,12 @@ namespace GymSys
                     member.Name = txtName.Text;
                     member.Surname = txtSurname.Text;
                     member.Code = txtCode.Text;
-                    member.Birthdate = Utils.GetDateTimeParsed(dateTimePickerBirthDate.Text);
+                    member.Birthdate = dateTimePickerBirthDate.Value.Date;
                 }
                 db.SaveChanges();
                 this.Close();
+                ucDashboard.Instance.LoadBirhdays();
+                ucMembers.Instance.CloseMembersEditForm(Actions.Operations.EditMember);
                 ucMembers.Instance.LoadMembers(Actions.Operations.EditMember, _txtMemberValue);
                 ucMembers.Instance.LoadSubscription(Actions.Operations.EditMember);
             }
@@ -286,6 +287,8 @@ namespace GymSys
                     // ignored
                 }
                 Close();
+
+                ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
             }
         }
@@ -346,6 +349,8 @@ namespace GymSys
                     // ignored
                 }
                 Close();
+                ucDashboard.Instance.LoadBirhdays();
+                ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
             }
         }

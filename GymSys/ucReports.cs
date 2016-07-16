@@ -19,6 +19,23 @@ namespace GymSys
         private ucReports()
         {
             InitializeComponent();
+            InitDateFields();
+            
+           LoadAllReports();
+            //AddMembers();
+            //DeleteMembers();
+            //AddMembership();
+        }
+
+        public void LoadAllReports()
+        {
+            LoadMembersReport(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
+            LoadMembershipReport(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
+            LoadScans(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
+        }
+
+        private void InitDateFields()
+        {
             dateTimePickerFromDateTime.Format = DateTimePickerFormat.Custom;
             dateTimePickerFromDateTime.CustomFormat = "dd/MM/yyyy";
             dateTimePickerFromDateTime.Value = DateTime.Now.Date.AddYears(-1);
@@ -39,14 +56,6 @@ namespace GymSys
 
             DTPScansTD.Format = DateTimePickerFormat.Custom;
             DTPScansTD.CustomFormat = "dd/MM/yyyy";
-
-
-            LoadMembersReport(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
-            LoadMembershipReport(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
-            LoadScans(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
-            //AddMembers();
-            //DeleteMembers();
-            //AddMembership();
         }
 
         private void DeleteMembers()
@@ -357,7 +366,7 @@ namespace GymSys
             lblInactiveCount.Text = (membershipList.Count() - membershipList.Count(m => m.Abonament_Activ)).ToString();
 
             dataGridViewMembershipR.DataSource = membershipList.ToList();
-
+            lblCountActiveMembers.Text = membershipList.Count(s => s.Abonament_Activ).ToString();
             var newMembershipsByMonth = from p in membershipList
                                         where p.Data_inscriere >= fromDateTime && p.Data_inscriere <= toDateTime
                                         group p by new { month = p.Data_inceput.Month, year = p.Data_inceput.Year } into d
