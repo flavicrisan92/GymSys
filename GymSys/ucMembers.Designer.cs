@@ -57,12 +57,13 @@
             this.dataGVMembers.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGVMembers.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGVMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGVMembers.Location = new System.Drawing.Point(3, 103);
+            this.dataGVMembers.Location = new System.Drawing.Point(4, 127);
+            this.dataGVMembers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGVMembers.MultiSelect = false;
             this.dataGVMembers.Name = "dataGVMembers";
             this.dataGVMembers.ReadOnly = true;
             this.dataGVMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGVMembers.Size = new System.Drawing.Size(589, 468);
+            this.dataGVMembers.Size = new System.Drawing.Size(785, 576);
             this.dataGVMembers.TabIndex = 0;
             this.dataGVMembers.SelectionChanged += new System.EventHandler(this.dataGVMembers_SelectionChanged);
             this.dataGVMembers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGVMembers_MouseClick);
@@ -70,9 +71,10 @@
             // btnNewMember
             // 
             this.btnNewMember.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewMember.Location = new System.Drawing.Point(469, 71);
+            this.btnNewMember.Location = new System.Drawing.Point(625, 87);
+            this.btnNewMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNewMember.Name = "btnNewMember";
-            this.btnNewMember.Size = new System.Drawing.Size(123, 23);
+            this.btnNewMember.Size = new System.Drawing.Size(164, 28);
             this.btnNewMember.TabIndex = 12;
             this.btnNewMember.Text = "Abonat nou";
             this.btnNewMember.UseVisualStyleBackColor = true;
@@ -80,27 +82,30 @@
             // 
             // txtSearchMembers
             // 
-            this.txtSearchMembers.Location = new System.Drawing.Point(92, 14);
+            this.txtSearchMembers.Location = new System.Drawing.Point(123, 17);
+            this.txtSearchMembers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSearchMembers.Name = "txtSearchMembers";
-            this.txtSearchMembers.Size = new System.Drawing.Size(209, 20);
+            this.txtSearchMembers.Size = new System.Drawing.Size(277, 22);
             this.txtSearchMembers.TabIndex = 11;
             this.txtSearchMembers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchMembers_KeyPress);
             this.txtSearchMembers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchMembers_KeyUp);
             // 
             // lblSearchBoxName
             // 
-            this.lblSearchBoxName.Location = new System.Drawing.Point(10, 16);
+            this.lblSearchBoxName.Location = new System.Drawing.Point(13, 20);
+            this.lblSearchBoxName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSearchBoxName.Name = "lblSearchBoxName";
-            this.lblSearchBoxName.Size = new System.Drawing.Size(76, 13);
+            this.lblSearchBoxName.Size = new System.Drawing.Size(101, 16);
             this.lblSearchBoxName.TabIndex = 1;
             this.lblSearchBoxName.Text = "Cauta abonat";
             // 
             // lblUserMembership
             // 
             this.lblUserMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUserMembership.Location = new System.Drawing.Point(598, 76);
+            this.lblUserMembership.Location = new System.Drawing.Point(797, 94);
+            this.lblUserMembership.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUserMembership.Name = "lblUserMembership";
-            this.lblUserMembership.Size = new System.Drawing.Size(109, 13);
+            this.lblUserMembership.Size = new System.Drawing.Size(145, 16);
             this.lblUserMembership.TabIndex = 10;
             this.lblUserMembership.Text = "Istoric abonamente";
             // 
@@ -113,12 +118,13 @@
             this.dataGvMembershipHist.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGvMembershipHist.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGvMembershipHist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGvMembershipHist.Location = new System.Drawing.Point(598, 103);
+            this.dataGvMembershipHist.Location = new System.Drawing.Point(797, 127);
+            this.dataGvMembershipHist.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGvMembershipHist.MultiSelect = false;
             this.dataGvMembershipHist.Name = "dataGvMembershipHist";
             this.dataGvMembershipHist.ReadOnly = true;
             this.dataGvMembershipHist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGvMembershipHist.Size = new System.Drawing.Size(525, 468);
+            this.dataGvMembershipHist.Size = new System.Drawing.Size(700, 576);
             this.dataGvMembershipHist.TabIndex = 9;
             this.dataGvMembershipHist.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGvMembershipHist_MouseClick);
             // 
@@ -138,45 +144,49 @@
             this.panelMembers.Controls.Add(this.lblUserMembership);
             this.panelMembers.Controls.Add(this.btnMembership);
             this.panelMembers.Controls.Add(this.dataGVMembers);
-            this.panelMembers.Location = new System.Drawing.Point(0, 3);
+            this.panelMembers.Location = new System.Drawing.Point(0, 4);
+            this.panelMembers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelMembers.Name = "panelMembers";
-            this.panelMembers.Size = new System.Drawing.Size(1131, 592);
+            this.panelMembers.Size = new System.Drawing.Size(1508, 729);
             this.panelMembers.TabIndex = 13;
             // 
             // lblTotalCount
             // 
             this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTotalCount.Location = new System.Drawing.Point(1077, 21);
+            this.lblTotalCount.Location = new System.Drawing.Point(1436, 26);
+            this.lblTotalCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalCount.Name = "lblTotalCount";
-            this.lblTotalCount.Size = new System.Drawing.Size(45, 13);
+            this.lblTotalCount.Size = new System.Drawing.Size(60, 16);
             this.lblTotalCount.TabIndex = 16;
             this.lblTotalCount.Text = "0";
             // 
             // lblTotalAbonati
             // 
             this.lblTotalAbonati.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTotalAbonati.Location = new System.Drawing.Point(997, 21);
+            this.lblTotalAbonati.Location = new System.Drawing.Point(1329, 26);
+            this.lblTotalAbonati.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalAbonati.Name = "lblTotalAbonati";
-            this.lblTotalAbonati.Size = new System.Drawing.Size(74, 13);
+            this.lblTotalAbonati.Size = new System.Drawing.Size(99, 16);
             this.lblTotalAbonati.TabIndex = 15;
             this.lblTotalAbonati.Text = "Total abonati:";
             // 
             // lblMembersList
             // 
-            this.lblMembersList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMembersList.AutoSize = true;
-            this.lblMembersList.Location = new System.Drawing.Point(10, 71);
+            this.lblMembersList.Location = new System.Drawing.Point(13, 87);
+            this.lblMembersList.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMembersList.Name = "lblMembersList";
-            this.lblMembersList.Size = new System.Drawing.Size(67, 13);
+            this.lblMembersList.Size = new System.Drawing.Size(89, 17);
             this.lblMembersList.TabIndex = 14;
             this.lblMembersList.Text = "Lista abonati";
             // 
             // btnMembership
             // 
             this.btnMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMembership.Location = new System.Drawing.Point(976, 71);
+            this.btnMembership.Location = new System.Drawing.Point(1301, 87);
+            this.btnMembership.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnMembership.Name = "btnMembership";
-            this.btnMembership.Size = new System.Drawing.Size(146, 23);
+            this.btnMembership.Size = new System.Drawing.Size(195, 28);
             this.btnMembership.TabIndex = 13;
             this.btnMembership.Text = "Abonament nou";
             this.btnMembership.UseVisualStyleBackColor = true;
@@ -184,11 +194,12 @@
             // 
             // ucMembers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelMembers);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ucMembers";
-            this.Size = new System.Drawing.Size(1136, 595);
+            this.Size = new System.Drawing.Size(1515, 732);
             this.Load += new System.EventHandler(this.ucMembers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGVMembers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGvMembershipHist)).EndInit();

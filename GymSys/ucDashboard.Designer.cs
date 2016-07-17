@@ -35,6 +35,7 @@
             this.panelDashboard = new System.Windows.Forms.Panel();
             this.LblBarCode = new System.Windows.Forms.Label();
             this.panelTopUser = new System.Windows.Forms.Panel();
+            this.numericUpDownTopDays = new System.Windows.Forms.NumericUpDown();
             this.dataGridViewTopUsers = new System.Windows.Forms.DataGridView();
             this.lblTop = new System.Windows.Forms.Label();
             this.lblDaysn = new System.Windows.Forms.Label();
@@ -56,21 +57,20 @@
             this.lblSDLastSub = new System.Windows.Forms.Label();
             this.lblSurname = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
-            this.numericUpDownTopDays = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScans)).BeginInit();
             this.panelDashboard.SuspendLayout();
             this.panelTopUser.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTopDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTopUsers)).BeginInit();
             this.panelBirthDates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBirthdays)).BeginInit();
             this.panelLastOneScanned.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTopDays)).BeginInit();
             this.SuspendLayout();
             // 
             // txtScanedCode
             // 
             this.txtScanedCode.Location = new System.Drawing.Point(28, 188);
-            this.txtScanedCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtScanedCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtScanedCode.Name = "txtScanedCode";
             this.txtScanedCode.Size = new System.Drawing.Size(351, 22);
             this.txtScanedCode.TabIndex = 0;
@@ -83,7 +83,7 @@
             this.dataGridViewScans.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewScans.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewScans.Location = new System.Drawing.Point(4, 384);
-            this.dataGridViewScans.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewScans.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewScans.Name = "dataGridViewScans";
             this.dataGridViewScans.ReadOnly = true;
             this.dataGridViewScans.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -126,7 +126,7 @@
             this.panelDashboard.Controls.Add(this.lblTodayCount);
             this.panelDashboard.Controls.Add(this.lblTotalToday);
             this.panelDashboard.Location = new System.Drawing.Point(0, -17);
-            this.panelDashboard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelDashboard.Margin = new System.Windows.Forms.Padding(4);
             this.panelDashboard.Name = "panelDashboard";
             this.panelDashboard.Size = new System.Drawing.Size(1843, 948);
             this.panelDashboard.TabIndex = 4;
@@ -150,10 +150,23 @@
             this.panelTopUser.Controls.Add(this.lblTop);
             this.panelTopUser.Controls.Add(this.lblDaysn);
             this.panelTopUser.Location = new System.Drawing.Point(1224, 649);
-            this.panelTopUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelTopUser.Margin = new System.Windows.Forms.Padding(4);
             this.panelTopUser.Name = "panelTopUser";
             this.panelTopUser.Size = new System.Drawing.Size(615, 234);
             this.panelTopUser.TabIndex = 12;
+            // 
+            // numericUpDownTopDays
+            // 
+            this.numericUpDownTopDays.Location = new System.Drawing.Point(111, 4);
+            this.numericUpDownTopDays.Name = "numericUpDownTopDays";
+            this.numericUpDownTopDays.ReadOnly = true;
+            this.numericUpDownTopDays.Size = new System.Drawing.Size(49, 22);
+            this.numericUpDownTopDays.TabIndex = 14;
+            this.numericUpDownTopDays.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // dataGridViewTopUsers
             // 
@@ -161,7 +174,7 @@
             this.dataGridViewTopUsers.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewTopUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewTopUsers.Location = new System.Drawing.Point(0, 41);
-            this.dataGridViewTopUsers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewTopUsers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewTopUsers.Name = "dataGridViewTopUsers";
             this.dataGridViewTopUsers.ReadOnly = true;
             this.dataGridViewTopUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -207,7 +220,7 @@
             this.panelBirthDates.Controls.Add(this.dataGridViewBirthdays);
             this.panelBirthDates.Controls.Add(this.lblBirthdates);
             this.panelBirthDates.Location = new System.Drawing.Point(1224, 384);
-            this.panelBirthDates.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelBirthDates.Margin = new System.Windows.Forms.Padding(4);
             this.panelBirthDates.Name = "panelBirthDates";
             this.panelBirthDates.Size = new System.Drawing.Size(615, 234);
             this.panelBirthDates.TabIndex = 5;
@@ -217,7 +230,7 @@
             this.dataGridViewBirthdays.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewBirthdays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewBirthdays.Location = new System.Drawing.Point(0, 37);
-            this.dataGridViewBirthdays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewBirthdays.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewBirthdays.Name = "dataGridViewBirthdays";
             this.dataGridViewBirthdays.ReadOnly = true;
             this.dataGridViewBirthdays.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -230,9 +243,9 @@
             this.lblBirthdates.Location = new System.Drawing.Point(4, 15);
             this.lblBirthdates.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBirthdates.Name = "lblBirthdates";
-            this.lblBirthdates.Size = new System.Drawing.Size(103, 17);
+            this.lblBirthdates.Size = new System.Drawing.Size(203, 17);
             this.lblBirthdates.TabIndex = 7;
-            this.lblBirthdates.Text = "Zile de nastere";
+            this.lblBirthdates.Text = "Urmatoarele 10 zile de nastere";
             // 
             // panelLastOneScanned
             // 
@@ -252,7 +265,7 @@
             this.panelLastOneScanned.Controls.Add(this.lblSurname);
             this.panelLastOneScanned.Controls.Add(this.lblName);
             this.panelLastOneScanned.Location = new System.Drawing.Point(1224, 42);
-            this.panelLastOneScanned.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelLastOneScanned.Margin = new System.Windows.Forms.Padding(4);
             this.panelLastOneScanned.Name = "panelLastOneScanned";
             this.panelLastOneScanned.Size = new System.Drawing.Size(515, 313);
             this.panelLastOneScanned.TabIndex = 4;
@@ -260,7 +273,7 @@
             // txtCode
             // 
             this.txtCode.Location = new System.Drawing.Point(163, 129);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(347, 22);
             this.txtCode.TabIndex = 13;
@@ -289,7 +302,7 @@
             // txtBirthdate
             // 
             this.txtBirthdate.Location = new System.Drawing.Point(163, 273);
-            this.txtBirthdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBirthdate.Margin = new System.Windows.Forms.Padding(4);
             this.txtBirthdate.Name = "txtBirthdate";
             this.txtBirthdate.Size = new System.Drawing.Size(347, 22);
             this.txtBirthdate.TabIndex = 11;
@@ -307,7 +320,7 @@
             // txtToDate
             // 
             this.txtToDate.Location = new System.Drawing.Point(163, 223);
-            this.txtToDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtToDate.Margin = new System.Windows.Forms.Padding(4);
             this.txtToDate.Name = "txtToDate";
             this.txtToDate.Size = new System.Drawing.Size(347, 22);
             this.txtToDate.TabIndex = 7;
@@ -315,7 +328,7 @@
             // lblDays
             // 
             this.lblDays.Location = new System.Drawing.Point(163, 174);
-            this.lblDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblDays.Margin = new System.Windows.Forms.Padding(4);
             this.lblDays.Name = "lblDays";
             this.lblDays.Size = new System.Drawing.Size(347, 22);
             this.lblDays.TabIndex = 6;
@@ -323,7 +336,7 @@
             // txtSurname
             // 
             this.txtSurname.Location = new System.Drawing.Point(163, 87);
-            this.txtSurname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSurname.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurname.Name = "txtSurname";
             this.txtSurname.Size = new System.Drawing.Size(347, 22);
             this.txtSurname.TabIndex = 5;
@@ -331,7 +344,7 @@
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(163, 43);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(347, 22);
             this.txtName.TabIndex = 4;
@@ -376,26 +389,13 @@
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Nume";
             // 
-            // numericUpDownTopDays
-            // 
-            this.numericUpDownTopDays.Location = new System.Drawing.Point(111, 4);
-            this.numericUpDownTopDays.Name = "numericUpDownTopDays";
-            this.numericUpDownTopDays.ReadOnly = true;
-            this.numericUpDownTopDays.Size = new System.Drawing.Size(49, 22);
-            this.numericUpDownTopDays.TabIndex = 14;
-            this.numericUpDownTopDays.Value = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            // 
             // ucDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.Controls.Add(this.panelDashboard);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucDashboard";
             this.Size = new System.Drawing.Size(1847, 934);
             this.Load += new System.EventHandler(this.ucDashboard_Load);
@@ -404,13 +404,13 @@
             this.panelDashboard.PerformLayout();
             this.panelTopUser.ResumeLayout(false);
             this.panelTopUser.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTopDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTopUsers)).EndInit();
             this.panelBirthDates.ResumeLayout(false);
             this.panelBirthDates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBirthdays)).EndInit();
             this.panelLastOneScanned.ResumeLayout(false);
             this.panelLastOneScanned.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTopDays)).EndInit();
             this.ResumeLayout(false);
 
         }

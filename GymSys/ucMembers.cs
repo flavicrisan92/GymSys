@@ -72,9 +72,9 @@ namespace GymSys
                                          select new
                                          {
                                              membership.Id,
-                                             TipAbonament = membership.MembershipType.Type,
-                                             DataInceput = membership.StartDate,
-                                             DataSfarsit = membership.EndDate,
+                                             Tip_abonament = membership.MembershipType.Type,
+                                             Data_inceput_abonament = membership.StartDate,
+                                             Data_sfarsit_abonament = membership.EndDate,
                                              Status = DateTime.Now < membership.EndDate ? "Activ" : "Expirat"
                                          };
 
@@ -125,7 +125,7 @@ namespace GymSys
                               Prenume = member.Surname,
                               Cod = member.Code,
                               Activ = member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
-                              Data_Nastere = member.Birthdate,
+                              Data_nastere = member.Birthdate,
                               Data_inregistrare = member.Created,
                               Ultima_scanare = db.Scans.Where(s => s.IdMember == member.Id).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault()
                           };
