@@ -85,7 +85,7 @@ namespace GymSys
 
         public void LoadTopMembers(int days)
         {
-            var fromDate = DateTime.Now.AddDays(-days);
+            var fromDate = DateTime.Now.Date.AddDays(-days);
             var topScans = from p in db.Scans
                            where p.Date >= fromDate
                            group p by new { idMember = p.IdMember, p.Members.Name, p.Members.Surname, p.Members.Code } into d

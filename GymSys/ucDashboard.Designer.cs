@@ -169,7 +169,7 @@
             // 
             // numericUpDownTopDays
             // 
-            this.numericUpDownTopDays.Location = new System.Drawing.Point(95, 11);
+            this.numericUpDownTopDays.Location = new System.Drawing.Point(111, 11);
             this.numericUpDownTopDays.Name = "numericUpDownTopDays";
             this.numericUpDownTopDays.ReadOnly = true;
             this.numericUpDownTopDays.Size = new System.Drawing.Size(49, 22);
@@ -202,15 +202,15 @@
             this.lblTop.Location = new System.Drawing.Point(2, 13);
             this.lblTop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTop.Name = "lblTop";
-            this.lblTop.Size = new System.Drawing.Size(84, 17);
+            this.lblTop.Size = new System.Drawing.Size(104, 17);
             this.lblTop.TabIndex = 8;
-            this.lblTop.Text = "Top abonati";
+            this.lblTop.Text = "Top 15 abonati";
             // 
             // lblDaysn
             // 
             this.lblDaysn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDaysn.AutoSize = true;
-            this.lblDaysn.Location = new System.Drawing.Point(149, 13);
+            this.lblDaysn.Location = new System.Drawing.Point(165, 13);
             this.lblDaysn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDaysn.Name = "lblDaysn";
             this.lblDaysn.Size = new System.Drawing.Size(29, 17);
@@ -261,7 +261,7 @@
             this.lblBirthdates.Name = "lblBirthdates";
             this.lblBirthdates.Size = new System.Drawing.Size(203, 17);
             this.lblBirthdates.TabIndex = 7;
-            this.lblBirthdates.Text = "Urmatoarele 10 zile de nastere";
+            this.lblBirthdates.Text = "Urmatoarele 15 zile de nastere";
             // 
             // panelLastOneScanned
             // 

@@ -20,6 +20,13 @@ namespace GymSys
             InitializeComponent();
             LoadDashboard();
             ucDashboard.Instance.SetFocusOnScan();
+            this.Text = "GYMSYS";
+        }
+
+        public sealed override string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
         }
 
         private void btnLogOut_Click(object sender, EventArgs e)
