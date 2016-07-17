@@ -22,7 +22,7 @@ namespace GymSys
             InitDateFields();
 
             LoadAllReports();
-            AddMembers();
+            //AddMembers();
             //DeleteMembers();
             //AddMembership();
             //AddScans();
@@ -44,6 +44,7 @@ namespace GymSys
 
         public void LoadAllReports()
         {
+            InitDateFields();
             LoadMembersReport(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
             LoadMembershipReport(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
             LoadScans(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
@@ -51,20 +52,15 @@ namespace GymSys
 
         private void InitDateFields()
         {
-            dateTimePickerFromDateTime.Format = DateTimePickerFormat.Custom;
-            dateTimePickerFromDateTime.CustomFormat = "dd/MM/yyyy";
-            dateTimePickerFromDateTime.Value = DateTime.Now.Date.AddYears(-1);
+            InitDatePickerNewMembers();
 
-            dateTimePickerToDateTime.Format = DateTimePickerFormat.Custom;
-            dateTimePickerToDateTime.CustomFormat = "dd/MM/yyyy";
+            InitDatePickersMembership();
 
-            dateTimePickerFDMembershipR.Format = DateTimePickerFormat.Custom;
-            dateTimePickerFDMembershipR.CustomFormat = "dd/MM/yyyy";
-            dateTimePickerFDMembershipR.Value = DateTime.Now.Date.AddYears(-1);
+            InitDatePickersScans();
+        }
 
-            dateTimePickerTDMembershipR.Format = DateTimePickerFormat.Custom;
-            dateTimePickerTDMembershipR.CustomFormat = "dd/MM/yyyy";
-
+        private void InitDatePickersScans()
+        {
             DTPScansFD.Format = DateTimePickerFormat.Custom;
             DTPScansFD.CustomFormat = "dd/MM/yyyy";
             DTPScansFD.Value = DateTime.Now.Date.AddYears(-1);
@@ -72,6 +68,27 @@ namespace GymSys
             DTPScansTD.Format = DateTimePickerFormat.Custom;
             DTPScansTD.CustomFormat = "dd/MM/yyyy";
         }
+
+        private void InitDatePickersMembership()
+        {
+            dateTimePickerFDMembershipR.Format = DateTimePickerFormat.Custom;
+            dateTimePickerFDMembershipR.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerFDMembershipR.Value = DateTime.Now.Date.AddYears(-1);
+
+            dateTimePickerTDMembershipR.Format = DateTimePickerFormat.Custom;
+            dateTimePickerTDMembershipR.CustomFormat = "dd/MM/yyyy";
+        }
+
+        private void InitDatePickerNewMembers()
+        {
+            dateTimePickerFromDateTime.Format = DateTimePickerFormat.Custom;
+            dateTimePickerFromDateTime.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerFromDateTime.Value = DateTime.Now.Date.AddYears(-1);
+
+            dateTimePickerToDateTime.Format = DateTimePickerFormat.Custom;
+            dateTimePickerToDateTime.CustomFormat = "dd/MM/yyyy";
+        }
+
 
         private void DeleteMembers()
         {
@@ -209,7 +226,7 @@ namespace GymSys
             var scansByMonth = from p in scans
                                where p.Data_scanare >= fromDateTime && p.Data_scanare <= toDateTime
                                group p by new { month = p.Data_scanare.Month, year = p.Data_scanare.Year } into d
-                               select new { An = d.Key.year, Luna = d.Key.month, Membri = d.Count() };
+                               select new { An = d.Key.year, Luna = d.Key.month, Numar_scanari = d.Count() };
 
             dataGridViewScandGBM.DataSource = scansByMonth.ToList();
 
@@ -292,7 +309,7 @@ namespace GymSys
             var newMembersByMonth = from p in members
                                     where p.Data_inregistrare >= fromDateTime && p.Data_inregistrare <= toDateTime
                                     group p by new { month = p.Data_inregistrare.Month, year = p.Data_inregistrare.Year } into d
-                                    select new { An = d.Key.year, Luna = d.Key.month, Membri = d.Count() };
+                                    select new { An = d.Key.year, Luna = d.Key.month, Membri_noi = d.Count() };
 
             dataGridViewCountByMonth.DataSource = newMembersByMonth.OrderByDescending(s => s.An).ThenByDescending(s => s.Luna).ToList();
             dataGridViewCountByMonth.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -388,7 +405,7 @@ namespace GymSys
             var newMembershipsByMonth = from p in membershipList
                                         where p.Data_inscriere >= fromDateTime && p.Data_inscriere <= toDateTime
                                         group p by new { month = p.Data_inceput_abonament.Month, year = p.Data_inceput_abonament.Year } into d
-                                        select new { An = d.Key.year, Luna = d.Key.month, Membri = d.Count() };
+                                        select new { An = d.Key.year, Luna = d.Key.month, Numar_abonamente = d.Count() };
 
             dataGridViewMembershipGroupByMonthR.DataSource = newMembershipsByMonth.OrderByDescending(d => d.An).ThenByDescending(d => d.Luna).ToList();
 
@@ -413,6 +430,7 @@ namespace GymSys
         private void btnReset_Click(object sender, EventArgs e)
         {
             txtMember.Clear();
+            InitDatePickerNewMembers();
             LoadMembersReport(DateTime.Now.AddYears(-1), DateTime.MaxValue.AddDays(-2), string.Empty);
         }
 
@@ -424,6 +442,7 @@ namespace GymSys
         private void btnResetMembershipR_Click(object sender, EventArgs e)
         {
             txtMemberMembershipR.Clear();
+            InitDatePickersMembership();
             LoadMembershipReport(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
         }
 
@@ -464,6 +483,8 @@ namespace GymSys
 
         private void btnResetGenerate_Click(object sender, EventArgs e)
         {
+            txtScanMember.Clear();
+            InitDatePickersScans();
             LoadScans(DateTime.Now.AddYears(-1), DateTime.Now.Date.AddDays(1).AddSeconds(-5), string.Empty);
         }
     }

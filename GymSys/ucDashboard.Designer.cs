@@ -50,13 +50,17 @@
             this.txtBirthdate = new System.Windows.Forms.TextBox();
             this.lblBirthdate = new System.Windows.Forms.Label();
             this.txtToDate = new System.Windows.Forms.TextBox();
-            this.lblDays = new System.Windows.Forms.TextBox();
+            this.txtFromDate = new System.Windows.Forms.TextBox();
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblEDLastS = new System.Windows.Forms.Label();
             this.lblSDLastSub = new System.Windows.Forms.Label();
             this.lblSurname = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dataGridViewToExpire = new System.Windows.Forms.DataGridView();
+            this.lblExpires = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScans)).BeginInit();
             this.panelDashboard.SuspendLayout();
             this.panelTopUser.SuspendLayout();
@@ -65,6 +69,9 @@
             this.panelBirthDates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBirthdays)).BeginInit();
             this.panelLastOneScanned.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToExpire)).BeginInit();
             this.SuspendLayout();
             // 
             // txtScanedCode
@@ -93,18 +100,20 @@
             // 
             // lblTotalToday
             // 
+            this.lblTotalToday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalToday.AutoSize = true;
-            this.lblTotalToday.Location = new System.Drawing.Point(24, 16);
+            this.lblTotalToday.Location = new System.Drawing.Point(1016, 356);
             this.lblTotalToday.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalToday.Name = "lblTotalToday";
-            this.lblTotalToday.Size = new System.Drawing.Size(97, 17);
+            this.lblTotalToday.Size = new System.Drawing.Size(145, 17);
             this.lblTotalToday.TabIndex = 2;
-            this.lblTotalToday.Text = "Abonati astazi";
+            this.lblTotalToday.Text = "Total prezente astazi:";
             // 
             // lblTodayCount
             // 
+            this.lblTodayCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTodayCount.AutoSize = true;
-            this.lblTodayCount.Location = new System.Drawing.Point(143, 16);
+            this.lblTodayCount.Location = new System.Drawing.Point(1169, 356);
             this.lblTodayCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTodayCount.Name = "lblTodayCount";
             this.lblTodayCount.Size = new System.Drawing.Size(16, 17);
@@ -116,6 +125,8 @@
             this.panelDashboard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelDashboard.Controls.Add(this.panel2);
+            this.panelDashboard.Controls.Add(this.panel1);
             this.panelDashboard.Controls.Add(this.LblBarCode);
             this.panelDashboard.Controls.Add(this.panelTopUser);
             this.panelDashboard.Controls.Add(this.lblLastScans);
@@ -125,7 +136,7 @@
             this.panelDashboard.Controls.Add(this.dataGridViewScans);
             this.panelDashboard.Controls.Add(this.lblTodayCount);
             this.panelDashboard.Controls.Add(this.lblTotalToday);
-            this.panelDashboard.Location = new System.Drawing.Point(0, -17);
+            this.panelDashboard.Location = new System.Drawing.Point(0, 4);
             this.panelDashboard.Margin = new System.Windows.Forms.Padding(4);
             this.panelDashboard.Name = "panelDashboard";
             this.panelDashboard.Size = new System.Drawing.Size(1843, 948);
@@ -144,7 +155,8 @@
             // panelTopUser
             // 
             this.panelTopUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTopUser.BackColor = System.Drawing.Color.DarkRed;
+            this.panelTopUser.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panelTopUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelTopUser.Controls.Add(this.numericUpDownTopDays);
             this.panelTopUser.Controls.Add(this.dataGridViewTopUsers);
             this.panelTopUser.Controls.Add(this.lblTop);
@@ -157,7 +169,7 @@
             // 
             // numericUpDownTopDays
             // 
-            this.numericUpDownTopDays.Location = new System.Drawing.Point(111, 4);
+            this.numericUpDownTopDays.Location = new System.Drawing.Point(95, 11);
             this.numericUpDownTopDays.Name = "numericUpDownTopDays";
             this.numericUpDownTopDays.ReadOnly = true;
             this.numericUpDownTopDays.Size = new System.Drawing.Size(49, 22);
@@ -167,25 +179,27 @@
             0,
             0,
             0});
+            this.numericUpDownTopDays.ValueChanged += new System.EventHandler(this.numericUpDownTopDays_ValueChanged);
             // 
             // dataGridViewTopUsers
             // 
             this.dataGridViewTopUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewTopUsers.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewTopUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTopUsers.Location = new System.Drawing.Point(0, 41);
+            this.dataGridViewTopUsers.Location = new System.Drawing.Point(-1, 41);
             this.dataGridViewTopUsers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewTopUsers.Name = "dataGridViewTopUsers";
             this.dataGridViewTopUsers.ReadOnly = true;
             this.dataGridViewTopUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewTopUsers.Size = new System.Drawing.Size(615, 193);
             this.dataGridViewTopUsers.TabIndex = 13;
+            this.dataGridViewTopUsers.Click += new System.EventHandler(this.dataGridViewTopUsers_Click);
             // 
             // lblTop
             // 
             this.lblTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTop.AutoSize = true;
-            this.lblTop.Location = new System.Drawing.Point(20, 4);
+            this.lblTop.Location = new System.Drawing.Point(2, 13);
             this.lblTop.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTop.Name = "lblTop";
             this.lblTop.Size = new System.Drawing.Size(84, 17);
@@ -196,7 +210,7 @@
             // 
             this.lblDaysn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDaysn.AutoSize = true;
-            this.lblDaysn.Location = new System.Drawing.Point(167, 6);
+            this.lblDaysn.Location = new System.Drawing.Point(149, 13);
             this.lblDaysn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDaysn.Name = "lblDaysn";
             this.lblDaysn.Size = new System.Drawing.Size(29, 17);
@@ -216,7 +230,8 @@
             // panelBirthDates
             // 
             this.panelBirthDates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelBirthDates.BackColor = System.Drawing.Color.DarkRed;
+            this.panelBirthDates.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panelBirthDates.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelBirthDates.Controls.Add(this.dataGridViewBirthdays);
             this.panelBirthDates.Controls.Add(this.lblBirthdates);
             this.panelBirthDates.Location = new System.Drawing.Point(1224, 384);
@@ -229,18 +244,19 @@
             // 
             this.dataGridViewBirthdays.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridViewBirthdays.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBirthdays.Location = new System.Drawing.Point(0, 37);
+            this.dataGridViewBirthdays.Location = new System.Drawing.Point(-1, 37);
             this.dataGridViewBirthdays.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewBirthdays.Name = "dataGridViewBirthdays";
             this.dataGridViewBirthdays.ReadOnly = true;
             this.dataGridViewBirthdays.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewBirthdays.Size = new System.Drawing.Size(615, 193);
+            this.dataGridViewBirthdays.Size = new System.Drawing.Size(615, 197);
             this.dataGridViewBirthdays.TabIndex = 11;
+            this.dataGridViewBirthdays.Click += new System.EventHandler(this.dataGridViewBirthdays_Click);
             // 
             // lblBirthdates
             // 
             this.lblBirthdates.AutoSize = true;
-            this.lblBirthdates.Location = new System.Drawing.Point(4, 15);
+            this.lblBirthdates.Location = new System.Drawing.Point(4, 10);
             this.lblBirthdates.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBirthdates.Name = "lblBirthdates";
             this.lblBirthdates.Size = new System.Drawing.Size(203, 17);
@@ -249,50 +265,54 @@
             // 
             // panelLastOneScanned
             // 
-            this.panelLastOneScanned.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelLastOneScanned.BackColor = System.Drawing.Color.DarkGray;
+            this.panelLastOneScanned.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelLastOneScanned.BackColor = System.Drawing.Color.Snow;
+            this.panelLastOneScanned.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelLastOneScanned.Controls.Add(this.txtCode);
-            this.panelLastOneScanned.Controls.Add(this.lblLastUser);
             this.panelLastOneScanned.Controls.Add(this.lblCode);
             this.panelLastOneScanned.Controls.Add(this.txtBirthdate);
             this.panelLastOneScanned.Controls.Add(this.lblBirthdate);
             this.panelLastOneScanned.Controls.Add(this.txtToDate);
-            this.panelLastOneScanned.Controls.Add(this.lblDays);
+            this.panelLastOneScanned.Controls.Add(this.txtFromDate);
             this.panelLastOneScanned.Controls.Add(this.txtSurname);
             this.panelLastOneScanned.Controls.Add(this.txtName);
             this.panelLastOneScanned.Controls.Add(this.lblEDLastS);
             this.panelLastOneScanned.Controls.Add(this.lblSDLastSub);
             this.panelLastOneScanned.Controls.Add(this.lblSurname);
             this.panelLastOneScanned.Controls.Add(this.lblName);
-            this.panelLastOneScanned.Location = new System.Drawing.Point(1224, 42);
+            this.panelLastOneScanned.Location = new System.Drawing.Point(574, 28);
             this.panelLastOneScanned.Margin = new System.Windows.Forms.Padding(4);
             this.panelLastOneScanned.Name = "panelLastOneScanned";
-            this.panelLastOneScanned.Size = new System.Drawing.Size(515, 313);
+            this.panelLastOneScanned.Size = new System.Drawing.Size(615, 321);
             this.panelLastOneScanned.TabIndex = 4;
             // 
             // txtCode
             // 
-            this.txtCode.Location = new System.Drawing.Point(163, 129);
+            this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCode.Enabled = false;
+            this.txtCode.Location = new System.Drawing.Point(129, 133);
             this.txtCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(347, 22);
+            this.txtCode.ReadOnly = true;
+            this.txtCode.Size = new System.Drawing.Size(439, 22);
             this.txtCode.TabIndex = 13;
             // 
             // lblLastUser
             // 
             this.lblLastUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLastUser.AutoSize = true;
-            this.lblLastUser.Location = new System.Drawing.Point(11, 11);
+            this.lblLastUser.Location = new System.Drawing.Point(2, 11);
             this.lblLastUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastUser.Name = "lblLastUser";
-            this.lblLastUser.Size = new System.Drawing.Size(95, 17);
+            this.lblLastUser.Size = new System.Drawing.Size(144, 17);
             this.lblLastUser.TabIndex = 7;
-            this.lblLastUser.Text = "Detalii abonat";
+            this.lblLastUser.Text = "Ultimul abonat scanat";
             // 
             // lblCode
             // 
+            this.lblCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(44, 133);
+            this.lblCode.Location = new System.Drawing.Point(13, 137);
             this.lblCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCode.Name = "lblCode";
             this.lblCode.Size = new System.Drawing.Size(33, 17);
@@ -301,16 +321,20 @@
             // 
             // txtBirthdate
             // 
-            this.txtBirthdate.Location = new System.Drawing.Point(163, 273);
+            this.txtBirthdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBirthdate.Enabled = false;
+            this.txtBirthdate.Location = new System.Drawing.Point(129, 277);
             this.txtBirthdate.Margin = new System.Windows.Forms.Padding(4);
             this.txtBirthdate.Name = "txtBirthdate";
-            this.txtBirthdate.Size = new System.Drawing.Size(347, 22);
+            this.txtBirthdate.ReadOnly = true;
+            this.txtBirthdate.Size = new System.Drawing.Size(439, 22);
             this.txtBirthdate.TabIndex = 11;
             // 
             // lblBirthdate
             // 
+            this.lblBirthdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBirthdate.AutoSize = true;
-            this.lblBirthdate.Location = new System.Drawing.Point(44, 273);
+            this.lblBirthdate.Location = new System.Drawing.Point(13, 277);
             this.lblBirthdate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBirthdate.Name = "lblBirthdate";
             this.lblBirthdate.Size = new System.Drawing.Size(90, 17);
@@ -319,40 +343,53 @@
             // 
             // txtToDate
             // 
-            this.txtToDate.Location = new System.Drawing.Point(163, 223);
+            this.txtToDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtToDate.Enabled = false;
+            this.txtToDate.Location = new System.Drawing.Point(129, 227);
             this.txtToDate.Margin = new System.Windows.Forms.Padding(4);
             this.txtToDate.Name = "txtToDate";
-            this.txtToDate.Size = new System.Drawing.Size(347, 22);
+            this.txtToDate.ReadOnly = true;
+            this.txtToDate.Size = new System.Drawing.Size(439, 22);
             this.txtToDate.TabIndex = 7;
             // 
-            // lblDays
+            // txtFromDate
             // 
-            this.lblDays.Location = new System.Drawing.Point(163, 174);
-            this.lblDays.Margin = new System.Windows.Forms.Padding(4);
-            this.lblDays.Name = "lblDays";
-            this.lblDays.Size = new System.Drawing.Size(347, 22);
-            this.lblDays.TabIndex = 6;
+            this.txtFromDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFromDate.Enabled = false;
+            this.txtFromDate.Location = new System.Drawing.Point(129, 178);
+            this.txtFromDate.Margin = new System.Windows.Forms.Padding(4);
+            this.txtFromDate.Name = "txtFromDate";
+            this.txtFromDate.ReadOnly = true;
+            this.txtFromDate.Size = new System.Drawing.Size(439, 22);
+            this.txtFromDate.TabIndex = 6;
             // 
             // txtSurname
             // 
-            this.txtSurname.Location = new System.Drawing.Point(163, 87);
+            this.txtSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSurname.Enabled = false;
+            this.txtSurname.Location = new System.Drawing.Point(129, 91);
             this.txtSurname.Margin = new System.Windows.Forms.Padding(4);
             this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(347, 22);
+            this.txtSurname.ReadOnly = true;
+            this.txtSurname.Size = new System.Drawing.Size(439, 22);
             this.txtSurname.TabIndex = 5;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(163, 43);
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.Enabled = false;
+            this.txtName.Location = new System.Drawing.Point(129, 47);
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(347, 22);
+            this.txtName.ReadOnly = true;
+            this.txtName.Size = new System.Drawing.Size(439, 22);
             this.txtName.TabIndex = 4;
             // 
             // lblEDLastS
             // 
+            this.lblEDLastS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEDLastS.AutoSize = true;
-            this.lblEDLastS.Location = new System.Drawing.Point(44, 223);
+            this.lblEDLastS.Location = new System.Drawing.Point(13, 227);
             this.lblEDLastS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEDLastS.Name = "lblEDLastS";
             this.lblEDLastS.Size = new System.Drawing.Size(80, 17);
@@ -361,8 +398,9 @@
             // 
             // lblSDLastSub
             // 
+            this.lblSDLastSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSDLastSub.AutoSize = true;
-            this.lblSDLastSub.Location = new System.Drawing.Point(44, 177);
+            this.lblSDLastSub.Location = new System.Drawing.Point(13, 181);
             this.lblSDLastSub.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSDLastSub.Name = "lblSDLastSub";
             this.lblSDLastSub.Size = new System.Drawing.Size(88, 17);
@@ -371,8 +409,9 @@
             // 
             // lblSurname
             // 
+            this.lblSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSurname.AutoSize = true;
-            this.lblSurname.Location = new System.Drawing.Point(44, 91);
+            this.lblSurname.Location = new System.Drawing.Point(13, 95);
             this.lblSurname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSurname.Name = "lblSurname";
             this.lblSurname.Size = new System.Drawing.Size(65, 17);
@@ -381,13 +420,61 @@
             // 
             // lblName
             // 
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(44, 47);
+            this.lblName.Location = new System.Drawing.Point(13, 51);
             this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(45, 17);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Nume";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lblLastUser);
+            this.panel1.Location = new System.Drawing.Point(574, 28);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(615, 41);
+            this.panel1.TabIndex = 14;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.dataGridViewToExpire);
+            this.panel2.Controls.Add(this.lblExpires);
+            this.panel2.Location = new System.Drawing.Point(1224, 28);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(615, 321);
+            this.panel2.TabIndex = 12;
+            // 
+            // dataGridViewToExpire
+            // 
+            this.dataGridViewToExpire.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridViewToExpire.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewToExpire.Location = new System.Drawing.Point(-1, 37);
+            this.dataGridViewToExpire.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewToExpire.Name = "dataGridViewToExpire";
+            this.dataGridViewToExpire.ReadOnly = true;
+            this.dataGridViewToExpire.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewToExpire.Size = new System.Drawing.Size(615, 283);
+            this.dataGridViewToExpire.TabIndex = 11;
+            this.dataGridViewToExpire.Click += new System.EventHandler(this.dataGridViewToExpire_Click);
+            // 
+            // lblExpires
+            // 
+            this.lblExpires.AutoSize = true;
+            this.lblExpires.Location = new System.Drawing.Point(4, 10);
+            this.lblExpires.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblExpires.Name = "lblExpires";
+            this.lblExpires.Size = new System.Drawing.Size(290, 17);
+            this.lblExpires.TabIndex = 7;
+            this.lblExpires.Text = "Abonamente care expira saptamana aceasta";
             // 
             // ucDashboard
             // 
@@ -411,6 +498,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBirthdays)).EndInit();
             this.panelLastOneScanned.ResumeLayout(false);
             this.panelLastOneScanned.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewToExpire)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -437,7 +529,7 @@
         private System.Windows.Forms.TextBox txtBirthdate;
         private System.Windows.Forms.Label lblBirthdate;
         private System.Windows.Forms.TextBox txtToDate;
-        private System.Windows.Forms.TextBox lblDays;
+        private System.Windows.Forms.TextBox txtFromDate;
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblEDLastS;
@@ -446,5 +538,9 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label LblBarCode;
         private System.Windows.Forms.NumericUpDown numericUpDownTopDays;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.DataGridView dataGridViewToExpire;
+        private System.Windows.Forms.Label lblExpires;
     }
 }

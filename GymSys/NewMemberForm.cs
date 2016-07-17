@@ -16,7 +16,7 @@ namespace GymSys
         private int _currentMemberOnEdit = 0;
         private string _txtMemberValue;
 
-        public NewMemberForm(Members member, Memberships membership, Actions.Operations operation, string txtMemberValue)
+        public NewMemberForm(Members member, Memberships membership, Actions.Operations operation, string txtMemberValue, string notExistCode)
         {
             _txtMemberValue = txtMemberValue;
             _operation = operation;
@@ -26,16 +26,20 @@ namespace GymSys
             }
             InitializeComponent();
             SetUpComboBoxMembershipTypeSourceOnlyActive(membership);
-            CheckOperation(operation, member, membership);
+            CheckOperation(operation, member, membership, notExistCode);
             SetUpDatetimeFields(membership, operation);
             SetUpPeriod("1");
         }
 
-        private void CheckOperation(Actions.Operations operation, Members member, Memberships membership)
+        private void CheckOperation(Actions.Operations operation, Members member, Memberships membership, string txtNotExistCode)
         {
             switch (operation)
             {
                 case Actions.Operations.AddMember:
+                    if (!string.IsNullOrEmpty(txtNotExistCode))
+                    {
+                        txtCode.Text = txtNotExistCode;
+                    }
                     break;
                 case Actions.Operations.EditMember:
                     SetUpMember(member);
@@ -47,7 +51,6 @@ namespace GymSys
                     SetupFrameAddSubscription();
                     break;
                 case Actions.Operations.EditSubscription:
-
                     SetupEditSubscription(membership);
                     break;
 
@@ -349,7 +352,10 @@ namespace GymSys
                     // ignored
                 }
                 Close();
+                ucDashboard.Instance.LoadScanList();
                 ucDashboard.Instance.LoadBirhdays();
+
+                ucDashboard.Instance.LoadTopMembers(20);
                 ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
             }

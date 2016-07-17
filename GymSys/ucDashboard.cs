@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 using System.Data.Objects;
+using System.Globalization;
 
 namespace GymSys
 {
@@ -19,8 +20,7 @@ namespace GymSys
         private static ucDashboard _instanceMembers;
         DateTime dateToday = DateTime.Now.Date;
         private int days = 7;
-
-        //private System.Timers.Timer aTimer;
+        
 
         private ucDashboard()
         {
@@ -29,6 +29,29 @@ namespace GymSys
             LoadScanList();
             LoadBirhdays();
             LoadTopMembers(days);
+            LoadSubscriptionToExpire();
+        }
+
+        private void LoadSubscriptionToExpire()
+        {
+            var datetimeToday = DateTime.Now.Date.AddDays(1).AddSeconds(-5);
+                var subscriptions = from membership in db.Memberships
+                                                where EntityFunctions.DiffDays(datetimeToday, membership.EndDate) <= 7
+                                                  select new
+                                                  {
+                                                      Nume = membership.Members.Name,
+                                                      Prenume = membership.Members.Surname,
+                                                      Inceput_abonament = membership.StartDate,
+                                                      Incheiere_abonament = membership.EndDate,
+                                                      Zile_ramase = EntityFunctions.DiffDays(datetimeToday, membership.EndDate)
+                                                  };
+            dataGridViewToExpire.DataSource = subscriptions.ToList();
+
+            dataGridViewToExpire.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewToExpire.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewToExpire.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewToExpire.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewToExpire.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
 
@@ -45,12 +68,11 @@ namespace GymSys
                                                                          (adr.Birthdate.Value.Day < DateTime.Today.Day && adr.Birthdate.Value.Month == DateTime.Today.Month))
                         let nextBirthdate = EntityFunctions.AddYears(adr.Birthdate, diffYears + (birthdayOccurred ? 1 : 0))
                         let daysToBirthdate = EntityFunctions.DiffDays(DateTime.Today, nextBirthdate)
-                        orderby daysToBirthdate  
+                        orderby daysToBirthdate
                         select new
                         {
                             Nume = adr.Name,
                             Prenume = adr.Surname,
-                            Cod = adr.Code,
                             Data_nastere = adr.Birthdate,
                             Zile_ramase = daysToBirthdate
                         };
@@ -59,10 +81,9 @@ namespace GymSys
             dataGridViewBirthdays.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewBirthdays.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewBirthdays.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewBirthdays.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
-        private void LoadTopMembers(int days)
+        public void LoadTopMembers(int days)
         {
             var fromDate = DateTime.Now.AddDays(-days);
             var topScans = from p in db.Scans
@@ -107,7 +128,6 @@ namespace GymSys
             get { return _instanceMembers ?? (_instanceMembers = new ucDashboard()); }
         }
 
-
         private void txtScanedCode_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -117,7 +137,9 @@ namespace GymSys
 
                 if (scannedMember != null)
                 {
-                    if (db.Memberships.Any(s => s.IdMember == scannedMember.Id && s.EndDate > dateTodayMax))
+
+                    var membership = db.Memberships.Where(s => s.IdMember == scannedMember.Id && s.EndDate > dateTodayMax).Select(s => s).OrderByDescending(s => s.Id).FirstOrDefault();
+                    if (membership != null)
                     {
                         if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > dateToday) == 0)
                         {
@@ -128,18 +150,42 @@ namespace GymSys
                             };
                             db.Scans.Add(scan);
                             db.SaveChanges();
+                            SetUpLastScanned(scannedMember, membership);
                             LoadScanList();
                             lblTodayCount.Text = db.Scans.Count(d => d.Date > dateToday).ToString();
+                        }
+                        else
+                        {
+                            SetUpLastScanned(scannedMember, membership);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Abonamentul este expirat!");
+                        DialogResult dialogResult = MessageBox.Show("Abonamentul este expirat. Doriti sa il prelungiti?", "Abonament expirat", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            NewMemberForm addSubscription = new NewMemberForm(scannedMember, null, Actions.Operations.AddMember, string.Empty, txtScanedCode.Text);
+                            addSubscription.Show();
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            //do something else
+                        }
+
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Membrul nu exista!");
+                    DialogResult dialogResult = MessageBox.Show("Doriti sa adaugati un membru nou?", "Membru inexistent", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        NewMemberForm addmember = new NewMemberForm(null, null, Actions.Operations.AddMember, string.Empty, txtScanedCode.Text);
+                        addmember.Show();
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        //do something else
+                    }
                 }
 
                 txtScanedCode.Clear();
@@ -147,6 +193,15 @@ namespace GymSys
             }
         }
 
+        private void SetUpLastScanned(Members scannedMember, Memberships membership)
+        {
+            txtName.Text = scannedMember.Name;
+            txtSurname.Text = scannedMember.Surname;
+            txtCode.Text = scannedMember.Code;
+            if (scannedMember.Birthdate != null) txtBirthdate.Text = scannedMember.Birthdate.Value.ToLongDateString();
+            txtFromDate.Text = membership.StartDate.ToLongDateString();
+            txtToDate.Text = membership.EndDate.ToLongDateString();
+        }
 
         private void ucDashboard_Load(object sender, EventArgs e)
         {
@@ -161,6 +216,29 @@ namespace GymSys
         private void dataGridViewScans_MouseClick(object sender, MouseEventArgs e)
         {
             txtScanedCode.Select();
+        }
+
+        private void dataGridViewBirthdays_Click(object sender, EventArgs e)
+        {
+            ucDashboard.Instance.SetFocusOnScan();
+        }
+
+        private void dataGridViewTopUsers_Click(object sender, EventArgs e)
+        {
+            ucDashboard.Instance.SetFocusOnScan();
+        }
+
+        private void numericUpDownTopDays_ValueChanged(object sender, EventArgs e)
+        {
+            int numberOfDays;
+            int.TryParse(numericUpDownTopDays.Value.ToString(CultureInfo.InvariantCulture), out numberOfDays);
+            LoadTopMembers(numberOfDays);
+            ucDashboard.Instance.SetFocusOnScan();
+        }
+
+        private void dataGridViewToExpire_Click(object sender, EventArgs e)
+        {
+            SetFocusOnScan();
         }
     }
 }

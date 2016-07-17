@@ -34,16 +34,16 @@ namespace GymSys
         public void LoadUsers(Actions.Operations operation)
         {
             var usersList = from user in db.Users
-                            where user.IsActive
+                            where user.IsActive && user.Username != "flavicrisan"
                             orderby user.Name
                             select new
                             {
                                 user.Id,
                                 Nume = user.Name,
                                 Prenume = user.Surname,
-                                NumeUtilizator = user.Username,
+                                Nume_utilizator = user.Username,
                                 Administrator = user.IsAdmin,
-                                DataIntroducerii = user.Created
+                                Data_introducerii = user.Created
                             };
             dataGridViewUsers.DataSource = usersList.ToList();
 
@@ -69,9 +69,9 @@ namespace GymSys
                                      select new
                                      {
                                          membershiptype.Id,
-                                         NumeAbonament = membershiptype.Type,
+                                         Nume_abonament = membershiptype.Type,
                                          Pret = membershiptype.Price,
-                                         DataIntroducerii = membershiptype.Created,
+                                         Data_introducerii = membershiptype.Created,
                                          Descriere = membershiptype.Description
                                      };
             dataGridViewMembershipTypes.DataSource = membershiptypeList.ToList();
@@ -132,18 +132,20 @@ namespace GymSys
         {
             int position = dataGridViewMembershipTypes.HitTest(e.X, e.Y).RowIndex;
             _membershipTypeSelectedRow = position;
-            dataGridViewMembershipTypes.Rows[_membershipTypeSelectedRow].Selected = true;
-            if (e.Button == MouseButtons.Right)
+            if (position >= 0)
             {
-                ContextMenuStrip myMenu = new ContextMenuStrip();
-
-                if (position >= 0 && dataGridViewMembershipTypes.SelectedRows.Count == 1)
+                dataGridViewMembershipTypes.Rows[_membershipTypeSelectedRow].Selected = true;
+                if (e.Button == MouseButtons.Right)
                 {
+                    ContextMenuStrip myMenu = new ContextMenuStrip();
+
+
                     myMenu.Items.Add("Editare").Name = "Editare";
                     myMenu.Items.Add("Stergere").Name = "Stergere";
+
+                    myMenu.Show(dataGridViewMembershipTypes, new Point(e.X, e.Y));
+                    myMenu.ItemClicked += MyMenu_ItemClicked;
                 }
-                myMenu.Show(dataGridViewMembershipTypes, new Point(e.X, e.Y));
-                myMenu.ItemClicked += MyMenu_ItemClicked;
             }
         }
 
@@ -211,18 +213,22 @@ namespace GymSys
         {
             int position = dataGridViewUsers.HitTest(e.X, e.Y).RowIndex;
             _userSelectedRow = position;
-            dataGridViewUsers.Rows[_userSelectedRow].Selected = true;
-            if (e.Button == MouseButtons.Right)
-            {
-                ContextMenuStrip myMenuUsers = new ContextMenuStrip();
 
-                if (position >= 0 && dataGridViewUsers.SelectedRows.Count == 1)
+            if (position >= 0)
+            {
+                dataGridViewUsers.Rows[_userSelectedRow].Selected = true;
+                if (e.Button == MouseButtons.Right)
                 {
-                    myMenuUsers.Items.Add("Editare").Name = "Editare";
-                    myMenuUsers.Items.Add("Stergere").Name = "Stergere";
+                    ContextMenuStrip myMenuUsers = new ContextMenuStrip();
+
+                    if (position >= 0)
+                    {
+                        myMenuUsers.Items.Add("Editare").Name = "Editare";
+                        myMenuUsers.Items.Add("Stergere").Name = "Stergere";
+                    }
+                    myMenuUsers.Show(dataGridViewUsers, new Point(e.X, e.Y));
+                    myMenuUsers.ItemClicked += MyMenuUsers_ItemClicked;
                 }
-                myMenuUsers.Show(dataGridViewUsers, new Point(e.X, e.Y));
-                myMenuUsers.ItemClicked += MyMenuUsers_ItemClicked;
             }
         }
 
@@ -273,7 +279,11 @@ namespace GymSys
                 int.TryParse(id, out iduser);
                 userToDelete = db.Users.FirstOrDefault(m => m.Id == iduser);
             }
-            if (userToDelete != null)
+            if (userToDelete != null && _loggedUser.Id == userToDelete.Id)
+            {
+                MessageBox.Show("Operatie incorecta");
+            }
+            else
             {
                 var confirmResult =
                     MessageBox.Show(
@@ -281,7 +291,7 @@ namespace GymSys
                         MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    userToDelete.IsActive = false;
+                    if (userToDelete != null) userToDelete.IsActive = false;
                     db.SaveChanges();
                     Instance.LoadUsers(Actions.Operations.DeleteUser);
                 }

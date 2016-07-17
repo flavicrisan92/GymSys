@@ -23,14 +23,16 @@ namespace GymSys
             {
                 if (!db.Users.Any())
                 {
-                    Users newUser = new Users();
-                    newUser.Name = "Crisan";
-                    newUser.Surname = "Flavius";
-                    newUser.Username = "flavicrisan";
-                    newUser.Password = "123";
-                    newUser.Created = DateTime.Now;
-                    newUser.IsActive = true;
-                    newUser.IsAdmin = true;
+                    Users newUser = new Users
+                    {
+                        Name = "Crisan",
+                        Surname = "Flavius",
+                        Username = "flavicrisan",
+                        Password = "123",
+                        Created = DateTime.Now,
+                        IsActive = true,
+                        IsAdmin = true
+                    };
                     db.Users.Add(newUser);
                     db.SaveChanges();
                 }
@@ -45,7 +47,7 @@ namespace GymSys
                 }
                 else
                 {
-                    MessageBox.Show("Login Failed!");
+                    MessageBox.Show("Nume de utilizator sau parola incorecte!");
                 }
             }
             catch (Exception ex)
@@ -65,6 +67,11 @@ namespace GymSys
         private void LoginForm_Load(object sender, EventArgs e)
         {
             txt_UserName.Select();
+        }
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

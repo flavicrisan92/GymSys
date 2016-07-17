@@ -206,7 +206,7 @@ namespace GymSys
         {
             if (newMemberForm == null)
             {
-                newMemberForm = new NewMemberForm(null, null, Actions.Operations.AddMember, txtSearchMembers.Text);
+                newMemberForm = new NewMemberForm(null, null, Actions.Operations.AddMember, txtSearchMembers.Text, string.Empty);
                 newMemberForm.Show();
             }
             else
@@ -228,7 +228,7 @@ namespace GymSys
             {
                 ContextMenuStrip myMenu = new ContextMenuStrip();
 
-                if (position >= 0 && dataGVMembers.SelectedRows.Count == 1)
+                if (position >= 0)
                 {
                     myMenu.Items.Add("Editare").Name = "Editare";
                     myMenu.Items.Add("Stergere").Name = "Stergere";
@@ -256,7 +256,7 @@ namespace GymSys
                         if (addSubscription == null)
                         {
                             addSubscription = new NewMemberForm(member, null, Actions.Operations.EditMember,
-                                txtSearchMembers.Text);
+                                txtSearchMembers.Text, string.Empty);
                             addSubscription.Show();
                         }
                         else
@@ -293,7 +293,7 @@ namespace GymSys
                     if (addSubscription == null)
                     {
                         addSubscription = new NewMemberForm(member, null,
-                            Actions.Operations.AddSubscription, txtSearchMembers.Text);
+                            Actions.Operations.AddSubscription, txtSearchMembers.Text, string.Empty);
                         addSubscription.Show();
                     }
                     else
@@ -316,7 +316,7 @@ namespace GymSys
             {
                 ContextMenuStrip membershipMenu = new ContextMenuStrip();
 
-                if (position >= 0 && dataGVMembers.SelectedRows.Count == 1)
+                if (position >= 0)
                 {
                     membershipMenu.Items.Add("Editare").Name = "Editare";
                     membershipMenu.Items.Add("Stergere").Name = "Stergere";
@@ -361,7 +361,7 @@ namespace GymSys
                                 if (editSubscription == null)
                                 {
                                     editSubscription = new NewMemberForm(null, membership,
-                                        Actions.Operations.EditSubscription, txtSearchMembers.Text);
+                                        Actions.Operations.EditSubscription, txtSearchMembers.Text, string.Empty);
                                     editSubscription.Show();
                                 }
                                 else
@@ -384,8 +384,7 @@ namespace GymSys
                     break;
             }
         }
-
-
+        
         private void ProcessDeleteMembership()
         {
             int idmembership;
