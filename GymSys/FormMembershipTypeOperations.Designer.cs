@@ -36,6 +36,7 @@
             this.lblLei = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.lblmandatory = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblType
@@ -70,7 +71,7 @@
             this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtType.Location = new System.Drawing.Point(170, 29);
             this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(165, 20);
+            this.txtType.Size = new System.Drawing.Size(139, 20);
             this.txtType.TabIndex = 3;
             // 
             // txtPrice
@@ -111,11 +112,21 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lblmandatory
+            // 
+            this.lblmandatory.AutoSize = true;
+            this.lblmandatory.Location = new System.Drawing.Point(323, 32);
+            this.lblmandatory.Name = "lblmandatory";
+            this.lblmandatory.Size = new System.Drawing.Size(12, 15);
+            this.lblmandatory.TabIndex = 34;
+            this.lblmandatory.Text = "*";
+            // 
             // FormMembershipTypeOperations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 269);
+            this.Controls.Add(this.lblmandatory);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.lblLei);
@@ -146,5 +157,6 @@
         private System.Windows.Forms.Label lblLei;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Label lblmandatory;
     }
 }
