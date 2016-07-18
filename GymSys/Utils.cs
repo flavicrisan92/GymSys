@@ -31,6 +31,22 @@ namespace GymSys
             return result;
         }
 
+        public static string GetOnlyDate(DateTime datetimeString)
+        {
+            string format = "dd/MM/yyyy";
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            DateTime result;
+            try
+            {
+                result = DateTime.ParseExact(datetimeString.ToString(CultureInfo.InvariantCulture), format, provider);
+            }
+            catch (FormatException)
+            {
+                result = DateTime.Parse(datetimeString.ToString(CultureInfo.InvariantCulture));
+            }
+            return result.ToString(CultureInfo.InvariantCulture);
+        }
+
         public static bool ValidateNewUserAndMembership(int id, string name, string surname, string code, string numericPeriod, int membershipType, Actions.Operations operation)
         {
             if (string.IsNullOrEmpty(code))

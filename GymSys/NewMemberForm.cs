@@ -211,7 +211,7 @@ namespace GymSys
             if (membership != null)
             {
                 membership.StartDate = dateTimePickerStartMembership.Value;
-                membership.EndDate = dateTimePickerEndDateMembership.Value.AddDays(1).AddSeconds(-10);
+                membership.EndDate = dateTimePickerEndDateMembership.Value.Date.AddDays(1).AddSeconds(-10);
                 membership.IdMembershipType =
                     db.MembershipType.Where(m => m.Type == comboBoxMembershipType.Text)
                         .Select(m => m.Id)
@@ -220,8 +220,9 @@ namespace GymSys
 
                 ((IObjectContextAdapter)db).ObjectContext.Refresh(RefreshMode.StoreWins, membership);
                 Close();
+                ucDashboard.Instance.LoadSubscriptionToExpire();
 
-                ucMembers.Instance.LoadMembers(_operation, _txtMemberValue);
+               ucMembers.Instance.LoadMembers(_operation, _txtMemberValue);
                 ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadSubscription(Actions.Operations.EditSubscription);
             }
@@ -242,6 +243,7 @@ namespace GymSys
                 }
                 db.SaveChanges();
                 this.Close();
+
                 ucDashboard.Instance.LoadBirhdays();
                 ucMembers.Instance.CloseMembersEditForm(Actions.Operations.EditMember);
                 ucMembers.Instance.LoadMembers(Actions.Operations.EditMember, _txtMemberValue);
@@ -274,11 +276,18 @@ namespace GymSys
                                 .Select(m => m.Id)
                                 .FirstOrDefault(),
                         StartDate = dateTimePickerStartMembership.Value,
-                        EndDate = dateTimePickerEndDateMembership.Value.AddDays(1).AddSeconds(-5),
+                        EndDate = dateTimePickerEndDateMembership.Value.Date.AddDays(1).AddSeconds(-5),
                         IsActive = true
                     };
 
                     db.Memberships.Add(memberships);
+
+                    Scans scanNewUser = new Scans
+                    {
+                        IdMember = member.Id,
+                        Date = DateTime.Now
+                    };
+                    db.Scans.Add(scanNewUser);
                 }
                 try
                 {
@@ -290,6 +299,10 @@ namespace GymSys
                     // ignored
                 }
                 Close();
+                ucDashboard.Instance.LoadScanList(true);
+                ucDashboard.Instance.LoadBirhdays();
+                ucDashboard.Instance.LoadTopMembers(20);
+                ucDashboard.Instance.LoadSubscriptionToExpire();
 
                 ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
@@ -352,12 +365,13 @@ namespace GymSys
                     // ignored
                 }
                 Close();
-                ucDashboard.Instance.LoadScanList();
+                ucDashboard.Instance.LoadScanList(true);
                 ucDashboard.Instance.LoadBirhdays();
-
                 ucDashboard.Instance.LoadTopMembers(20);
-                ucMembers.Instance.CloseMembersEditForm(_operation);
+                ucDashboard.Instance.LoadSubscriptionToExpire();
+
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
+                ucMembers.Instance.CloseMembersEditForm(_operation);
             }
         }
 

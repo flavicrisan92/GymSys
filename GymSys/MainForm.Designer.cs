@@ -45,7 +45,7 @@
             this.btnLogOut.Image = global::GymSys.Properties.Resources.logout_img;
             this.btnLogOut.Location = new System.Drawing.Point(1532, 12);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(37, 26);
+            this.btnLogOut.Size = new System.Drawing.Size(37, 36);
             this.btnLogOut.TabIndex = 0;
             this.btnLogOut.UseVisualStyleBackColor = false;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);

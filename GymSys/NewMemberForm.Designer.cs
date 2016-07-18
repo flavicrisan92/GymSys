@@ -48,62 +48,64 @@
             this.lblEndDateMembership = new System.Windows.Forms.Label();
             this.txtIdMembership = new System.Windows.Forms.TextBox();
             this.txtIdMember = new System.Windows.Forms.TextBox();
+            this.lblmandatory = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPeriod)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePickerBirthDate
             // 
             this.dateTimePickerBirthDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePickerBirthDate.Location = new System.Drawing.Point(247, 118);
-            this.dateTimePickerBirthDate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerBirthDate.Location = new System.Drawing.Point(185, 96);
             this.dateTimePickerBirthDate.Name = "dateTimePickerBirthDate";
-            this.dateTimePickerBirthDate.Size = new System.Drawing.Size(277, 22);
+            this.dateTimePickerBirthDate.Size = new System.Drawing.Size(209, 20);
             this.dateTimePickerBirthDate.TabIndex = 3;
             // 
             // txtSurname
             // 
             this.txtSurname.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSurname.Location = new System.Drawing.Point(249, 73);
-            this.txtSurname.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSurname.Location = new System.Drawing.Point(187, 59);
             this.txtSurname.Name = "txtSurname";
-            this.txtSurname.Size = new System.Drawing.Size(277, 22);
+            this.txtSurname.Size = new System.Drawing.Size(209, 20);
             this.txtSurname.TabIndex = 2;
             // 
             // txtName
             // 
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.Location = new System.Drawing.Point(249, 28);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Location = new System.Drawing.Point(187, 23);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(277, 22);
+            this.txtName.Size = new System.Drawing.Size(209, 20);
             this.txtName.TabIndex = 1;
             // 
             // txtCode
             // 
             this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCode.Location = new System.Drawing.Point(249, 162);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCode.Location = new System.Drawing.Point(187, 132);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(277, 22);
+            this.txtCode.Size = new System.Drawing.Size(209, 20);
             this.txtCode.TabIndex = 4;
             // 
             // lblCode
             // 
             this.lblCode.AutoSize = true;
-            this.lblCode.Location = new System.Drawing.Point(37, 162);
-            this.lblCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCode.Location = new System.Drawing.Point(28, 132);
             this.lblCode.Name = "lblCode";
-            this.lblCode.Size = new System.Drawing.Size(74, 17);
+            this.lblCode.Size = new System.Drawing.Size(56, 15);
             this.lblCode.TabIndex = 16;
-            this.lblCode.Text = "Cod card *";
+            this.lblCode.Text = "Cod card";
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(247, 478);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSave.Location = new System.Drawing.Point(185, 388);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(279, 28);
+            this.btnSave.Size = new System.Drawing.Size(209, 23);
             this.btnSave.TabIndex = 9;
             this.btnSave.Text = "Creare";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -112,41 +114,37 @@
             // lblBirthDate
             // 
             this.lblBirthDate.AutoSize = true;
-            this.lblBirthDate.Location = new System.Drawing.Point(37, 118);
-            this.lblBirthDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBirthDate.Location = new System.Drawing.Point(28, 96);
             this.lblBirthDate.Name = "lblBirthDate";
-            this.lblBirthDate.Size = new System.Drawing.Size(99, 17);
+            this.lblBirthDate.Size = new System.Drawing.Size(77, 15);
             this.lblBirthDate.TabIndex = 14;
-            this.lblBirthDate.Text = "Data nastere *";
+            this.lblBirthDate.Text = "Data nastere";
             // 
             // lblSurname
             // 
             this.lblSurname.AutoSize = true;
-            this.lblSurname.Location = new System.Drawing.Point(37, 73);
-            this.lblSurname.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSurname.Location = new System.Drawing.Point(28, 59);
             this.lblSurname.Name = "lblSurname";
-            this.lblSurname.Size = new System.Drawing.Size(74, 17);
+            this.lblSurname.Size = new System.Drawing.Size(58, 15);
             this.lblSurname.TabIndex = 13;
-            this.lblSurname.Text = "Prenume *";
+            this.lblSurname.Text = "Prenume";
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(37, 28);
-            this.lblName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblName.Location = new System.Drawing.Point(28, 23);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(54, 17);
+            this.lblName.Size = new System.Drawing.Size(41, 15);
             this.lblName.TabIndex = 12;
-            this.lblName.Text = "Nume *";
+            this.lblName.Text = "Nume";
             // 
             // lblStartDate
             // 
             this.lblStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Location = new System.Drawing.Point(37, 324);
-            this.lblStartDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStartDate.Location = new System.Drawing.Point(28, 263);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(163, 17);
+            this.lblStartDate.Size = new System.Drawing.Size(142, 15);
             this.lblStartDate.TabIndex = 21;
             this.lblStartDate.Text = "Data inceput abonament";
             // 
@@ -154,27 +152,24 @@
             // 
             this.lblPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblPeriod.AutoSize = true;
-            this.lblPeriod.Location = new System.Drawing.Point(39, 379);
-            this.lblPeriod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPeriod.Location = new System.Drawing.Point(29, 308);
             this.lblPeriod.Name = "lblPeriod";
-            this.lblPeriod.Size = new System.Drawing.Size(65, 17);
+            this.lblPeriod.Size = new System.Drawing.Size(57, 15);
             this.lblPeriod.TabIndex = 22;
             this.lblPeriod.Text = "Perioada";
             // 
             // dateTimePickerStartMembership
             // 
             this.dateTimePickerStartMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePickerStartMembership.Location = new System.Drawing.Point(259, 324);
-            this.dateTimePickerStartMembership.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerStartMembership.Location = new System.Drawing.Point(194, 263);
             this.dateTimePickerStartMembership.Name = "dateTimePickerStartMembership";
-            this.dateTimePickerStartMembership.Size = new System.Drawing.Size(265, 22);
+            this.dateTimePickerStartMembership.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerStartMembership.TabIndex = 6;
             // 
             // numericUpDownPeriod
             // 
             this.numericUpDownPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownPeriod.Location = new System.Drawing.Point(259, 379);
-            this.numericUpDownPeriod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDownPeriod.Location = new System.Drawing.Point(194, 308);
             this.numericUpDownPeriod.Minimum = new decimal(new int[] {
             1,
             0,
@@ -182,7 +177,7 @@
             0});
             this.numericUpDownPeriod.Name = "numericUpDownPeriod";
             this.numericUpDownPeriod.ReadOnly = true;
-            this.numericUpDownPeriod.Size = new System.Drawing.Size(96, 22);
+            this.numericUpDownPeriod.Size = new System.Drawing.Size(72, 20);
             this.numericUpDownPeriod.TabIndex = 7;
             this.numericUpDownPeriod.Value = new decimal(new int[] {
             1,
@@ -196,10 +191,9 @@
             this.comboBoxPeriod.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxPeriod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPeriod.FormattingEnabled = true;
-            this.comboBoxPeriod.Location = new System.Drawing.Point(367, 378);
-            this.comboBoxPeriod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxPeriod.Location = new System.Drawing.Point(275, 307);
             this.comboBoxPeriod.Name = "comboBoxPeriod";
-            this.comboBoxPeriod.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxPeriod.Size = new System.Drawing.Size(121, 21);
             this.comboBoxPeriod.TabIndex = 26;
             this.comboBoxPeriod.SelectedIndexChanged += new System.EventHandler(this.comboBoxPeriod_SelectedIndexChanged);
             // 
@@ -207,10 +201,9 @@
             // 
             this.lblMembershipType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMembershipType.AutoSize = true;
-            this.lblMembershipType.Location = new System.Drawing.Point(39, 279);
-            this.lblMembershipType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMembershipType.Location = new System.Drawing.Point(29, 227);
             this.lblMembershipType.Name = "lblMembershipType";
-            this.lblMembershipType.Size = new System.Drawing.Size(103, 17);
+            this.lblMembershipType.Size = new System.Drawing.Size(90, 15);
             this.lblMembershipType.TabIndex = 27;
             this.lblMembershipType.Text = "Tip abonament";
             // 
@@ -219,55 +212,132 @@
             this.comboBoxMembershipType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxMembershipType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMembershipType.FormattingEnabled = true;
-            this.comboBoxMembershipType.Location = new System.Drawing.Point(259, 272);
-            this.comboBoxMembershipType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxMembershipType.Location = new System.Drawing.Point(194, 221);
             this.comboBoxMembershipType.Name = "comboBoxMembershipType";
-            this.comboBoxMembershipType.Size = new System.Drawing.Size(265, 24);
+            this.comboBoxMembershipType.Size = new System.Drawing.Size(200, 21);
             this.comboBoxMembershipType.TabIndex = 5;
             // 
             // dateTimePickerEndDateMembership
             // 
             this.dateTimePickerEndDateMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePickerEndDateMembership.Location = new System.Drawing.Point(257, 428);
-            this.dateTimePickerEndDateMembership.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerEndDateMembership.Location = new System.Drawing.Point(193, 348);
             this.dateTimePickerEndDateMembership.Name = "dateTimePickerEndDateMembership";
-            this.dateTimePickerEndDateMembership.Size = new System.Drawing.Size(265, 22);
+            this.dateTimePickerEndDateMembership.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerEndDateMembership.TabIndex = 8;
             // 
             // lblEndDateMembership
             // 
             this.lblEndDateMembership.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblEndDateMembership.AutoSize = true;
-            this.lblEndDateMembership.Location = new System.Drawing.Point(36, 428);
-            this.lblEndDateMembership.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEndDateMembership.Location = new System.Drawing.Point(27, 348);
             this.lblEndDateMembership.Name = "lblEndDateMembership";
-            this.lblEndDateMembership.Size = new System.Drawing.Size(155, 17);
+            this.lblEndDateMembership.Size = new System.Drawing.Size(134, 15);
             this.lblEndDateMembership.TabIndex = 29;
             this.lblEndDateMembership.Text = "Data sfarsit abonament";
             // 
             // txtIdMembership
             // 
-            this.txtIdMembership.Location = new System.Drawing.Point(40, 218);
-            this.txtIdMembership.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIdMembership.Location = new System.Drawing.Point(30, 177);
             this.txtIdMembership.Name = "txtIdMembership";
             this.txtIdMembership.ReadOnly = true;
-            this.txtIdMembership.Size = new System.Drawing.Size(45, 22);
+            this.txtIdMembership.Size = new System.Drawing.Size(35, 20);
             this.txtIdMembership.TabIndex = 31;
+            this.txtIdMembership.Visible = false;
             // 
             // txtIdMember
             // 
-            this.txtIdMember.Location = new System.Drawing.Point(168, 33);
-            this.txtIdMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIdMember.Location = new System.Drawing.Point(126, 27);
             this.txtIdMember.Name = "txtIdMember";
             this.txtIdMember.ReadOnly = true;
-            this.txtIdMember.Size = new System.Drawing.Size(57, 22);
+            this.txtIdMember.Size = new System.Drawing.Size(44, 20);
             this.txtIdMember.TabIndex = 32;
+            this.txtIdMember.Visible = false;
+            // 
+            // lblmandatory
+            // 
+            this.lblmandatory.AutoSize = true;
+            this.lblmandatory.Location = new System.Drawing.Point(402, 26);
+            this.lblmandatory.Name = "lblmandatory";
+            this.lblmandatory.Size = new System.Drawing.Size(12, 15);
+            this.lblmandatory.TabIndex = 33;
+            this.lblmandatory.Text = "*";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(402, 62);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(12, 15);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "*";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(400, 101);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(12, 15);
+            this.label2.TabIndex = 35;
+            this.label2.Text = "*";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(400, 135);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(12, 15);
+            this.label3.TabIndex = 36;
+            this.label3.Text = "*";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(400, 224);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(12, 15);
+            this.label4.TabIndex = 37;
+            this.label4.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(400, 268);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(12, 15);
+            this.label5.TabIndex = 38;
+            this.label5.Text = "*";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(400, 310);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(12, 15);
+            this.label6.TabIndex = 39;
+            this.label6.Text = "*";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(402, 353);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(12, 15);
+            this.label7.TabIndex = 40;
+            this.label7.Text = "*";
             // 
             // NewMemberForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 529);
+            this.ClientSize = new System.Drawing.Size(416, 430);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblmandatory);
             this.Controls.Add(this.txtIdMember);
             this.Controls.Add(this.txtIdMembership);
             this.Controls.Add(this.dateTimePickerEndDateMembership);
@@ -288,7 +358,6 @@
             this.Controls.Add(this.lblBirthDate);
             this.Controls.Add(this.lblSurname);
             this.Controls.Add(this.lblName);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewMemberForm";
@@ -324,5 +393,13 @@
         private System.Windows.Forms.Label lblEndDateMembership;
         private System.Windows.Forms.TextBox txtIdMembership;
         private System.Windows.Forms.TextBox txtIdMember;
+        private System.Windows.Forms.Label lblmandatory;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

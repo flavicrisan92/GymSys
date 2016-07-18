@@ -102,7 +102,7 @@ namespace GymSys
                 ucDashboard.Instance.BringToFront();
             }
 
-            ucDashboard.Instance.LoadScanList();
+            ucDashboard.Instance.LoadScanList(false);
             ucDashboard.Instance.SetFocusOnScan();
         }
 

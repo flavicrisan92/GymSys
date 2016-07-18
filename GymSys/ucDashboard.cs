@@ -20,31 +20,30 @@ namespace GymSys
         private static ucDashboard _instanceMembers;
         DateTime dateToday = DateTime.Now.Date;
         private int days = 7;
-        
+
 
         private ucDashboard()
         {
             InitializeComponent();
-            lblTodayCount.Text = db.Scans.Count(d => d.Date > dateToday).ToString();
-            LoadScanList();
+            LoadScanList(false);
             LoadBirhdays();
             LoadTopMembers(days);
             LoadSubscriptionToExpire();
         }
 
-        private void LoadSubscriptionToExpire()
+        public void LoadSubscriptionToExpire()
         {
-            var datetimeToday = DateTime.Now.Date.AddDays(1).AddSeconds(-5);
-                var subscriptions = from membership in db.Memberships
-                                                where EntityFunctions.DiffDays(datetimeToday, membership.EndDate) <= 7
-                                                  select new
-                                                  {
-                                                      Nume = membership.Members.Name,
-                                                      Prenume = membership.Members.Surname,
-                                                      Inceput_abonament = membership.StartDate,
-                                                      Incheiere_abonament = membership.EndDate,
-                                                      Zile_ramase = EntityFunctions.DiffDays(datetimeToday, membership.EndDate)
-                                                  };
+            var datetimeToday = DateTime.Now.Date.AddDays(1).AddSeconds(-1);
+            var subscriptions = from membership in db.Memberships
+                                where EntityFunctions.DiffDays(datetimeToday, membership.EndDate) <= 7 && EntityFunctions.DiffDays(datetimeToday, membership.EndDate) >-1
+                                select new
+                                {
+                                    Nume = membership.Members.Name,
+                                    Prenume = membership.Members.Surname,
+                                    Inceput_abonament = membership.StartDate,
+                                    Incheiere_abonament = membership.EndDate,
+                                    Zile_ramase = EntityFunctions.DiffDays(datetimeToday, membership.EndDate)
+                                };
             dataGridViewToExpire.DataSource = subscriptions.ToList();
 
             dataGridViewToExpire.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -53,7 +52,6 @@ namespace GymSys
             dataGridViewToExpire.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewToExpire.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
-
 
         public void LoadBirhdays()
         {
@@ -67,7 +65,7 @@ namespace GymSys
                         let birthdayOccurred = adr.Birthdate != null && (adr.Birthdate.Value.Month < DateTime.Today.Month ||
                                                                          (adr.Birthdate.Value.Day < DateTime.Today.Day && adr.Birthdate.Value.Month == DateTime.Today.Month))
                         let nextBirthdate = EntityFunctions.AddYears(adr.Birthdate, diffYears + (birthdayOccurred ? 1 : 0))
-                        let daysToBirthdate = EntityFunctions.DiffDays(DateTime.Today, nextBirthdate)
+                        let daysToBirthdate = EntityFunctions.DiffDays(DateTime.Today.Date, nextBirthdate)
                         orderby daysToBirthdate
                         select new
                         {
@@ -97,12 +95,14 @@ namespace GymSys
             dataGridViewTopUsers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewTopUsers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
-        public void LoadScanList()
+        public void LoadScanList(bool updateLastScanned)
         {
             var todayDate = DateTime.Now.Date;
-            var scans = from scan in db.Scans
-                        where scan.Date > todayDate
-                        orderby scan.Date descending
+            var getScans = from scan in db.Scans
+                           where scan.Date > todayDate
+                           orderby scan.Date descending
+                           select scan;
+            var scans = from scan in getScans
                         select new
                         {
                             Nume = scan.Members.Name,
@@ -113,8 +113,9 @@ namespace GymSys
                             Data_scanare = db.Scans.Where(s => s.IdMember == scan.IdMember).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault(),
                             Abonament_Activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                         };
-            dataGridViewScans.DataSource = scans.ToList();
 
+            dataGridViewScans.DataSource = scans.ToList();
+            lblTodayCount.Text = scans.Count().ToString();
             dataGridViewScans.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScans.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScans.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -122,6 +123,16 @@ namespace GymSys
             dataGridViewScans.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScans.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScans.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            if (updateLastScanned)
+            {
+                var maxMembership = getScans.FirstOrDefault();
+                if (maxMembership != null)
+                {
+                    var membshp = maxMembership.Members.Memberships.OrderByDescending(s => s.EndDate).FirstOrDefault();
+
+                    SetUpLastScanned(getScans.Select(s => s.Members).FirstOrDefault(), membshp);
+                }
+            }
         }
         public static ucDashboard Instance
         {
@@ -151,8 +162,7 @@ namespace GymSys
                             db.Scans.Add(scan);
                             db.SaveChanges();
                             SetUpLastScanned(scannedMember, membership);
-                            LoadScanList();
-                            lblTodayCount.Text = db.Scans.Count(d => d.Date > dateToday).ToString();
+                            LoadScanList(false);
                         }
                         else
                         {
@@ -164,7 +174,7 @@ namespace GymSys
                         DialogResult dialogResult = MessageBox.Show("Abonamentul este expirat. Doriti sa il prelungiti?", "Abonament expirat", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            NewMemberForm addSubscription = new NewMemberForm(scannedMember, null, Actions.Operations.AddMember, string.Empty, txtScanedCode.Text);
+                            NewMemberForm addSubscription = new NewMemberForm(scannedMember, null, Actions.Operations.AddSubscription, string.Empty, txtScanedCode.Text);
                             addSubscription.Show();
                         }
                         else if (dialogResult == DialogResult.No)
@@ -193,14 +203,14 @@ namespace GymSys
             }
         }
 
-        private void SetUpLastScanned(Members scannedMember, Memberships membership)
+        public void SetUpLastScanned(Members scannedMember, Memberships membership)
         {
             txtName.Text = scannedMember.Name;
             txtSurname.Text = scannedMember.Surname;
             txtCode.Text = scannedMember.Code;
-            if (scannedMember.Birthdate != null) txtBirthdate.Text = scannedMember.Birthdate.Value.ToLongDateString();
-            txtFromDate.Text = membership.StartDate.ToLongDateString();
-            txtToDate.Text = membership.EndDate.ToLongDateString();
+            if (scannedMember.Birthdate != null) txtBirthdate.Text = scannedMember.Birthdate.Value.ToString("dd/MM/yyyy");
+            txtFromDate.Text = membership.StartDate.ToString("dd/MM/yyyy");
+            txtToDate.Text = membership.EndDate.ToString("dd/MM/yyyy");
         }
 
         private void ucDashboard_Load(object sender, EventArgs e)
