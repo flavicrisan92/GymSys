@@ -19,7 +19,7 @@ namespace GymSys
         LocalDBEntities db = new LocalDBEntities();
         private static ucDashboard _instanceMembers;
         DateTime dateToday = DateTime.Now.Date;
-        private int days = 7;
+        private int days = 20;
 
 
         private ucDashboard()
@@ -88,7 +88,7 @@ namespace GymSys
                            where p.Date >= fromDate
                            group p by new { idMember = p.IdMember, p.Members.Name, p.Members.Surname, p.Members.Code } into d
                            select new { Nume = d.Key.Name, Prenume = d.Key.Surname, Cod = d.Key.Code, Prezente = d.Count() };
-            topScans = topScans.OrderByDescending(s => s.Prezente).Take(15);
+            topScans = topScans.OrderByDescending(s => s.Prezente).Take(30);
             dataGridViewTopUsers.DataSource = topScans.ToList();
             dataGridViewTopUsers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewTopUsers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -99,7 +99,7 @@ namespace GymSys
         {
             var todayDate = DateTime.Now.Date;
             var getScans = from scan in db.Scans
-                           where scan.Date > todayDate
+                           where scan.Date > todayDate && scan.Members.IsActive
                            orderby scan.Date descending
                            select scan;
             var scans = from scan in getScans

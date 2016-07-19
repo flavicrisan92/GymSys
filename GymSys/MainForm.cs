@@ -18,6 +18,7 @@ namespace GymSys
         {
             _user = user;
             InitializeComponent();
+            lblUsername.Text = user.Username;
             LoadDashboard();
             ucDashboard.Instance.SetFocusOnScan();
             this.Text = "GYMSYS";

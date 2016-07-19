@@ -51,9 +51,20 @@ namespace GymSys
                     memberToDelete.IsActive = false;
                     db.SaveChanges();
                     Instance.LoadMembers(Actions.Operations.DeleteMember, txtSearchMembers.Text);
+
+                    RefreshDashboard();
                 }
             }
         }
+
+        private static void RefreshDashboard()
+        {
+            ucDashboard.Instance.LoadScanList(false);
+            ucDashboard.Instance.LoadBirhdays();
+            ucDashboard.Instance.LoadSubscriptionToExpire();
+            ucDashboard.Instance.LoadTopMembers(20);
+        }
+
 
         public void LoadSubscription(Actions.Operations operation)
         {
@@ -405,7 +416,10 @@ namespace GymSys
                 {
                     membershipToDelete.IsActive = false;
                     db.SaveChanges();
+
                     Instance.LoadSubscription(Actions.Operations.DeleteMemberhip);
+
+                    RefreshDashboard();
                 }
             }
         }

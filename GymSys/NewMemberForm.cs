@@ -222,7 +222,7 @@ namespace GymSys
                 Close();
                 ucDashboard.Instance.LoadSubscriptionToExpire();
 
-               ucMembers.Instance.LoadMembers(_operation, _txtMemberValue);
+                ucMembers.Instance.LoadMembers(_operation, _txtMemberValue);
                 ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadSubscription(Actions.Operations.EditSubscription);
             }
@@ -230,28 +230,39 @@ namespace GymSys
 
         private void ProcessEditMember()
         {
-            //Add validation
-            var member = db.Members.FirstOrDefault(m => m.Id == _currentMemberOnEdit);
-            if (!db.Members.Any(m => m.Code == txtCode.Text && m.Id != _currentMemberOnEdit))
+            if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text,
+                numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddMember))
             {
-                if (member != null)
+                var member = db.Members.FirstOrDefault(m => m.Id == _currentMemberOnEdit);
+                if (!db.Members.Any(m => m.Code == txtCode.Text && m.Id != _currentMemberOnEdit))
                 {
-                    member.Name = txtName.Text;
-                    member.Surname = txtSurname.Text;
-                    member.Code = txtCode.Text;
-                    member.Birthdate = dateTimePickerBirthDate.Value.Date;
-                }
-                db.SaveChanges();
-                this.Close();
+                    if (member != null)
+                    {
+                        member.Name = txtName.Text;
+                        member.Surname = txtSurname.Text;
+                        member.Code = txtCode.Text;
+                        member.Birthdate = dateTimePickerBirthDate.Value.Date;
+                    }
+                    db.SaveChanges();
+                    this.Close();
 
-                ucDashboard.Instance.LoadBirhdays();
-                ucMembers.Instance.CloseMembersEditForm(Actions.Operations.EditMember);
-                ucMembers.Instance.LoadMembers(Actions.Operations.EditMember, _txtMemberValue);
-                ucMembers.Instance.LoadSubscription(Actions.Operations.EditMember);
+                    ucDashboard.Instance.LoadBirhdays();
+                    ucDashboard.Instance.LoadScanList(false);
+                    ucDashboard.Instance.LoadTopMembers(20);
+                    ucDashboard.Instance.LoadSubscriptionToExpire();
+
+                    ucMembers.Instance.CloseMembersEditForm(Actions.Operations.EditMember);
+                    ucMembers.Instance.LoadMembers(Actions.Operations.EditMember, _txtMemberValue);
+                    ucMembers.Instance.LoadSubscription(Actions.Operations.EditMember);
+                }
+                else
+                {
+                    MessageBox.Show("Acest cod este atasat altui abonat!");
+                }
             }
             else
             {
-                MessageBox.Show("Acest cod este atasat altui abonat!");
+                MessageBox.Show("Campurile marcate cu * sunt obligatorii!");
             }
         }
 
@@ -281,13 +292,17 @@ namespace GymSys
                     };
 
                     db.Memberships.Add(memberships);
-
-                    Scans scanNewUser = new Scans
+                    var datetimetoday = DateTime.Now.Date;
+                    if (!db.Scans.Any(s => s.IdMember == member.Id && s.Date > datetimetoday))
                     {
-                        IdMember = member.Id,
-                        Date = DateTime.Now
-                    };
-                    db.Scans.Add(scanNewUser);
+                        Scans scanNewUser = new Scans
+                        {
+                            IdMember = member.Id,
+                            Date = DateTime.Now
+                        };
+                        db.Scans.Add(scanNewUser);
+                        ucDashboard.Instance.LoadScanList(true);
+                    }
                 }
                 try
                 {
@@ -299,13 +314,15 @@ namespace GymSys
                     // ignored
                 }
                 Close();
-                ucDashboard.Instance.LoadScanList(true);
-                ucDashboard.Instance.LoadBirhdays();
                 ucDashboard.Instance.LoadTopMembers(20);
                 ucDashboard.Instance.LoadSubscriptionToExpire();
 
                 ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
+            }
+            else
+            {
+                MessageBox.Show("Campurile marcate cu * sunt obligatorii!");
             }
         }
 
@@ -373,6 +390,10 @@ namespace GymSys
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
                 ucMembers.Instance.CloseMembersEditForm(_operation);
             }
+            else
+            {
+                MessageBox.Show("Campurile marcate cu * sunt obligatorii!");
+            }
         }
 
 
@@ -426,7 +447,7 @@ namespace GymSys
 
         private void NewMemberForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-           ucMembers.Instance.CloseMembersEditForm(_operation);
+            ucMembers.Instance.CloseMembersEditForm(_operation);
         }
 
         //private void txtCode_KeyDown(object sender, KeyEventArgs e)
