@@ -51,6 +51,7 @@ namespace GymSys
         {
             if (string.IsNullOrEmpty(code))
             {
+                ShowRequiredMessage();
                 return false;
             }
             if (operation != Actions.Operations.AddSubscription && db.Members.Any(m => m.Code == code && m.Id != id))
@@ -60,21 +61,32 @@ namespace GymSys
             }
             if (string.IsNullOrEmpty(name))
             {
+                ShowRequiredMessage();
                 return false;
             }
             if (string.IsNullOrEmpty(surname))
             {
+                ShowRequiredMessage();
                 return false;
             }
             if (numericPeriod == "0")
             {
+                ShowRequiredMessage();
                 return false;
             }
             if (membershipType < 0)
             {
+                ShowRequiredMessage();
                 return false;
             }
             return true;
+        }
+
+        private static void ShowRequiredMessage()
+        {
+          
+                MessageBox.Show("Campurile marcate cu * sunt obligatorii!");
+            
         }
     }
 }

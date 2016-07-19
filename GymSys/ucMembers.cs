@@ -93,7 +93,7 @@ namespace GymSys
 
                     dataGvMembershipHist.Visible = true;
                     var dataGridViewColumn = dataGvMembershipHist.Columns["Id"];
-                    //if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+                    if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
                     dataGvMembershipHist.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGvMembershipHist.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                     dataGvMembershipHist.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -189,7 +189,7 @@ namespace GymSys
             dataGVMembers.DataSource = members.ToList();
 
             var dataGridViewColumn = dataGVMembers.Columns["Id"];
-            //if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
             dataGVMembers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGVMembers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGVMembers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -200,7 +200,7 @@ namespace GymSys
 
             if (operation != Actions.Operations.DeleteMember)
             {
-                if (_membersSelectedRow > 0)
+                if (_membersSelectedRow > 0 && dataGVMembers.Rows.Count > _membersSelectedRow)
                 {
                     dataGVMembers.ClearSelection();
                     dataGVMembers.Rows[_membersSelectedRow].Selected = true;

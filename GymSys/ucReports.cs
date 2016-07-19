@@ -165,6 +165,7 @@ namespace GymSys
                             Data_nastere = scan.Members.Birthdate,
                             Data_inregistrare = scan.Members.Created,
                             Data_scanare = scan.Date,
+                            Utilizator_activ = scan.Members.IsActive,
                             Abonament_activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                         };
             if (!string.IsNullOrEmpty(searchValue))
@@ -214,6 +215,9 @@ namespace GymSys
             lblTotalScansCount.Text = scans.Count().ToString();
             dataGridViewScansR.DataSource = scans.ToList();
 
+            var id = dataGridViewScansR.Columns["Id"];
+            if (id != null) id.Visible = false;
+
             dataGridViewScansR.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScansR.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScansR.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -222,6 +226,7 @@ namespace GymSys
             dataGridViewScansR.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScansR.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScansR.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewScansR.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             var scansByMonth = from p in scans
                                where p.Data_scanare >= fromDateTime && p.Data_scanare <= toDateTime
@@ -252,6 +257,7 @@ namespace GymSys
                               Data_nastere = member.Birthdate,
                               Data_inregistrare = member.Created,
                               Ultima_scanare = db.Scans.Where(s => s.IdMember == member.Id).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault(),
+                              Utilizator_activ = member.IsActive,
                               Abonament_activ = member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                           };
 
@@ -302,6 +308,9 @@ namespace GymSys
 
             dataGridViewMembersRep.DataSource = members.ToList();
 
+            var id = dataGridViewMembersRep.Columns["Id"];
+            if (id != null) id.Visible = false;
+
             lblTotalCount.Text = members.Count().ToString();
 
             lblCountActiveMembers.Text = members.Count(m => m.Abonament_activ).ToString();
@@ -328,6 +337,7 @@ namespace GymSys
             dataGridViewMembersRep.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewMembersRep.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewMembersRep.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewMembersRep.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void LoadMembershipReport(DateTime fromDateTime, DateTime toDateTime, string searchValue)
@@ -349,6 +359,7 @@ namespace GymSys
                                      Data_inceput_abonament = membership.StartDate,
                                      Data_incheiere_abonament = membership.EndDate,
                                      Total_abonamente = db.Memberships.Count(s => s.IdMember == membership.Members.Id && s.StartDate >= fromDateTime && s.StartDate <= toDateTime),
+                                     Utilizator_activ = membership.Members.IsActive,
                                      Abonament_activ = membership.StartDate <= DateTime.Now && membership.EndDate >= DateTime.Now
                                  };
 
@@ -398,6 +409,9 @@ namespace GymSys
 
             dataGridViewMembershipR.DataSource = membershipList.ToList();
 
+            var id = dataGridViewMembershipR.Columns["Id"];
+            if (id != null) id.Visible = false;
+
             lblTotalMembership.Text = membershipList.Count().ToString();
             lblActiveCount.Text = membershipList.Count(m => m.Abonament_activ).ToString();
             lblInactiveCount.Text = (membershipList.Count() - membershipList.Count(m => m.Abonament_activ)).ToString();
@@ -420,6 +434,7 @@ namespace GymSys
             dataGridViewMembershipR.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewMembershipR.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewMembershipR.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewMembershipR.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)

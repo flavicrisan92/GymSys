@@ -48,7 +48,7 @@ namespace GymSys
             dataGridViewUsers.DataSource = usersList.ToList();
 
             var dataGridViewUsersId = dataGridViewUsers.Columns["Id"];
-            //if (dataGridViewUsersId != null) dataGridViewUsersId.Visible = false;
+            if (dataGridViewUsersId != null) dataGridViewUsersId.Visible = false;
             dataGridViewUsers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewUsers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewUsers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

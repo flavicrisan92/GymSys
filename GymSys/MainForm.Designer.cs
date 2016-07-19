@@ -34,8 +34,6 @@
             this.btnAdministration = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnLogOut
@@ -45,20 +43,18 @@
             this.btnLogOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnLogOut.FlatAppearance.BorderSize = 0;
             this.btnLogOut.Image = global::GymSys.Properties.Resources.logout_img;
-            this.btnLogOut.Location = new System.Drawing.Point(2043, 15);
-            this.btnLogOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogOut.Location = new System.Drawing.Point(1532, 12);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(49, 44);
+            this.btnLogOut.Size = new System.Drawing.Size(37, 36);
             this.btnLogOut.TabIndex = 0;
             this.btnLogOut.UseVisualStyleBackColor = false;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // btnMembers
             // 
-            this.btnMembers.Location = new System.Drawing.Point(135, 15);
-            this.btnMembers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMembers.Location = new System.Drawing.Point(101, 12);
             this.btnMembers.Name = "btnMembers";
-            this.btnMembers.Size = new System.Drawing.Size(124, 28);
+            this.btnMembers.Size = new System.Drawing.Size(93, 23);
             this.btnMembers.TabIndex = 2;
             this.btnMembers.Text = "Abonamente";
             this.btnMembers.UseVisualStyleBackColor = true;
@@ -66,21 +62,19 @@
             // 
             // panelMain
             // 
-            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelMain.Location = new System.Drawing.Point(16, 79);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMain.Location = new System.Drawing.Point(12, 64);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(2076, 586);
+            this.panelMain.Size = new System.Drawing.Size(1557, 476);
             this.panelMain.TabIndex = 3;
             // 
             // btnAdministration
             // 
-            this.btnAdministration.Location = new System.Drawing.Point(392, 15);
-            this.btnAdministration.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAdministration.Location = new System.Drawing.Point(294, 12);
             this.btnAdministration.Name = "btnAdministration";
-            this.btnAdministration.Size = new System.Drawing.Size(117, 28);
+            this.btnAdministration.Size = new System.Drawing.Size(88, 23);
             this.btnAdministration.TabIndex = 4;
             this.btnAdministration.Text = "Administrare";
             this.btnAdministration.UseVisualStyleBackColor = true;
@@ -88,10 +82,9 @@
             // 
             // btnDashboard
             // 
-            this.btnDashboard.Location = new System.Drawing.Point(16, 15);
-            this.btnDashboard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDashboard.Location = new System.Drawing.Point(12, 12);
             this.btnDashboard.Name = "btnDashboard";
-            this.btnDashboard.Size = new System.Drawing.Size(105, 28);
+            this.btnDashboard.Size = new System.Drawing.Size(79, 23);
             this.btnDashboard.TabIndex = 5;
             this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.UseVisualStyleBackColor = true;
@@ -99,56 +92,31 @@
             // 
             // btnReports
             // 
-            this.btnReports.Location = new System.Drawing.Point(267, 15);
-            this.btnReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReports.Location = new System.Drawing.Point(200, 12);
             this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(117, 28);
+            this.btnReports.Size = new System.Drawing.Size(88, 23);
             this.btnReports.TabIndex = 6;
             this.btnReports.Text = "Rapoarte";
             this.btnReports.UseVisualStyleBackColor = true;
             this.btnReports.Click += new System.EventHandler(this.btnReports_Click);
             // 
-            // lblUsername
-            // 
-            this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(1916, 29);
-            this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(11, 16);
-            this.lblUsername.TabIndex = 7;
-            this.lblUsername.Text = " ";
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1846, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 16);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Utilizator:";
-            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(2108, 679);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblUsername);
+            this.ClientSize = new System.Drawing.Size(1581, 552);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnDashboard);
             this.Controls.Add(this.btnAdministration);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.btnMembers);
             this.Controls.Add(this.btnLogOut);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -160,8 +128,6 @@
         private System.Windows.Forms.Button btnAdministration;
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Button btnReports;
-        private System.Windows.Forms.Label lblUsername;
-        private System.Windows.Forms.Label label1;
     }
 }
 

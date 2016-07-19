@@ -260,10 +260,6 @@ namespace GymSys
                     MessageBox.Show("Acest cod este atasat altui abonat!");
                 }
             }
-            else
-            {
-                MessageBox.Show("Campurile marcate cu * sunt obligatorii!");
-            }
         }
 
         private void ProcessAddMembership()
@@ -319,10 +315,6 @@ namespace GymSys
 
                 ucMembers.Instance.CloseMembersEditForm(_operation);
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
-            }
-            else
-            {
-                MessageBox.Show("Campurile marcate cu * sunt obligatorii!");
             }
         }
 
@@ -389,10 +381,6 @@ namespace GymSys
 
                 ucMembers.Instance.LoadMembers(Actions.Operations.AddMember, _txtMemberValue);
                 ucMembers.Instance.CloseMembersEditForm(_operation);
-            }
-            else
-            {
-                MessageBox.Show("Campurile marcate cu * sunt obligatorii!");
             }
         }
 
