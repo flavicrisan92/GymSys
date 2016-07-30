@@ -339,9 +339,9 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>EntityFramework.dll</td><td>{9E2762A6-8F62-4A06-A256-F1D07885FB4C}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GymSys.exe</td><td>{338EDEB7-0F96-4606-8896-997888020122}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GymSys.vshost.exe</td><td>{F79717DC-EDD8-4E4F-A7FF-89368FC31C76}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>EntityFramework.dll</td><td>{632E4CF2-A328-422D-8F6A-89A89CEB27CA}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GymSys.exe</td><td>{7969D43D-DF2A-4F9C-9B76-55032E56F659}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GymSys.vshost.exe</td><td>{0C2DD7FC-364C-4C28-9E1E-2E8F7FA4A918}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{1C3CC932-F3DC-4D35-BCE2-2BB41263EA95}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1892,7 +1892,6 @@
 		<row><td>gymsys.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>GymSys.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.pdb</td><td>1</td><td/></row>
 		<row><td>gymsys.vshost.exe</td><td>GymSys.vshost.exe</td><td>GYMSYS~1.EXE|GymSys.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.vshost.exe</td><td>1</td><td/></row>
 		<row><td>gymsys.vshost.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.CON|GymSys.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.vshost.exe.config</td><td>1</td><td/></row>
-		<row><td>gymsys.vshost.exe.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.MAN|GymSys.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.vshost.exe.manifest</td><td>1</td><td/></row>
 		<row><td>localdb.mdf</td><td>ISX_DEFAULTCOMPONENT</td><td>LocalDB.mdf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\LocalDB.mdf</td><td>1</td><td/></row>
 		<row><td>localdb_log.ldf</td><td>ISX_DEFAULTCOMPONENT</td><td>LOCALD~1.LDF|LocalDB_log.ldf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\LocalDB_log.ldf</td><td>1</td><td/></row>
 		<row><td>loginform.cs</td><td>ISX_DEFAULTCOMPONENT</td><td>LOGINF~1.CS|LoginForm.cs</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\LoginForm.cs</td><td>1</td><td/></row>
@@ -2039,9 +2038,9 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>EntityFramework.dll</td><td/><td/><td>_56256D91_EFD5_4009_BEA6_ED61678B57E5_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GymSys.exe</td><td/><td/><td>_DB9FB2FD_1D88_4901_8C94_5ACF005349FA_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GymSys.vshost.exe</td><td/><td/><td>_3A0F2E72_38A2_4B0C_8DFF_55E006BC608F_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>EntityFramework.dll</td><td/><td/><td>_BB3D4386_5939_49DF_B7E0_A0039F1B7491_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GymSys.exe</td><td/><td/><td>_4C4302B6_E35B_4241_8809_4667B2FDEEF9_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GymSys.vshost.exe</td><td/><td/><td>_8E6A5BEA_0C33_4738_BB73_719CC1A5C7ED_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_DC3118A4_E4A6_430F_8EB6_D478C0B54BFA_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -2597,6 +2596,8 @@
 		<col def="I2">Order</col>
 		<col def="I2">ISSetupLocation</col>
 		<col def="S255">ISReleaseFlags</col>
+		<row><td>_208ED124_AE56_49D7_B571_B5CCB771F81D_</td><td>Microsoft SQL Server 2012 Express SP2 LocalDB (x86).prq</td><td/><td/><td/></row>
+		<row><td>_74C6DD15_0B78_4571_93F2_B746BDE9F839_</td><td>Microsoft SQL Server 2012 Express SP2 (x86).prq</td><td/><td/><td/></row>
 	</table>
 
 	<table name="ISSetupType">
@@ -3444,6 +3445,10 @@
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>-341573036</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-341540268</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-341540268</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-207355093</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-207355093</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME5</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-207334613</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME6</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-207334613</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>-341573036</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>-341573036</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-341573036</td></row>
@@ -3850,6 +3855,10 @@
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
 		<row><td>GymSys.exe1_E3ECC2E895D24168AFF73EB943E61ACC.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.exe_75B1D3B85456431185EE44A414657886.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.exe_C757F31548D74028A91CEFD47200B3C9.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.vshost.exe_2B43ECAA3F2B43A6A0B85DD9A9C4507C.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.vshost.exe_FB0B13AA6D934601834819869F7BBAF9.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 	</table>
 
 	<table name="IniFile">
@@ -3982,7 +3991,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{819BB8A1-A3C5-4956-8EA6-2C54E3EB71B8}</td></row>
 		<row><td>ISUSSignature</td><td>{703136EC-C173-4FDD-A11E-6199B5E5C81E}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewUpdateService,viewAppFiles,viewISToday,viewLearnMore</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewUpdateService,viewAppFiles,viewISToday,viewLearnMore,viewUpgradePaths,viewObjects</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4431,8 +4440,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
-		<row><td>FileKey1</td><td>GymSys.exe</td><td/><td>crisan_1_crisanflavius</td><td>2</td></row>
-		<row><td>FileKey2</td><td>GymSys.exe</td><td/><td>gymsys</td><td>2</td></row>
+		<row><td>GymSys.exe</td><td>GymSys.exe</td><td/><td>gymsys</td><td>2</td></row>
+		<row><td>GymSys.vshost.exe</td><td>GymSys.vshost.exe</td><td/><td>gymsys</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4518,7 +4527,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>GymSys.exe1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>GymSys.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>GymSys.exe1_E3ECC2E895D24168AFF73EB943E61ACC.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>GymSys.exe</td><td>gymsys</td><td>##IDS_SHORTCUT_DISPLAY_NAME5##</td><td>GymSys.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>GymSys.exe_75B1D3B85456431185EE44A414657886.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>GymSys.vshost.exe</td><td>gymsys</td><td>##IDS_SHORTCUT_DISPLAY_NAME6##</td><td>GymSys.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>GymSys.vshost.exe_2B43ECAA3F2B43A6A0B85DD9A9C4507C.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">
