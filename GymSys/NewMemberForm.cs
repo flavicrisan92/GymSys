@@ -288,17 +288,6 @@ namespace GymSys
                     };
 
                     db.Memberships.Add(memberships);
-                    var datetimetoday = DateTime.Now.Date;
-                    if (!db.Scans.Any(s => s.IdMember == member.Id && s.Date > datetimetoday))
-                    {
-                        Scans scanNewUser = new Scans
-                        {
-                            IdMember = member.Id,
-                            Date = DateTime.Now
-                        };
-                        db.Scans.Add(scanNewUser);
-                        ucDashboard.Instance.LoadScanList(true);
-                    }
                 }
                 try
                 {
@@ -357,13 +346,6 @@ namespace GymSys
                     };
 
                     db.Memberships.Add(memberships);
-
-                    Scans scanNewUser = new Scans
-                    {
-                        IdMember = member.Id,
-                        Date = DateTime.Now
-                    };
-                    db.Scans.Add(scanNewUser);
                 }
                 try
                 {

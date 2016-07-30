@@ -49,6 +49,7 @@ namespace GymSys
             {
                 ucMembers.Instance.BringToFront();
             }
+            ucMembers.Instance.LoadMembers(Actions.Operations.NotSpecified, string.Empty);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
