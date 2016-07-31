@@ -41,8 +41,8 @@ namespace GymSys
                                     Nume = membership.Members.Name,
                                     Prenume = membership.Members.Surname,
                                     Inceput_abonament = membership.StartDate,
-                                    Incheiere_abonament = membership.EndDate,
-                                    Zile_ramase = EntityFunctions.DiffDays(datetimeToday, membership.EndDate)
+                                    Incheiere_abonament = membership.EndDate
+                                    //,Zile_ramase = EntityFunctions.DiffDays(datetimeToday, membership.EndDate)
                                 };
             dataGridViewToExpire.DataSource = subscriptions.ToList();
 
@@ -50,7 +50,7 @@ namespace GymSys
             dataGridViewToExpire.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewToExpire.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewToExpire.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewToExpire.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            //dataGridViewToExpire.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         public void LoadBirhdays()
@@ -144,12 +144,13 @@ namespace GymSys
             if (e.KeyCode == Keys.Enter)
             {
                 DateTime dateTodayMax = dateToday.AddDays(1).Date.AddSeconds(-5);
+                DateTime dateTodayMin = dateToday.Date;
                 var scannedMember = db.Members.FirstOrDefault(m => m.Code == txtScanedCode.Text);
 
                 if (scannedMember != null)
                 {
 
-                    var membership = db.Memberships.Where(s => s.IdMember == scannedMember.Id && s.EndDate > dateTodayMax).Select(s => s).OrderByDescending(s => s.Id).FirstOrDefault();
+                    var membership = db.Memberships.Where(s => s.IdMember == scannedMember.Id && s.EndDate > dateTodayMin).Select(s => s).OrderByDescending(s => s.Id).FirstOrDefault();
                     if (membership != null)
                     {
                         if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > dateToday) == 0)

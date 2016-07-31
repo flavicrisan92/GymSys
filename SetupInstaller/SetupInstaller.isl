@@ -339,9 +339,9 @@
 		<col def="S0">ISDotNetInstallerArgsCommit</col>
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
-		<row><td>EntityFramework.dll</td><td>{F64A3683-2CAF-4CAC-876D-60B6CFA3294C}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GymSys.exe</td><td>{B7845EC1-9187-4721-A283-D97BF887A2E8}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>GymSys.vshost.exe</td><td>{EE1BE3B8-C266-4244-8C9E-5280451B80D8}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>EntityFramework.dll</td><td>{ED717027-DF39-492F-AB25-4AC6C15444DB}</td><td>INSTALLDIR</td><td>2</td><td/><td>entityframework.dll</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GymSys.exe</td><td>{302CFFDD-D583-46C6-8A10-1679CB936BBC}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>GymSys.vshost.exe</td><td>{61A3D04A-587B-4412-BE88-A1553A33B0E6}</td><td>INSTALLDIR</td><td>2</td><td/><td>gymsys.vshost.exe</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{1C3CC932-F3DC-4D35-BCE2-2BB41263EA95}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
@@ -1885,18 +1885,18 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>entityframework.dll</td><td>EntityFramework.dll</td><td>ENTITY~1.DLL|EntityFramework.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\EntityFramework.dll</td><td>1</td><td/></row>
-		<row><td>entityframework.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>ENTITY~1.XML|EntityFramework.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\EntityFramework.xml</td><td>1</td><td/></row>
-		<row><td>gymsys.exe</td><td>GymSys.exe</td><td>GymSys.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.exe</td><td>1</td><td/></row>
-		<row><td>gymsys.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.CON|GymSys.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.exe.config</td><td>1</td><td/></row>
-		<row><td>gymsys.mdf</td><td>ISX_DEFAULTCOMPONENT</td><td>GymSys.mdf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.mdf</td><td>1</td><td/></row>
-		<row><td>gymsys.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>GymSys.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.pdb</td><td>1</td><td/></row>
-		<row><td>gymsys.vshost.exe</td><td>GymSys.vshost.exe</td><td>GYMSYS~1.EXE|GymSys.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.vshost.exe</td><td>1</td><td/></row>
-		<row><td>gymsys.vshost.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.CON|GymSys.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.vshost.exe.config</td><td>1</td><td/></row>
-		<row><td>gymsys.vshost.exe.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.MAN|GymSys.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys.vshost.exe.manifest</td><td>1</td><td/></row>
-		<row><td>gymsys_log.ldf</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.LDF|GymSys_log.ldf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\GymSys_log.ldf</td><td>1</td><td/></row>
-		<row><td>localdb.mdf</td><td>ISX_DEFAULTCOMPONENT</td><td>LocalDB.mdf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\LocalDB.mdf</td><td>1</td><td/></row>
-		<row><td>localdb_log.ldf</td><td>ISX_DEFAULTCOMPONENT</td><td>LOCALD~1.LDF|LocalDB_log.ldf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Debug\LocalDB_log.ldf</td><td>1</td><td/></row>
+		<row><td>entityframework.dll</td><td>EntityFramework.dll</td><td>ENTITY~1.DLL|EntityFramework.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\EntityFramework.dll</td><td>1</td><td/></row>
+		<row><td>entityframework.xml</td><td>ISX_DEFAULTCOMPONENT</td><td>ENTITY~1.XML|EntityFramework.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\EntityFramework.xml</td><td>1</td><td/></row>
+		<row><td>gymsys.exe</td><td>GymSys.exe</td><td>GymSys.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys.exe</td><td>1</td><td/></row>
+		<row><td>gymsys.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.CON|GymSys.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys.exe.config</td><td>1</td><td/></row>
+		<row><td>gymsys.mdf</td><td>ISX_DEFAULTCOMPONENT</td><td>GymSys.mdf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys.mdf</td><td>1</td><td/></row>
+		<row><td>gymsys.pdb</td><td>ISX_DEFAULTCOMPONENT</td><td>GymSys.pdb</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys.pdb</td><td>1</td><td/></row>
+		<row><td>gymsys.vshost.exe</td><td>GymSys.vshost.exe</td><td>GYMSYS~1.EXE|GymSys.vshost.exe</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys.vshost.exe</td><td>1</td><td/></row>
+		<row><td>gymsys.vshost.exe.config</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.CON|GymSys.vshost.exe.config</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys.vshost.exe.config</td><td>1</td><td/></row>
+		<row><td>gymsys.vshost.exe.manifest</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.MAN|GymSys.vshost.exe.manifest</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys.vshost.exe.manifest</td><td>1</td><td/></row>
+		<row><td>gymsys_log.ldf</td><td>ISX_DEFAULTCOMPONENT</td><td>GYMSYS~1.LDF|GymSys_log.ldf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\GymSys_log.ldf</td><td>1</td><td/></row>
+		<row><td>localdb.mdf</td><td>ISX_DEFAULTCOMPONENT</td><td>LocalDB.mdf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\LocalDB.mdf</td><td>1</td><td/></row>
+		<row><td>localdb_log.ldf</td><td>ISX_DEFAULTCOMPONENT</td><td>LOCALD~1.LDF|LocalDB_log.ldf</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Flavius.Crisan\Documents\Visual Studio 2015\Projects\GymSys\GymSys\bin\Release\LocalDB_log.ldf</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2038,9 +2038,9 @@
 		<col def="S0">FTPLocation</col>
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
-		<row><td>EntityFramework.dll</td><td/><td/><td>_F59A869C_0296_426A_B877_6840A51847BE_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GymSys.exe</td><td/><td/><td>_EB8429CB_B412_4800_95D3_8D76216E6313_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>GymSys.vshost.exe</td><td/><td/><td>_025785D9_82E3_4FC1_8043_8612767FA5BC_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>EntityFramework.dll</td><td/><td/><td>_5858A245_A457_4F1A_A57E_E65840DA8711_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GymSys.exe</td><td/><td/><td>_0269811E_C375_4C01_B949_8EAA91DF853D_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>GymSys.vshost.exe</td><td/><td/><td>_524644F7_D18E_456E_BC16_84E935451658_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_DC3118A4_E4A6_430F_8EB6_D478C0B54BFA_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
@@ -3445,6 +3445,10 @@
 		<row><td>IDS_SETUPEXE_LAUNCH_COND_E</td><td>1033</td><td>This setup was built with an evaluation version of InstallShield and can only be launched from setup.exe.</td><td>0</td><td/><td>-341573036</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-341540268</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME10</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-207348847</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME11</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-207336749</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME12</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-207336749</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME13</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-207303981</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME14</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-207303981</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME2</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-341540268</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME3</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-207355093</td></row>
 		<row><td>IDS_SHORTCUT_DISPLAY_NAME4</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.vshost.exe</td><td>0</td><td/><td>-207355093</td></row>
@@ -3860,11 +3864,15 @@
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\setupicon.ico</td><td>0</td></row>
 		<row><td>GymSys.exe1_E3ECC2E895D24168AFF73EB943E61ACC.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.exe_75B1D3B85456431185EE44A414657886.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.exe_7DA6DC97C4174DABA7324BDBC82412F5.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.exe_976EA83AC62F4EA08FC69394C30FDAA2.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.exe_AFE8061C8EDF422FACA96832E4ADC5C4.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.exe_C757F31548D74028A91CEFD47200B3C9.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.exe_FB6EC6B5639547CB975028DCDB479CAE.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.vshost.exe_2B43ECAA3F2B43A6A0B85DD9A9C4507C.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.vshost.exe_4BA2CCD6A6C84BEABD981D54BD059D65.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.vshost.exe_8D08EA98EA244C0AA9F6CBE12D52060F.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
+		<row><td>GymSys.vshost.exe_A53231FCC25A4320B04B4A72AE985B33.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.vshost.exe_E7084532E2B94ABDACAE138D3DB0C19F.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 		<row><td>GymSys.vshost.exe_FB0B13AA6D934601834819869F7BBAF9.exe</td><td/><td>&lt;ISProductFolder&gt;\redist\Language Independent\OS Independent\GenericExe.ico</td><td>0</td></row>
 	</table>
@@ -4535,8 +4543,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>GymSys.exe</td><td>gymsys</td><td>##IDS_SHORTCUT_DISPLAY_NAME9##</td><td>GymSys.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>GymSys.exe_976EA83AC62F4EA08FC69394C30FDAA2.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>GymSys.vshost.exe</td><td>gymsys</td><td>##IDS_SHORTCUT_DISPLAY_NAME10##</td><td>GymSys.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>GymSys.vshost.exe_E7084532E2B94ABDACAE138D3DB0C19F.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>GymSys.exe</td><td>gymsys</td><td>##IDS_SHORTCUT_DISPLAY_NAME13##</td><td>GymSys.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>GymSys.exe_7DA6DC97C4174DABA7324BDBC82412F5.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>GymSys.vshost.exe</td><td>gymsys</td><td>##IDS_SHORTCUT_DISPLAY_NAME14##</td><td>GymSys.vshost.exe</td><td>AlwaysInstall</td><td/><td/><td/><td>GymSys.vshost.exe_4BA2CCD6A6C84BEABD981D54BD059D65.exe</td><td>0</td><td>1</td><td>INSTALLDIR</td><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

@@ -222,10 +222,10 @@
   <ItemGroup>
     <Content Include="Content\logout_img.png" />
     <Content Include="GymSys.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GymSys_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>GymSys.mdf</DependentUpon>
     </Content>
     <Content Include="LocalDB.mdf">

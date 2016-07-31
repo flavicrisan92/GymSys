@@ -175,7 +175,7 @@ namespace GymSys
 
                 dateTimePickerEndDateMembership.Format = DateTimePickerFormat.Custom;
                 dateTimePickerEndDateMembership.CustomFormat = "dd/MM/yyyy";
-                dateTimePickerEndDateMembership.Value = dateTimePickerStartMembership.Value.AddMonths(1);
+                dateTimePickerEndDateMembership.Value = dateTimePickerStartMembership.Value.AddMonths(1).AddDays(-1);
             }
             dateTimePickerBirthDate.Format = DateTimePickerFormat.Custom;
             dateTimePickerBirthDate.CustomFormat = "dd/MM/yyyy";
@@ -377,18 +377,20 @@ namespace GymSys
 
         private void SetEndDate()
         {
+            decimal numberOfDays = numericUpDownPeriod.Value - 1;
             var startDate = Utils.GetDateTimeParsed(dateTimePickerStartMembership.Text);
             if (comboBoxPeriod.Text.StartsWith("Lun"))
             {
                 dateTimePickerEndDateMembership.Value =
                     startDate.AddMonths(
                         int.Parse(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture)));
+                dateTimePickerEndDateMembership.Value = dateTimePickerEndDateMembership.Value.AddDays(-1);
             }
             else if (comboBoxPeriod.Text.StartsWith("Zi"))
             {
                 dateTimePickerEndDateMembership.Value =
                    startDate.AddDays(
-                        int.Parse(numericUpDownPeriod.Value.ToString(CultureInfo.InvariantCulture)));
+                        int.Parse(numberOfDays.ToString(CultureInfo.InvariantCulture)));
             }
             else if (comboBoxPeriod.Text.StartsWith("Sapt"))
             {
@@ -396,7 +398,7 @@ namespace GymSys
                     startDate.AddDays(7 *
                                                   int.Parse(
                                                       numericUpDownPeriod.Value.ToString(
-                                                          CultureInfo.InvariantCulture)));
+                                                          CultureInfo.InvariantCulture)) - 1);
             }
         }
 
@@ -418,6 +420,11 @@ namespace GymSys
         private void NewMemberForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ucMembers.Instance.CloseMembersEditForm(_operation);
+        }
+
+        private void dateTimePickerStartMembership_ValueChanged(object sender, EventArgs e)
+        {
+            GetNumbericDropdownNumber();
         }
 
         //private void txtCode_KeyDown(object sender, KeyEventArgs e)

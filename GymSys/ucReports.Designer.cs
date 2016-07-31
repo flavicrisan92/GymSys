@@ -97,7 +97,7 @@
             this.tabControlReports.Controls.Add(this.tabPageScans);
             this.tabControlReports.Controls.Add(this.RptAbPage);
             this.tabControlReports.Location = new System.Drawing.Point(0, 0);
-            this.tabControlReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControlReports.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlReports.Name = "tabControlReports";
             this.tabControlReports.SelectedIndex = 0;
             this.tabControlReports.Size = new System.Drawing.Size(1733, 919);
@@ -121,9 +121,9 @@
             this.tabPage1MembersReport.Controls.Add(this.lblMembershipDate);
             this.tabPage1MembersReport.Controls.Add(this.dataGridViewMembersRep);
             this.tabPage1MembersReport.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1MembersReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1MembersReport.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1MembersReport.Name = "tabPage1MembersReport";
-            this.tabPage1MembersReport.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1MembersReport.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1MembersReport.Size = new System.Drawing.Size(1725, 890);
             this.tabPage1MembersReport.TabIndex = 0;
             this.tabPage1MembersReport.Text = "Raport abonati noi";
@@ -153,7 +153,7 @@
             // btnReset
             // 
             this.btnReset.Location = new System.Drawing.Point(1027, 31);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReset.Margin = new System.Windows.Forms.Padding(4);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 28);
             this.btnReset.TabIndex = 18;
@@ -173,7 +173,7 @@
             // txtMember
             // 
             this.txtMember.Location = new System.Drawing.Point(151, 78);
-            this.txtMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMember.Margin = new System.Windows.Forms.Padding(4);
             this.txtMember.Name = "txtMember";
             this.txtMember.Size = new System.Drawing.Size(300, 22);
             this.txtMember.TabIndex = 17;
@@ -194,13 +194,14 @@
             this.dataGridViewCountByMonth.Name = "dataGridViewCountByMonth";
             this.dataGridViewCountByMonth.ReadOnly = true;
             this.dataGridViewCountByMonth.RowTemplate.Height = 24;
+            this.dataGridViewCountByMonth.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewCountByMonth.Size = new System.Drawing.Size(455, 743);
             this.dataGridViewCountByMonth.TabIndex = 15;
             // 
             // btnGenerate
             // 
             this.btnGenerate.Location = new System.Drawing.Point(907, 30);
-            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGenerate.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(100, 28);
             this.btnGenerate.TabIndex = 14;
@@ -243,7 +244,7 @@
             // dateTimePickerToDateTime
             // 
             this.dateTimePickerToDateTime.Location = new System.Drawing.Point(565, 31);
-            this.dateTimePickerToDateTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerToDateTime.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerToDateTime.Name = "dateTimePickerToDateTime";
             this.dateTimePickerToDateTime.Size = new System.Drawing.Size(305, 22);
             this.dateTimePickerToDateTime.TabIndex = 4;
@@ -251,7 +252,7 @@
             // dateTimePickerFromDateTime
             // 
             this.dateTimePickerFromDateTime.Location = new System.Drawing.Point(147, 31);
-            this.dateTimePickerFromDateTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerFromDateTime.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerFromDateTime.Name = "dateTimePickerFromDateTime";
             this.dateTimePickerFromDateTime.Size = new System.Drawing.Size(305, 22);
             this.dateTimePickerFromDateTime.TabIndex = 2;
@@ -275,8 +276,9 @@
             this.dataGridViewMembersRep.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewMembersRep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMembersRep.Location = new System.Drawing.Point(5, 138);
-            this.dataGridViewMembersRep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewMembersRep.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewMembersRep.Name = "dataGridViewMembersRep";
+            this.dataGridViewMembersRep.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMembersRep.Size = new System.Drawing.Size(1249, 742);
             this.dataGridViewMembersRep.TabIndex = 0;
             // 
@@ -296,9 +298,9 @@
             this.tabPageScans.Controls.Add(this.dataGridViewScandGBM);
             this.tabPageScans.Controls.Add(this.dataGridViewScansR);
             this.tabPageScans.Location = new System.Drawing.Point(4, 25);
-            this.tabPageScans.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageScans.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageScans.Name = "tabPageScans";
-            this.tabPageScans.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageScans.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageScans.Size = new System.Drawing.Size(1725, 890);
             this.tabPageScans.TabIndex = 1;
             this.tabPageScans.Text = "Raport scanari";
@@ -306,7 +308,7 @@
             // btnResetGenerate
             // 
             this.btnResetGenerate.Location = new System.Drawing.Point(1027, 31);
-            this.btnResetGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnResetGenerate.Margin = new System.Windows.Forms.Padding(4);
             this.btnResetGenerate.Name = "btnResetGenerate";
             this.btnResetGenerate.Size = new System.Drawing.Size(100, 28);
             this.btnResetGenerate.TabIndex = 34;
@@ -326,7 +328,7 @@
             // txtScanMember
             // 
             this.txtScanMember.Location = new System.Drawing.Point(151, 78);
-            this.txtScanMember.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtScanMember.Margin = new System.Windows.Forms.Padding(4);
             this.txtScanMember.Name = "txtScanMember";
             this.txtScanMember.Size = new System.Drawing.Size(300, 22);
             this.txtScanMember.TabIndex = 33;
@@ -336,7 +338,7 @@
             // btnScansGenerate
             // 
             this.btnScansGenerate.Location = new System.Drawing.Point(907, 30);
-            this.btnScansGenerate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnScansGenerate.Margin = new System.Windows.Forms.Padding(4);
             this.btnScansGenerate.Name = "btnScansGenerate";
             this.btnScansGenerate.Size = new System.Drawing.Size(100, 28);
             this.btnScansGenerate.TabIndex = 31;
@@ -379,7 +381,7 @@
             // DTPScansTD
             // 
             this.DTPScansTD.Location = new System.Drawing.Point(565, 31);
-            this.DTPScansTD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DTPScansTD.Margin = new System.Windows.Forms.Padding(4);
             this.DTPScansTD.Name = "DTPScansTD";
             this.DTPScansTD.Size = new System.Drawing.Size(305, 22);
             this.DTPScansTD.TabIndex = 27;
@@ -387,7 +389,7 @@
             // DTPScansFD
             // 
             this.DTPScansFD.Location = new System.Drawing.Point(147, 31);
-            this.DTPScansFD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DTPScansFD.Margin = new System.Windows.Forms.Padding(4);
             this.DTPScansFD.Name = "DTPScansFD";
             this.DTPScansFD.Size = new System.Drawing.Size(305, 22);
             this.DTPScansFD.TabIndex = 26;
@@ -416,6 +418,7 @@
             this.dataGridViewScandGBM.Name = "dataGridViewScandGBM";
             this.dataGridViewScandGBM.ReadOnly = true;
             this.dataGridViewScandGBM.RowTemplate.Height = 24;
+            this.dataGridViewScandGBM.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewScandGBM.Size = new System.Drawing.Size(455, 743);
             this.dataGridViewScandGBM.TabIndex = 24;
             // 
@@ -428,8 +431,9 @@
             this.dataGridViewScansR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewScansR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewScansR.Location = new System.Drawing.Point(5, 138);
-            this.dataGridViewScansR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewScansR.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewScansR.Name = "dataGridViewScansR";
+            this.dataGridViewScansR.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewScansR.Size = new System.Drawing.Size(1249, 742);
             this.dataGridViewScansR.TabIndex = 21;
             // 
@@ -453,7 +457,7 @@
             this.RptAbPage.Controls.Add(this.lblMembershipFrom);
             this.RptAbPage.Controls.Add(this.dataGridViewMembershipR);
             this.RptAbPage.Location = new System.Drawing.Point(4, 25);
-            this.RptAbPage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RptAbPage.Margin = new System.Windows.Forms.Padding(4);
             this.RptAbPage.Name = "RptAbPage";
             this.RptAbPage.Size = new System.Drawing.Size(1725, 890);
             this.RptAbPage.TabIndex = 2;
@@ -473,6 +477,7 @@
             this.dataGridViewMembershipGroupByMonthR.Name = "dataGridViewMembershipGroupByMonthR";
             this.dataGridViewMembershipGroupByMonthR.ReadOnly = true;
             this.dataGridViewMembershipGroupByMonthR.RowTemplate.Height = 24;
+            this.dataGridViewMembershipGroupByMonthR.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMembershipGroupByMonthR.Size = new System.Drawing.Size(455, 743);
             this.dataGridViewMembershipGroupByMonthR.TabIndex = 31;
             // 
@@ -532,7 +537,7 @@
             // txtMemberMembershipR
             // 
             this.txtMemberMembershipR.Location = new System.Drawing.Point(151, 78);
-            this.txtMemberMembershipR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMemberMembershipR.Margin = new System.Windows.Forms.Padding(4);
             this.txtMemberMembershipR.Name = "txtMemberMembershipR";
             this.txtMemberMembershipR.Size = new System.Drawing.Size(300, 22);
             this.txtMemberMembershipR.TabIndex = 26;
@@ -564,7 +569,7 @@
             // btnResetMembershipR
             // 
             this.btnResetMembershipR.Location = new System.Drawing.Point(1027, 31);
-            this.btnResetMembershipR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnResetMembershipR.Margin = new System.Windows.Forms.Padding(4);
             this.btnResetMembershipR.Name = "btnResetMembershipR";
             this.btnResetMembershipR.Size = new System.Drawing.Size(100, 28);
             this.btnResetMembershipR.TabIndex = 20;
@@ -575,7 +580,7 @@
             // btnGenerateMembershipR
             // 
             this.btnGenerateMembershipR.Location = new System.Drawing.Point(907, 30);
-            this.btnGenerateMembershipR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGenerateMembershipR.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerateMembershipR.Name = "btnGenerateMembershipR";
             this.btnGenerateMembershipR.Size = new System.Drawing.Size(100, 28);
             this.btnGenerateMembershipR.TabIndex = 19;
@@ -596,7 +601,7 @@
             // dateTimePickerTDMembershipR
             // 
             this.dateTimePickerTDMembershipR.Location = new System.Drawing.Point(565, 31);
-            this.dateTimePickerTDMembershipR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerTDMembershipR.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerTDMembershipR.Name = "dateTimePickerTDMembershipR";
             this.dateTimePickerTDMembershipR.Size = new System.Drawing.Size(305, 22);
             this.dateTimePickerTDMembershipR.TabIndex = 11;
@@ -604,7 +609,7 @@
             // dateTimePickerFDMembershipR
             // 
             this.dateTimePickerFDMembershipR.Location = new System.Drawing.Point(147, 31);
-            this.dateTimePickerFDMembershipR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePickerFDMembershipR.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePickerFDMembershipR.Name = "dateTimePickerFDMembershipR";
             this.dateTimePickerFDMembershipR.Size = new System.Drawing.Size(305, 22);
             this.dateTimePickerFDMembershipR.TabIndex = 10;
@@ -628,8 +633,9 @@
             this.dataGridViewMembershipR.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewMembershipR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMembershipR.Location = new System.Drawing.Point(5, 138);
-            this.dataGridViewMembershipR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewMembershipR.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewMembershipR.Name = "dataGridViewMembershipR";
+            this.dataGridViewMembershipR.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMembershipR.Size = new System.Drawing.Size(1249, 742);
             this.dataGridViewMembershipR.TabIndex = 1;
             // 
@@ -641,7 +647,7 @@
             this.panelReports.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panelReports.Controls.Add(this.tabControlReports);
             this.panelReports.Location = new System.Drawing.Point(0, 0);
-            this.panelReports.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelReports.Margin = new System.Windows.Forms.Padding(4);
             this.panelReports.Name = "panelReports";
             this.panelReports.Size = new System.Drawing.Size(1733, 919);
             this.panelReports.TabIndex = 1;
@@ -651,7 +657,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelReports);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ucReports";
             this.Size = new System.Drawing.Size(1733, 919);
             this.tabControlReports.ResumeLayout(false);
