@@ -150,7 +150,7 @@ namespace GymSys
                 if (scannedMember != null)
                 {
 
-                    var membership = db.Memberships.Where(s => s.IdMember == scannedMember.Id && s.EndDate > dateTodayMin).Select(s => s).OrderByDescending(s => s.Id).FirstOrDefault();
+                    var membership = db.Memberships.Where(s => s.IdMember == scannedMember.Id && s.StartDate <= dateTodayMax && s.EndDate > dateTodayMin).Select(s => s).OrderByDescending(s => s.Id).FirstOrDefault();
                     if (membership != null)
                     {
                         if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > dateToday) == 0)
@@ -172,7 +172,7 @@ namespace GymSys
                     }
                     else
                     {
-                        DialogResult dialogResult = MessageBox.Show("Abonatul nu are nici un abonament activ. Doriti sa adaugati un abonament?", "Abonament inactiv", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = MessageBox.Show("Abonatul nu are nici un abonament activ. Doriti sa adaugati un abonament nou?", "Abonament inactiv", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
                             NewMemberForm addSubscription = new NewMemberForm(scannedMember, null, Actions.Operations.AddSubscription, string.Empty, txtScanedCode.Text);
