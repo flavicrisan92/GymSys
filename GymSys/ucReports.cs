@@ -67,6 +67,7 @@ namespace GymSys
 
             DTPScansTD.Format = DateTimePickerFormat.Custom;
             DTPScansTD.CustomFormat = "dd/MM/yyyy";
+            DTPScansTD.Value= DateTime.Now.Date;
         }
 
         private void InitDatePickersMembership()
@@ -77,6 +78,7 @@ namespace GymSys
 
             dateTimePickerTDMembershipR.Format = DateTimePickerFormat.Custom;
             dateTimePickerTDMembershipR.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerTDMembershipR.Value = DateTime.Now.Date;
         }
 
         private void InitDatePickerNewMembers()
@@ -87,6 +89,7 @@ namespace GymSys
 
             dateTimePickerToDateTime.Format = DateTimePickerFormat.Custom;
             dateTimePickerToDateTime.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerToDateTime.Value = DateTime.Now.Date;
         }
 
 

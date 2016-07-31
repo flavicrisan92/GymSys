@@ -485,7 +485,7 @@
             // 
             this.lblInactiveCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInactiveCount.AutoSize = true;
-            this.lblInactiveCount.Location = new System.Drawing.Point(1134, 110);
+            this.lblInactiveCount.Location = new System.Drawing.Point(1055, 110);
             this.lblInactiveCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInactiveCount.Name = "lblInactiveCount";
             this.lblInactiveCount.Size = new System.Drawing.Size(16, 17);
@@ -496,7 +496,7 @@
             // 
             this.lblInactive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInactive.AutoSize = true;
-            this.lblInactive.Location = new System.Drawing.Point(979, 110);
+            this.lblInactive.Location = new System.Drawing.Point(900, 110);
             this.lblInactive.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblInactive.Name = "lblInactive";
             this.lblInactive.Size = new System.Drawing.Size(144, 17);
@@ -507,7 +507,7 @@
             // 
             this.lblActiveCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblActiveCount.AutoSize = true;
-            this.lblActiveCount.Location = new System.Drawing.Point(934, 110);
+            this.lblActiveCount.Location = new System.Drawing.Point(855, 110);
             this.lblActiveCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblActiveCount.Name = "lblActiveCount";
             this.lblActiveCount.Size = new System.Drawing.Size(16, 17);
@@ -518,7 +518,7 @@
             // 
             this.lblTotalActive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalActive.AutoSize = true;
-            this.lblTotalActive.Location = new System.Drawing.Point(790, 110);
+            this.lblTotalActive.Location = new System.Drawing.Point(711, 110);
             this.lblTotalActive.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTotalActive.Name = "lblTotalActive";
             this.lblTotalActive.Size = new System.Drawing.Size(133, 17);
@@ -559,12 +559,12 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1174, 110);
+            this.label4.Location = new System.Drawing.Point(1091, 110);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 17);
+            this.label4.Size = new System.Drawing.Size(127, 17);
             this.label4.TabIndex = 23;
-            this.label4.Text = "Total:";
+            this.label4.Text = "Total abonamente:";
             // 
             // btnResetMembershipR
             // 

@@ -86,7 +86,7 @@ namespace GymSys
                                              Tip_abonament = membership.MembershipType.Type,
                                              Data_inceput_abonament = membership.StartDate,
                                              Data_sfarsit_abonament = membership.EndDate,
-                                             Status = DateTime.Now < membership.EndDate ? "Activ" : "Expirat"
+                                             Status = membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate ? "Activ" : "Inactiv"
                                          };
 
                     dataGvMembershipHist.DataSource = membershipHist.ToList();
@@ -126,6 +126,10 @@ namespace GymSys
 
         public void LoadMembers(Actions.Operations operation, string searchValue)
         {
+            if (string.IsNullOrEmpty(searchValue))
+            {
+                txtSearchMembers.Clear();
+            }
             var members = from member in db.Members
                           where member.IsActive
                           orderby member.Created descending
@@ -452,6 +456,11 @@ namespace GymSys
             {
                 addSubscription = null;
             }
+        }
+
+        public void SetFocus()
+        {
+            txtSearchMembers.Select();
         }
     }
 }

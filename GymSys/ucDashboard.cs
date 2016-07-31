@@ -172,7 +172,7 @@ namespace GymSys
                     }
                     else
                     {
-                        DialogResult dialogResult = MessageBox.Show("Abonamentul este expirat. Doriti sa il prelungiti?", "Abonament expirat", MessageBoxButtons.YesNo);
+                        DialogResult dialogResult = MessageBox.Show("Abonatul nu are nici un abonament activ. Doriti sa adaugati un abonament?", "Abonament inactiv", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.Yes)
                         {
                             NewMemberForm addSubscription = new NewMemberForm(scannedMember, null, Actions.Operations.AddSubscription, string.Empty, txtScanedCode.Text);
@@ -187,7 +187,7 @@ namespace GymSys
                 }
                 else
                 {
-                    DialogResult dialogResult = MessageBox.Show("Doriti sa adaugati un membru nou?", "Membru inexistent", MessageBoxButtons.YesNo);
+                    DialogResult dialogResult = MessageBox.Show("Doriti sa adaugati un abonat nou?", "Cod inexistent", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
                         NewMemberForm addmember = new NewMemberForm(null, null, Actions.Operations.AddMember, string.Empty, txtScanedCode.Text);
