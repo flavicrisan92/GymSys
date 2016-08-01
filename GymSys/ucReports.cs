@@ -420,7 +420,7 @@ namespace GymSys
             lblInactiveCount.Text = (membershipList.Count() - membershipList.Count(m => m.Abonament_activ)).ToString();
 
             var newMembershipsByMonth = from p in membershipList
-                                        where p.Data_inscriere >= fromDateTime && p.Data_inscriere <= toDateTime
+                                        where p.Data_inceput_abonament >= fromDateTime && p.Data_inceput_abonament <= toDateTime
                                         group p by new { month = p.Data_inceput_abonament.Month, year = p.Data_inceput_abonament.Year } into d
                                         select new { An = d.Key.year, Luna = d.Key.month, Numar_abonamente = d.Count() };
 
