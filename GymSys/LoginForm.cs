@@ -19,8 +19,8 @@ namespace GymSys
                 MessageBox.Show("Please provide UserName and Password");
                 return;
             }
-            try
-            {
+            //try
+            //{
                 if (!db.Users.Any())
                 {
                     Users newUser = new Users
@@ -49,11 +49,11 @@ namespace GymSys
                 {
                     MessageBox.Show("Nume de utilizator sau parola incorecte!");
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
 
         private void txt_Password_KeyDown(object sender, KeyEventArgs e)

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMembershipTypeOperations));
             this.lblType = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
@@ -135,6 +136,7 @@
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.lblType);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMembershipTypeOperations";

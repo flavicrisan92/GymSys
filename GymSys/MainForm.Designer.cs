@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnMembers = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
@@ -62,8 +63,8 @@
             // 
             // panelMain
             // 
-            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panelMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMain.Location = new System.Drawing.Point(12, 64);
             this.panelMain.Name = "panelMain";
@@ -112,6 +113,7 @@
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.btnMembers);
             this.Controls.Add(this.btnLogOut);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

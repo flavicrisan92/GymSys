@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewMemberForm));
             this.dateTimePickerBirthDate = new System.Windows.Forms.DateTimePicker();
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -387,7 +388,8 @@
             this.Controls.Add(this.lblBirthDate);
             this.Controls.Add(this.lblSurname);
             this.Controls.Add(this.lblName);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "NewMemberForm";
