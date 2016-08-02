@@ -45,7 +45,14 @@ namespace GymSys
                                 Administrator = user.IsAdmin,
                                 Data_introducerii = user.Created
                             };
+
             dataGridViewUsers.DataSource = usersList.ToList();
+            var dataGridViewColumn = dataGridViewUsers.Columns["Nume_utilizator"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.HeaderText = "Nume utilizator";
+            var gridViewColumn = dataGridViewUsers.Columns["Data_introducerii"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Data introducerii";
 
             var dataGridViewUsersId = dataGridViewUsers.Columns["Id"];
             if (dataGridViewUsersId != null) dataGridViewUsersId.Visible = false;
@@ -74,7 +81,15 @@ namespace GymSys
                                          Data_introducerii = membershiptype.Created,
                                          Descriere = membershiptype.Description
                                      };
+
             dataGridViewMembershipTypes.DataSource = membershiptypeList.ToList();
+
+            var dataGridViewColumn = dataGridViewMembershipTypes.Columns["Nume_abonament"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.HeaderText = "Nume abonament";
+            var gridViewColumn = dataGridViewMembershipTypes.Columns["Data_introducerii"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Data introducerii";
 
             var dataGridViewMembershipTypesId = dataGridViewMembershipTypes.Columns["Id"];
             if (dataGridViewMembershipTypesId != null) dataGridViewMembershipTypesId.Visible = false;

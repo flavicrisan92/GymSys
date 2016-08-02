@@ -89,7 +89,17 @@ namespace GymSys
                                              Status = membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate ? "Activ" : "Inactiv"
                                          };
 
+
                     dataGvMembershipHist.DataSource = membershipHist.ToList();
+                    var gridViewColumn = dataGvMembershipHist.Columns["Data_inceput_abonament"];
+                    if (gridViewColumn != null)
+                        gridViewColumn.HeaderText = "Data inceput abonament";
+                    var viewColumn = dataGvMembershipHist.Columns["Data_sfarsit_abonament"];
+                    if (viewColumn != null)
+                        viewColumn.HeaderText = "Data sfarsit abonament";
+                    var column = dataGvMembershipHist.Columns["Tip_abonament"];
+                    if (column != null)
+                        column.HeaderText = "Tip abonament";
 
                     dataGvMembershipHist.Visible = true;
                     var dataGridViewColumn = dataGvMembershipHist.Columns["Id"];
@@ -190,7 +200,17 @@ namespace GymSys
 
             }
             lblTotalCount.Text = members.Count().ToString();
+
             dataGVMembers.DataSource = members.ToList();
+            var gridViewColumn = dataGVMembers.Columns["Data_nastere"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Data nastere";
+            var viewColumn = dataGVMembers.Columns["Data_inregistrare"];
+            if (viewColumn != null)
+                viewColumn.HeaderText = "Data inregistrare";
+            var column = dataGVMembers.Columns["Ultima_scanare"];
+            if (column != null)
+                column.HeaderText = "Ultima scanare";
 
             var dataGridViewColumn = dataGVMembers.Columns["Id"];
             if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;

@@ -171,6 +171,7 @@ namespace GymSys
                             Utilizator_activ = scan.Members.IsActive,
                             Abonament_activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                         };
+
             if (!string.IsNullOrEmpty(searchValue))
             {
                 if (searchValue.Contains(" "))
@@ -216,7 +217,24 @@ namespace GymSys
 
             }
             lblTotalScansCount.Text = scans.Count().ToString();
+
             dataGridViewScansR.DataSource = scans.ToList();
+            var dataGridViewColumn = dataGridViewScansR.Columns["Data_nastere"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.HeaderText = "Data nastere";
+            var gridViewColumn = dataGridViewScansR.Columns["Data_inregistrare"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Data inregistrare";
+            var viewColumn = dataGridViewScansR.Columns["Data_scanare"];
+            if (viewColumn != null)
+                viewColumn.HeaderText = "Data scanare";
+            var column = dataGridViewScansR.Columns["Utilizator_activ"];
+            if (column != null)
+                column.HeaderText = "Utilizator activ";
+            var o = dataGridViewScansR.Columns["Abonament_activ"];
+            if (o != null)
+                o.HeaderText = "Abonament activ";
+
 
             var id = dataGridViewScansR.Columns["Id"];
             if (id != null) id.Visible = false;
@@ -237,7 +255,9 @@ namespace GymSys
                                select new { An = d.Key.year, Luna = d.Key.month, Numar_scanari = d.Count() };
 
             dataGridViewScandGBM.DataSource = scansByMonth.ToList();
-
+            var q = dataGridViewScandGBM.Columns["Numar_scanari"];
+            if (q != null)
+                q.HeaderText = "Numar scanari";
             dataGridViewScandGBM.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScandGBM.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScandGBM.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -310,7 +330,21 @@ namespace GymSys
             }
 
             dataGridViewMembersRep.DataSource = members.ToList();
-
+            var viewColumn = dataGridViewMembersRep.Columns["Data_nastere"];
+            if (viewColumn != null)
+                viewColumn.HeaderText = "Data nastere";
+            var column = dataGridViewMembersRep.Columns["Data_inregistrare"];
+            if (column != null)
+                column.HeaderText = "Data inregistrare";
+            var o = dataGridViewMembersRep.Columns["Ultima_scanare"];
+            if (o != null)
+                o.HeaderText = "Ultima scanare";
+            var dataGridViewColumn1 = dataGridViewMembersRep.Columns["Utilizator_activ"];
+            if (dataGridViewColumn1 != null)
+                dataGridViewColumn1.HeaderText = "Utilizator activ";
+            var gridViewColumn1 = dataGridViewMembersRep.Columns["Abonament_activ"];
+            if (gridViewColumn1 != null)
+                gridViewColumn1.HeaderText = "Abonament activ";
             var id = dataGridViewMembersRep.Columns["Id"];
             if (id != null) id.Visible = false;
 
@@ -324,6 +358,11 @@ namespace GymSys
                                     select new { An = d.Key.year, Luna = d.Key.month, Membri_noi = d.Count() };
 
             dataGridViewCountByMonth.DataSource = newMembersByMonth.OrderByDescending(s => s.An).ThenByDescending(s => s.Luna).ToList();
+
+            var gridViewColumn = dataGridViewCountByMonth.Columns["Membri_noi"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Membri noi";
+
             dataGridViewCountByMonth.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCountByMonth.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewCountByMonth.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -412,6 +451,28 @@ namespace GymSys
 
             dataGridViewMembershipR.DataSource = membershipList.ToList();
 
+            var dataGridViewColumn = dataGridViewMembershipR.Columns["Data_inscriere"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.HeaderText = "Data inscriere";
+            var gridViewColumn = dataGridViewMembershipR.Columns["Tip_abonament"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Tip abonament";
+            var viewColumn = dataGridViewMembershipR.Columns["Data_inceput_abonament"];
+            if (viewColumn != null)
+                viewColumn.HeaderText = "Data inceput abonament";
+            var column = dataGridViewMembershipR.Columns["Data_incheiere_abonament"];
+            if (column != null)
+                column.HeaderText = "Data incheiere abonament";
+            var o = dataGridViewMembershipR.Columns["Total_abonamente"];
+            if (o != null)
+                o.HeaderText = "Total abonamente";
+            var dataGridViewColumn1 = dataGridViewMembershipR.Columns["Utilizator_activ"];
+            if (dataGridViewColumn1 != null)
+                dataGridViewColumn1.HeaderText = "Utilizator activ";
+            var gridViewColumn1 = dataGridViewMembershipR.Columns["Abonament_activ"];
+            if (gridViewColumn1 != null)
+                gridViewColumn1.HeaderText = "Abonament activ";
+
             var id = dataGridViewMembershipR.Columns["Id"];
             if (id != null) id.Visible = false;
 
@@ -425,7 +486,9 @@ namespace GymSys
                                         select new { An = d.Key.year, Luna = d.Key.month, Numar_abonamente = d.Count() };
 
             dataGridViewMembershipGroupByMonthR.DataSource = newMembershipsByMonth.OrderByDescending(d => d.An).ThenByDescending(d => d.Luna).ToList();
-
+            var gridViewColumn12 = dataGridViewMembershipGroupByMonthR.Columns["Numar_abonamente"];
+            if (gridViewColumn12 != null)
+                gridViewColumn12.HeaderText = "Numar abonamente";
 
             dataGridViewMembershipR.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewMembershipR.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

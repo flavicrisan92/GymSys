@@ -44,7 +44,14 @@ namespace GymSys
                                     Incheiere_abonament = membership.EndDate
                                     //,Zile_ramase = EntityFunctions.DiffDays(datetimeToday, membership.EndDate)
                                 };
+
             dataGridViewToExpire.DataSource = subscriptions.ToList();
+            var dataGridViewColumn = dataGridViewToExpire.Columns["Inceput_abonament"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.HeaderText = "Inceput abonament";
+            var gridViewColumn = dataGridViewToExpire.Columns["Incheiere_abonament"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Incheiere abonament";
 
             dataGridViewToExpire.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewToExpire.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -74,7 +81,15 @@ namespace GymSys
                             Data_nastere = adr.Birthdate,
                             Zile_ramase = daysToBirthdate
                         };
+
             dataGridViewBirthdays.DataSource = query.Take(15).ToList();
+            var dataGridViewColumn = dataGridViewBirthdays.Columns["Zile_ramase"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.HeaderText = "Zile ramase";
+            var gridViewColumn = dataGridViewBirthdays.Columns["Data_nastere"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Data nastere";
+
             dataGridViewBirthdays.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewBirthdays.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewBirthdays.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -111,10 +126,23 @@ namespace GymSys
                             Data_nastere = scan.Members.Birthdate,
                             Expirare_abonament = scan.Members.Memberships.Select(s => s.EndDate).Max(), //
                             Data_scanare = db.Scans.Where(s => s.IdMember == scan.IdMember).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault(),
-                            Abonament_Activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
+                            Abonament_activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                         };
 
             dataGridViewScans.DataSource = scans.ToList();
+            var dataGridViewColumn = dataGridViewScans.Columns["Data_nastere"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.HeaderText = "Data nastere";
+            var gridViewColumn = dataGridViewScans.Columns["Expirare_abonament"];
+            if (gridViewColumn != null)
+                gridViewColumn.HeaderText = "Expirare abonament";
+            var viewColumn = dataGridViewScans.Columns["Data_scanare"];
+            if (viewColumn != null)
+                viewColumn.HeaderText = "Data scanare";
+            var column = dataGridViewScans.Columns["Abonament_activ"];
+            if (column != null)
+                column.HeaderText = "Abonament activ";
+
             lblTodayCount.Text = scans.Count().ToString();
             dataGridViewScans.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewScans.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
