@@ -19,41 +19,34 @@ namespace GymSys
                 MessageBox.Show("Please provide UserName and Password");
                 return;
             }
-            //try
-            //{
-                if (!db.Users.Any())
+            if (!db.Users.Any())
+            {
+                Users newUser = new Users
                 {
-                    Users newUser = new Users
-                    {
-                        Name = "Crisan",
-                        Surname = "Flavius",
-                        Username = "flavicrisan",
-                        Password = "123",
-                        Created = DateTime.Now,
-                        IsActive = true,
-                        IsAdmin = true
-                    };
-                    db.Users.Add(newUser);
-                    db.SaveChanges();
-                }
-                var user =
-                    db.Users
-                        .FirstOrDefault(w => w.Username == txt_UserName.Text && w.Password == txt_Password.Text && w.IsActive);
-                if (user != null)
-                {
-                    this.Hide();
-                    MainForm mainForm = new MainForm(user);
-                    mainForm.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Nume de utilizator sau parola incorecte!");
-                }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+                    Name = "Crisan",
+                    Surname = "Flavius",
+                    Username = "flavicrisan",
+                    Password = "123",
+                    Created = DateTime.Now,
+                    IsActive = true,
+                    IsAdmin = true
+                };
+                db.Users.Add(newUser);
+                db.SaveChanges();
+            }
+            var user =
+                db.Users
+                    .FirstOrDefault(w => w.Username == txt_UserName.Text && w.Password == txt_Password.Text && w.IsActive);
+            if (user != null)
+            {
+                this.Hide();
+                MainForm mainForm = new MainForm(user);
+                mainForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nume de utilizator sau parola incorecte!");
+            }
         }
 
         private void txt_Password_KeyDown(object sender, KeyEventArgs e)

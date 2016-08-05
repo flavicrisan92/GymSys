@@ -387,23 +387,28 @@ namespace GymSys
             fromDateTime = fromDateTime.Date;
             toDateTime = toDateTime.Date.AddDays(1).AddSeconds(-5);
 
-            var membershipList = from membership in db.Memberships
-                                 where membership.StartDate >= fromDateTime && membership.StartDate <= toDateTime
-                                 orderby membership.Id descending
-                                 select new
-                                 {
-                                     membership.Id,
-                                     Nume = membership.Members.Name,
-                                     Prenume = membership.Members.Surname,
-                                     Cod = membership.Members.Code,
-                                     Data_inscriere = membership.Members.Created,
-                                     Tip_abonament = membership.MembershipType.Type,
-                                     Data_inceput_abonament = membership.StartDate,
-                                     Data_incheiere_abonament = membership.EndDate,
-                                     Total_abonamente = db.Memberships.Count(s => s.IdMember == membership.Members.Id && s.StartDate >= fromDateTime && s.StartDate <= toDateTime),
-                                     Utilizator_activ = membership.Members.IsActive,
-                                     Abonament_activ = membership.StartDate <= DateTime.Now && membership.EndDate >= DateTime.Now
-                                 };
+            var membershipList =
+                db.Memberships.Where(
+                    membership => membership.StartDate >= fromDateTime && membership.StartDate <= toDateTime)
+                    .OrderByDescending(membership => membership.Id).ToList()
+                    .Select(membership => new
+                    {
+                        membership.Id,
+                        Nume = membership.Members.Name,
+                        Prenume = membership.Members.Surname,
+                        Cod = membership.Members.Code,
+                        Data_inscriere = membership.Members.Created,
+                        Tip_abonament = membership.MembershipType.Type,
+                        Data_inceput_abonament = membership.StartDate,
+                        Data_incheiere_abonament = membership.EndDate.Date,
+                        Total_abonamente =
+                            db.Memberships.Count(
+                                s =>
+                                    s.IdMember == membership.Members.Id && s.StartDate >= fromDateTime &&
+                                    s.StartDate <= toDateTime),
+                        Utilizator_activ = membership.Members.IsActive,
+                        Abonament_activ = membership.StartDate <= DateTime.Now && membership.EndDate >= DateTime.Now
+                    });
 
             if (!string.IsNullOrEmpty(searchValue))
             {

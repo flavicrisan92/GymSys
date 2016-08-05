@@ -77,17 +77,20 @@ namespace GymSys
                     string id = row.Cells[0].Value.ToString();
                     int.TryParse(id, out idint);
 
-                    var membershipHist = from membership in db.Memberships
-                                         where membership.IdMember == idint && membership.IsActive
-                                         orderby membership.Id descending
-                                         select new
-                                         {
-                                             membership.Id,
-                                             Tip_abonament = membership.MembershipType.Type,
-                                             Data_inceput_abonament = membership.StartDate,
-                                             Data_sfarsit_abonament = membership.EndDate,
-                                             Status = membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate ? "Activ" : "Inactiv"
-                                         };
+                    var membershipHist =
+                        db.Memberships.Where(membership => membership.IdMember == idint && membership.IsActive)
+                            .OrderByDescending(membership => membership.Id).ToList()
+                            .Select(membership => new
+                            {
+                                membership.Id,
+                                Tip_abonament = membership.MembershipType.Type,
+                                Data_inceput_abonament = membership.StartDate,
+                                Data_sfarsit_abonament = membership.EndDate.Date,
+                                Status =
+                                    membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate
+                                        ? "Activ"
+                                        : "Inactiv"
+                            });
 
 
                     dataGvMembershipHist.DataSource = membershipHist.ToList();

@@ -18,7 +18,7 @@ namespace GymSys
     {
         LocalDBEntities db = new LocalDBEntities();
         private static ucDashboard _instanceMembers;
-        DateTime dateToday = DateTime.Now.Date;
+        DateTime _dateToday = DateTime.Now.Date;
         private int days = 20;
 
 
@@ -34,18 +34,19 @@ namespace GymSys
         public void LoadSubscriptionToExpire()
         {
             var datetimeToday = DateTime.Now.Date.AddDays(1).AddSeconds(-1);
-            var subscriptions = from membership in db.Memberships
-                                where EntityFunctions.DiffDays(datetimeToday, membership.EndDate) <= 7 && EntityFunctions.DiffDays(datetimeToday, membership.EndDate) >-1
-                                select new
-                                {
-                                    Nume = membership.Members.Name,
-                                    Prenume = membership.Members.Surname,
-                                    Inceput_abonament = membership.StartDate,
-                                    Incheiere_abonament = membership.EndDate
-                                    //,Zile_ramase = EntityFunctions.DiffDays(datetimeToday, membership.EndDate)
-                                };
+            var subscriptions =
+                db.Memberships.Where(
+                    membership =>
+                        EntityFunctions.DiffDays(datetimeToday, membership.EndDate) <= 7 &&
+                        EntityFunctions.DiffDays(datetimeToday, membership.EndDate) > -1).ToList().Select(membership => new
+                        {
+                            Nume = membership.Members.Name,
+                            Prenume = membership.Members.Surname,
+                            Inceput_abonament = membership.StartDate,
+                            Incheiere_abonament = membership.EndDate.Date
+                        });
 
-            dataGridViewToExpire.DataSource = subscriptions.ToList();
+            dataGridViewToExpire.DataSource = subscriptions.OrderBy(s=>s.Incheiere_abonament).ToList();
             var dataGridViewColumn = dataGridViewToExpire.Columns["Inceput_abonament"];
             if (dataGridViewColumn != null)
                 dataGridViewColumn.HeaderText = "Inceput abonament";
@@ -57,7 +58,6 @@ namespace GymSys
             dataGridViewToExpire.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewToExpire.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewToExpire.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //dataGridViewToExpire.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         public void LoadBirhdays()
@@ -78,14 +78,11 @@ namespace GymSys
                         {
                             Nume = adr.Name,
                             Prenume = adr.Surname,
-                            Data_nastere = adr.Birthdate,
-                            Zile_ramase = daysToBirthdate
+                            Data_nastere = adr.Birthdate
                         };
 
             dataGridViewBirthdays.DataSource = query.Take(15).ToList();
-            var dataGridViewColumn = dataGridViewBirthdays.Columns["Zile_ramase"];
-            if (dataGridViewColumn != null)
-                dataGridViewColumn.HeaderText = "Zile ramase";
+
             var gridViewColumn = dataGridViewBirthdays.Columns["Data_nastere"];
             if (gridViewColumn != null)
                 gridViewColumn.HeaderText = "Data nastere";
@@ -93,7 +90,6 @@ namespace GymSys
             dataGridViewBirthdays.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewBirthdays.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewBirthdays.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewBirthdays.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         public void LoadTopMembers(int days)
@@ -117,17 +113,21 @@ namespace GymSys
                            where scan.Date > todayDate && scan.Members.IsActive
                            orderby scan.Date descending
                            select scan;
-            var scans = from scan in getScans
-                        select new
-                        {
-                            Nume = scan.Members.Name,
-                            Prenume = scan.Members.Surname,
-                            Cod = scan.Members.Code,
-                            Data_nastere = scan.Members.Birthdate,
-                            Expirare_abonament = scan.Members.Memberships.Select(s => s.EndDate).Max(), //
-                            Data_scanare = db.Scans.Where(s => s.IdMember == scan.IdMember).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault(),
-                            Abonament_activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
-                        };
+            var scans = getScans.ToList().Select(scan => new
+            {
+                Nume = scan.Members.Name,
+                Prenume = scan.Members.Surname,
+                Cod = scan.Members.Code,
+                Data_nastere = scan.Members.Birthdate,
+                Expirare_abonament = scan.Members.Memberships.Select(s => s.EndDate).Max().Date, //
+                Data_scanare =
+                    db.Scans.Where(s => s.IdMember == scan.IdMember)
+                        .OrderByDescending(s => s.Id)
+                        .Select(s => s.Date)
+                        .FirstOrDefault(),
+                Abonament_activ =
+                    scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
+            });
 
             dataGridViewScans.DataSource = scans.ToList();
             var dataGridViewColumn = dataGridViewScans.Columns["Data_nastere"];
@@ -171,8 +171,8 @@ namespace GymSys
         {
             if (e.KeyCode == Keys.Enter)
             {
-                DateTime dateTodayMax = dateToday.AddDays(1).Date.AddSeconds(-5);
-                DateTime dateTodayMin = dateToday.Date;
+                DateTime dateTodayMax = _dateToday.AddDays(1).Date.AddSeconds(-5);
+                DateTime dateTodayMin = _dateToday.Date;
                 var scannedMember = db.Members.FirstOrDefault(m => m.Code == txtScanedCode.Text);
 
                 if (scannedMember != null)
@@ -181,7 +181,7 @@ namespace GymSys
                     var membership = db.Memberships.Where(s => s.IdMember == scannedMember.Id && s.StartDate <= dateTodayMax && s.EndDate > dateTodayMin).Select(s => s).OrderByDescending(s => s.Id).FirstOrDefault();
                     if (membership != null)
                     {
-                        if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > dateToday) == 0)
+                        if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > _dateToday) == 0)
                         {
                             Scans scan = new Scans
                             {
@@ -229,6 +229,9 @@ namespace GymSys
 
                 txtScanedCode.Clear();
                 LoadTopMembers(days);
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
 
