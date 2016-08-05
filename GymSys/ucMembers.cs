@@ -139,7 +139,11 @@ namespace GymSys
 
         public void LoadMembers(Actions.Operations operation, string searchValue)
         {
-            if (string.IsNullOrEmpty(searchValue))
+            if (!string.IsNullOrEmpty(txtSearchMembers.Text))
+            {
+                searchValue = txtSearchMembers.Text;
+            }
+            else if (string.IsNullOrEmpty(searchValue))
             {
                 txtSearchMembers.Clear();
             }
@@ -422,7 +426,7 @@ namespace GymSys
                     break;
             }
         }
-        
+
         private void ProcessDeleteMembership()
         {
             int idmembership;

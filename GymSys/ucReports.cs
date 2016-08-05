@@ -172,6 +172,10 @@ namespace GymSys
                             Abonament_activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                         };
 
+            if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtScanMember.Text))
+            {
+                searchValue = txtScanMember.Text;
+            }
             if (!string.IsNullOrEmpty(searchValue))
             {
                 if (searchValue.Contains(" "))
@@ -283,7 +287,10 @@ namespace GymSys
                               Utilizator_activ = member.IsActive,
                               Abonament_activ = member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
                           };
-
+            if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtMember.Text))
+            {
+                searchValue = txtMember.Text;
+            }
             if (!string.IsNullOrEmpty(searchValue))
             {
                 if (searchValue.Contains(" "))
@@ -312,19 +319,19 @@ namespace GymSys
                         else
                         {
                             members =
-                           members.Where(
-                               m =>
-                                   m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                                members.Where(
+                                    m =>
+                                        m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
                         }
                     }
                 }
                 else
                 {
                     members =
-                     members.Where(
-                         m =>
-                             m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
-                             m.Cod.StartsWith(searchValue));
+                        members.Where(
+                            m =>
+                                m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
+                                m.Cod.StartsWith(searchValue));
                 }
 
             }
@@ -409,7 +416,10 @@ namespace GymSys
                         Utilizator_activ = membership.Members.IsActive,
                         Abonament_activ = membership.StartDate <= DateTime.Now && membership.EndDate >= DateTime.Now
                     });
-
+            if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtMemberMembershipR.Text))
+            {
+                searchValue = txtMemberMembershipR.Text;
+            }
             if (!string.IsNullOrEmpty(searchValue))
             {
                 if (searchValue.Contains(" "))
