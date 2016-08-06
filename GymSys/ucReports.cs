@@ -485,11 +485,17 @@ namespace GymSys
 
                 dataGridViewMembershipR.DataSource = membershipList.ToList().Select(membership => new
                 {
-                    membership.Id, membership.Nume, membership.Prenume, membership.Cod, membership.Data_inscriere, membership.Tip_abonament,
-                    membership.Data_inceput_abonament, Data_incheiere_abonament = membership.Data_incheiere_abonament.Date,
-                    Total_abonamente = db.Memberships.Count(s => s.IdMember == membership.Id && s.StartDate >= fromDateTime && s.StartDate <= toDateTime),
-                    Utilizator_activ = membership.Abonament_activ, Abonament_activ = membership.Data_inceput_abonament <= DateTime.Now 
-                    && membership.Data_incheiere_abonament >= DateTime.Now
+                    membership.Id,
+                    membership.Nume,
+                    membership.Prenume,
+                    membership.Cod,
+                    membership.Data_inscriere,
+                    membership.Tip_abonament,
+                    membership.Data_inceput_abonament,
+                    Data_incheiere_abonament = membership.Data_incheiere_abonament.Date,
+                    membership.Total_abonamente,
+                    membership.Utilizator_activ,
+                    membership.Abonament_activ
                 }).ToList();
 
                 var dataGridViewColumn = dataGridViewMembershipR.Columns["Data_inscriere"];
