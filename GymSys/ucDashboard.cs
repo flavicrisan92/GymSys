@@ -44,8 +44,10 @@ namespace GymSys
                          {
                              Nume = membership.Members.Name,
                              Prenume = membership.Members.Surname,
-                             Inceput_abonament = membership.StartDate,
-                             Incheiere_abonament = membership.EndDate.Date
+                             Inceput_abonament = membership.StartDate.ToString("dd/MM/yyyy HH:mm",
+                                CultureInfo.InvariantCulture),
+                             Incheiere_abonament = membership.EndDate.Date.ToString("dd/MM/yyyy",
+                                CultureInfo.InvariantCulture)
                          });
 
                 dataGridViewToExpire.DataSource = subscriptions.OrderBy(s=>s.Incheiere_abonament).ToList();
@@ -89,7 +91,12 @@ namespace GymSys
                         Data_nastere = adr.Birthdate
                     };
 
-                dataGridViewBirthdays.DataSource = query.Take(15).ToList();
+                dataGridViewBirthdays.DataSource = query.ToList().Take(15).Select(s => new
+                {
+                  s.Nume,
+                  s.Prenume,
+                    Data_nastere = s.Data_nastere.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)
+                }).ToList();
 
                 var gridViewColumn = dataGridViewBirthdays.Columns["Data_nastere"];
                 if (gridViewColumn != null)
@@ -134,25 +141,26 @@ namespace GymSys
                     Nume = scan.Members.Name,
                     Prenume = scan.Members.Surname,
                     Cod = scan.Members.Code,
-                    Data_nastere = scan.Members.Birthdate,
-                    Expirare_abonament = scan.Members.Memberships.Select(s => s.EndDate).Max().Date, //
+                    Data_nastere = scan.Members.Birthdate?.ToString("dd/MM/yyyy",CultureInfo.InvariantCulture) ?? "",
+                    Incheiere_abonament = scan.Members.Memberships.Select(s => s.EndDate).Max().Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture), //
                     Data_scanare =
                         db.Scans.Where(s => s.IdMember == scan.IdMember)
                             .OrderByDescending(s => s.Id)
                             .Select(s => s.Date)
-                            .FirstOrDefault(),
+                            .FirstOrDefault().ToString("dd/MM/yyyy HH:mm",
+                                CultureInfo.InvariantCulture),
                     Abonament_activ =
                         scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) >
-                        0,
-                });
+                        0
+                }).ToList();
 
-                dataGridViewScans.DataSource = scans.ToList();
+                dataGridViewScans.DataSource = scans;
                 var dataGridViewColumn = dataGridViewScans.Columns["Data_nastere"];
                 if (dataGridViewColumn != null)
                     dataGridViewColumn.HeaderText = "Data nastere";
-                var gridViewColumn = dataGridViewScans.Columns["Expirare_abonament"];
+                var gridViewColumn = dataGridViewScans.Columns["Incheiere_abonament"];
                 if (gridViewColumn != null)
-                    gridViewColumn.HeaderText = "Expirare abonament";
+                    gridViewColumn.HeaderText = "Incheiere abonament";
                 var viewColumn = dataGridViewScans.Columns["Data_scanare"];
                 if (viewColumn != null)
                     viewColumn.HeaderText = "Data scanare";
@@ -276,9 +284,9 @@ namespace GymSys
             txtName.Text = scannedMember.Name;
             txtSurname.Text = scannedMember.Surname;
             txtCode.Text = scannedMember.Code;
-            if (scannedMember.Birthdate != null) txtBirthdate.Text = scannedMember.Birthdate.Value.ToString("dd/MM/yyyy");
-            txtFromDate.Text = membership.StartDate.ToString("dd/MM/yyyy");
-            txtToDate.Text = membership.EndDate.ToString("dd/MM/yyyy");
+            if (scannedMember.Birthdate != null) txtBirthdate.Text = scannedMember.Birthdate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            txtFromDate.Text = membership.StartDate.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+            txtToDate.Text = membership.EndDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
 
         private void ucDashboard_Load(object sender, EventArgs e)

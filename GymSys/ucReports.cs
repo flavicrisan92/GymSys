@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -123,7 +124,7 @@ namespace GymSys
 
             DTPScansTD.Format = DateTimePickerFormat.Custom;
             DTPScansTD.CustomFormat = "dd/MM/yyyy";
-            DTPScansTD.Value= DateTime.Now.Date;
+            DTPScansTD.Value = DateTime.Now.Date;
         }
 
         private void InitDatePickersMembership()
@@ -150,7 +151,7 @@ namespace GymSys
 
 
 
-       
+
 
         public static ucReports Instance => _instanceMembers ?? (_instanceMembers = new ucReports());
 
@@ -161,22 +162,22 @@ namespace GymSys
             using (var db = new LocalDBEntities())
             {
                 var scans = from scan in db.Scans
-                    where scan.Date >= fromDateTime && scan.Date <= toDateTime
-                    orderby scan.Date descending
-                    select new
-                    {
-                        scan.Members.Id,
-                        Nume = scan.Members.Name,
-                        Prenume = scan.Members.Surname,
-                        Cod = scan.Members.Code,
-                        Data_nastere = scan.Members.Birthdate,
-                        Data_inregistrare = scan.Members.Created,
-                        Data_scanare = scan.Date,
-                        Utilizator_activ = scan.Members.IsActive,
-                        Abonament_activ =
+                            where scan.Date >= fromDateTime && scan.Date <= toDateTime
+                            orderby scan.Date descending
+                            select new
+                            {
+                                scan.Members.Id,
+                                Nume = scan.Members.Name,
+                                Prenume = scan.Members.Surname,
+                                Cod = scan.Members.Code,
+                                Data_nastere = scan.Members.Birthdate,
+                                Data_inregistrare = scan.Members.Created,
+                                Data_scanare = scan.Date,
+                                Utilizator_activ = scan.Members.IsActive,
+                                Abonament_activ =
                             scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) >
                             0
-                    };
+                            };
 
                 if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtScanMember.Text))
                 {
@@ -228,7 +229,18 @@ namespace GymSys
 
                 lblTotalScansCount.Text = scans.Count().ToString();
 
-                dataGridViewScansR.DataSource = scans.ToList();
+                dataGridViewScansR.DataSource = scans.ToList().Select(s=>new
+                {
+                    s.Id,
+                    s.Nume,
+                    s.Prenume,
+                    s.Cod,
+                    Data_nastere = s.Data_nastere.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Data_inregistrare = s.Data_inregistrare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    Data_scanare = s.Data_scanare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    s.Utilizator_activ,
+                    s.Abonament_activ
+                }).ToList();
 
                 var dataGridViewColumn = dataGridViewScansR.Columns["Data_nastere"];
                 if (dataGridViewColumn != null)
@@ -249,7 +261,7 @@ namespace GymSys
 
                 var id = dataGridViewScansR.Columns["Id"];
                 if (id != null) id.Visible = false;
-
+                
                 dataGridViewScansR.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGridViewScansR.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGridViewScansR.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -261,10 +273,10 @@ namespace GymSys
                 dataGridViewScansR.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 var scansByMonth = from p in scans
-                    where p.Data_scanare >= fromDateTime && p.Data_scanare <= toDateTime
-                    group p by new {month = p.Data_scanare.Month, year = p.Data_scanare.Year}
+                                   where p.Data_scanare >= fromDateTime && p.Data_scanare <= toDateTime
+                                   group p by new { month = p.Data_scanare.Month, year = p.Data_scanare.Year }
                     into d
-                    select new {An = d.Key.year, Luna = d.Key.month, Numar_scanari = d.Count()};
+                                   select new { An = d.Key.year, Luna = d.Key.month, Numar_scanari = d.Count() };
 
                 dataGridViewScandGBM.DataSource = scansByMonth.ToList();
                 var q = dataGridViewScandGBM.Columns["Numar_scanari"];
@@ -283,25 +295,25 @@ namespace GymSys
             using (var db = new LocalDBEntities())
             {
                 var members = from member in db.Members
-                    where member.Created >= fromDateTime && member.Created <= toDateTime
-                    orderby member.Created descending
-                    select new
-                    {
-                        member.Id,
-                        Nume = member.Name,
-                        Prenume = member.Surname,
-                        Cod = member.Code,
-                        Data_nastere = member.Birthdate,
-                        Data_inregistrare = member.Created,
-                        Ultima_scanare =
-                            db.Scans.Where(s => s.IdMember == member.Id)
-                                .OrderByDescending(s => s.Id)
-                                .Select(s => s.Date)
-                                .FirstOrDefault(),
-                        Utilizator_activ = member.IsActive,
-                        Abonament_activ =
-                            member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0
-                    };
+                              where member.Created >= fromDateTime && member.Created <= toDateTime
+                              orderby member.Created descending
+                              select new
+                              {
+                                  member.Id,
+                                  Nume = member.Name,
+                                  Prenume = member.Surname,
+                                  Cod = member.Code,
+                                  Data_nastere = member.Birthdate,
+                                  Data_inregistrare = member.Created,
+                                  Ultima_scanare =
+                                      db.Scans.Where(s => s.IdMember == member.Id)
+                                          .OrderByDescending(s => s.Id)
+                                          .Select(s => s.Date)
+                                          .FirstOrDefault(),
+                                  Utilizator_activ = member.IsActive,
+                                  Abonament_activ =
+                                      member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0
+                              };
                 if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtMember.Text))
                 {
                     searchValue = txtMember.Text;
@@ -351,7 +363,18 @@ namespace GymSys
 
                 }
 
-                dataGridViewMembersRep.DataSource = members.ToList();
+                dataGridViewMembersRep.DataSource = members.ToList().Select(s => new
+                {
+                    s.Id,
+                    s.Nume,
+                    s.Prenume,
+                    s.Cod,
+                    Data_nastere = s.Data_nastere.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Data_inregistrare = s.Data_inregistrare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    Ultima_scanare = s.Ultima_scanare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    s.Utilizator_activ,
+                    s.Abonament_activ
+                }).ToList();
                 var viewColumn = dataGridViewMembersRep.Columns["Data_nastere"];
                 if (viewColumn != null)
                     viewColumn.HeaderText = "Data nastere";
@@ -367,6 +390,7 @@ namespace GymSys
                 var gridViewColumn1 = dataGridViewMembersRep.Columns["Abonament_activ"];
                 if (gridViewColumn1 != null)
                     gridViewColumn1.HeaderText = "Abonament activ";
+
                 var id = dataGridViewMembersRep.Columns["Id"];
                 if (id != null) id.Visible = false;
 
@@ -375,10 +399,10 @@ namespace GymSys
                 lblCountActiveMembers.Text = members.Count(m => m.Abonament_activ).ToString();
 
                 var newMembersByMonth = from p in members
-                    where p.Data_inregistrare >= fromDateTime && p.Data_inregistrare <= toDateTime
-                    group p by new {month = p.Data_inregistrare.Month, year = p.Data_inregistrare.Year}
+                                        where p.Data_inregistrare >= fromDateTime && p.Data_inregistrare <= toDateTime
+                                        group p by new { month = p.Data_inregistrare.Month, year = p.Data_inregistrare.Year }
                     into d
-                    select new {An = d.Key.year, Luna = d.Key.month, Membri_noi = d.Count()};
+                                        select new { An = d.Key.year, Luna = d.Key.month, Membri_noi = d.Count() };
 
                 dataGridViewCountByMonth.DataSource =
                     newMembersByMonth.OrderByDescending(s => s.An).ThenByDescending(s => s.Luna).ToList();
@@ -489,10 +513,13 @@ namespace GymSys
                     membership.Nume,
                     membership.Prenume,
                     membership.Cod,
-                    membership.Data_inscriere,
+                    Data_inscriere = membership.Data_inscriere.ToString("dd/MM/yyyy HH:mm",
+                                CultureInfo.InvariantCulture),
                     membership.Tip_abonament,
-                    membership.Data_inceput_abonament,
-                    Data_incheiere_abonament = membership.Data_incheiere_abonament.Date,
+                    Data_inceput_abonament = membership.Data_inceput_abonament.ToString("dd/MM/yyyy HH:mm",
+                                CultureInfo.InvariantCulture),
+                    Data_incheiere_abonament = membership.Data_incheiere_abonament.Date.ToString("dd/MM/yyyy",
+                                CultureInfo.InvariantCulture),
                     membership.Total_abonamente,
                     membership.Utilizator_activ,
                     membership.Abonament_activ
@@ -529,10 +556,10 @@ namespace GymSys
                     (membershipList.Count() - membershipList.Count(m => m.Abonament_activ)).ToString();
 
                 var newMembershipsByMonth = from p in membershipList
-                    where p.Data_inceput_abonament >= fromDateTime && p.Data_inceput_abonament <= toDateTime
-                    group p by new {month = p.Data_inceput_abonament.Month, year = p.Data_inceput_abonament.Year}
+                                            where p.Data_inceput_abonament >= fromDateTime && p.Data_inceput_abonament <= toDateTime
+                                            group p by new { month = p.Data_inceput_abonament.Month, year = p.Data_inceput_abonament.Year }
                     into d
-                    select new {An = d.Key.year, Luna = d.Key.month, Numar_abonamente = d.Count()};
+                                            select new { An = d.Key.year, Luna = d.Key.month, Numar_abonamente = d.Count() };
 
                 dataGridViewMembershipGroupByMonthR.DataSource =
                     newMembershipsByMonth.OrderByDescending(d => d.An).ThenByDescending(d => d.Luna).ToList();

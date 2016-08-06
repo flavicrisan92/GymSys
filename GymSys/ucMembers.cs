@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace GymSys
 {
@@ -88,8 +90,10 @@ namespace GymSys
                                 {
                                     membership.Id,
                                     Tip_abonament = membership.MembershipType.Type,
-                                    Data_inceput_abonament = membership.StartDate,
-                                    Data_sfarsit_abonament = membership.EndDate.Date,
+                                    Data_inceput_abonament = membership.StartDate.ToString("dd/MM/yyyy HH:mm",
+                                CultureInfo.InvariantCulture),
+                                    Data_sfarsit_abonament = membership.EndDate.Date.ToString("dd/MM/yyyy",
+                                CultureInfo.InvariantCulture),
                                     Status =
                                         membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate
                                             ? "Activ"
@@ -221,7 +225,17 @@ namespace GymSys
                 }
                 lblTotalCount.Text = members.Count().ToString();
 
-                dataGVMembers.DataSource = members.ToList();
+                dataGVMembers.DataSource = members.ToList().Select(s=>new
+                {
+                    s.Id,
+                    s.Nume,
+                    s.Prenume,
+                    s.Cod,
+                    s.Activ,
+                    Data_nastere = s.Data_nastere.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    Data_inregistrare = s.Data_inregistrare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    Ultima_scanare=s.Ultima_scanare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture)
+                }).ToList();
                 var gridViewColumn = dataGVMembers.Columns["Data_nastere"];
                 if (gridViewColumn != null)
                     gridViewColumn.HeaderText = "Data nastere";
@@ -241,6 +255,7 @@ namespace GymSys
                 dataGVMembers.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGVMembers.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dataGVMembers.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGVMembers.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 if (operation != Actions.Operations.DeleteMember)
                 {

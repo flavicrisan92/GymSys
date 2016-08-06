@@ -42,24 +42,19 @@ namespace GymSys
                                 Nume = user.Name,
                                 Prenume = user.Surname,
                                 Nume_utilizator = user.Username,
-                                Administrator = user.IsAdmin,
-                                Data_introducerii = user.Created
+                                Administrator = user.IsAdmin
                             };
 
             dataGridViewUsers.DataSource = usersList.ToList();
             var dataGridViewColumn = dataGridViewUsers.Columns["Nume_utilizator"];
             if (dataGridViewColumn != null)
                 dataGridViewColumn.HeaderText = "Nume utilizator";
-            var gridViewColumn = dataGridViewUsers.Columns["Data_introducerii"];
-            if (gridViewColumn != null)
-                gridViewColumn.HeaderText = "Data introducerii";
 
             var dataGridViewUsersId = dataGridViewUsers.Columns["Id"];
             if (dataGridViewUsersId != null) dataGridViewUsersId.Visible = false;
             dataGridViewUsers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewUsers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewUsers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewUsers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (_userSelectedRow > 0 && operation != Actions.Operations.DeleteUser)
             {
@@ -78,7 +73,6 @@ namespace GymSys
                                          membershiptype.Id,
                                          Nume_abonament = membershiptype.Type,
                                          Pret = membershiptype.Price,
-                                         Data_introducerii = membershiptype.Created,
                                          Descriere = membershiptype.Description
                                      };
 
@@ -87,9 +81,6 @@ namespace GymSys
             var dataGridViewColumn = dataGridViewMembershipTypes.Columns["Nume_abonament"];
             if (dataGridViewColumn != null)
                 dataGridViewColumn.HeaderText = "Nume abonament";
-            var gridViewColumn = dataGridViewMembershipTypes.Columns["Data_introducerii"];
-            if (gridViewColumn != null)
-                gridViewColumn.HeaderText = "Data introducerii";
 
             var dataGridViewMembershipTypesId = dataGridViewMembershipTypes.Columns["Id"];
             if (dataGridViewMembershipTypesId != null) dataGridViewMembershipTypesId.Visible = false;
@@ -97,7 +88,6 @@ namespace GymSys
             dataGridViewMembershipTypes.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewMembershipTypes.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewMembershipTypes.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipTypes.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             if (_membershipTypeSelectedRow > 0 && operation != Actions.Operations.DeleteMemberhipType)
             {
