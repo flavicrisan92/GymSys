@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Data.Common.CommandTrees;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GymSys
 {
     public partial class ucReports : UserControl
     {
-        LocalDBEntities db = new LocalDBEntities();
         private static ucReports _instanceMembers;
 
         private ucReports()
@@ -28,19 +20,83 @@ namespace GymSys
             //AddScans();
         }
 
-        private void AddScans()
-        {
-            foreach (var memberse in db.Members.ToList())
-            {
-                Scans scan = new Scans
-                {
-                    IdMember = memberse.Id,
-                    Date = RandomDay()
-                };
-                db.Scans.Add(scan);
-                db.SaveChanges();
-            }
-        }
+        //private void AddScans()
+        //{
+        //    using (var db = new LocalDBEntities())
+        //    {
+        //        foreach (var memberse in db.Members.ToList())
+        //        {
+        //            Scans scan = new Scans
+        //            {
+        //                IdMember = memberse.Id,
+        //                Date = RandomDay()
+        //            };
+        //            db.Scans.Add(scan);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //}
+        //private void DeleteMembers()
+        //{
+        //    using (var db = new LocalDBEntities())
+        //    {
+        //        var date = DateTime.Now.AddDays(-3);
+        //        foreach (var memberse in db.Members.Where(a => a.Created <= date).ToList())
+        //        {
+        //            db.Members.Remove(memberse);
+        //        }
+
+        //        db.SaveChanges();
+        //    }
+        //}
+        //private void AddMembers()
+        //{
+        //    for (var i = 0; i < 250; i++)
+        //    {
+        //        Members member = new Members
+        //        {
+        //            Name = "Test",
+        //            Surname = "Test1",
+        //            Birthdate = RandomDay(),
+        //            Code = "123",
+        //            IsActive = true,
+        //            Created = RandomDay()
+        //        };
+        //        using (var db = new LocalDBEntities())
+        //        {
+        //            db.Members.Add(member);
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //}
+        //private void AddMembership()
+        //{
+        //    using (var db = new LocalDBEntities())
+        //    {
+        //        foreach (var memberse in db.Members.ToList())
+        //        {
+        //            Memberships newMemberships = new Memberships
+        //            {
+        //                IdMember = memberse.Id,
+        //                StartDate = DateTime.Now.AddDays(-5),
+
+        //                EndDate = DateTime.Now.AddDays(-5).AddMonths(1),
+        //                IsActive = true,
+        //                IdMembershipType = db.MembershipType.Select(s => s.Id).FirstOrDefault()
+        //            };
+        //            db.Memberships.Add(newMemberships);
+
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //}
+        //private DateTime RandomDay()
+        //{
+        //    Random gen = new Random();
+        //    DateTime start = new DateTime(2005, 1, 1);
+        //    int range = (DateTime.Today - start).Days;
+        //    return start.AddDays(gen.Next(range));
+        //}
 
         public void LoadAllReports()
         {
@@ -93,61 +149,8 @@ namespace GymSys
         }
 
 
-        private void DeleteMembers()
-        {
-            var date = DateTime.Now.AddDays(-3);
-            foreach (var memberse in db.Members.Where(a => a.Created <= date).ToList())
-            {
-                db.Members.Remove(memberse);
-            }
 
-            db.SaveChanges();
-        }
-
-        private void AddMembers()
-        {
-            for (var i = 0; i < 250; i++)
-            {
-                Members member = new Members
-                {
-                    Name = "Test",
-                    Surname = "Test1",
-                    Birthdate = RandomDay(),
-                    Code = "123",
-                    IsActive = true,
-                    Created = RandomDay()
-                };
-                db.Members.Add(member);
-                db.SaveChanges();
-            }
-        }
-
-        private void AddMembership()
-        {
-            foreach (var memberse in db.Members.ToList())
-            {
-                Memberships newMemberships = new Memberships
-                {
-                    IdMember = memberse.Id,
-                    StartDate = DateTime.Now.AddDays(-5),
-
-                    EndDate = DateTime.Now.AddDays(-5).AddMonths(1),
-                    IsActive = true,
-                    IdMembershipType = db.MembershipType.Select(s => s.Id).FirstOrDefault()
-                };
-                db.Memberships.Add(newMemberships);
-
-                db.SaveChanges();
-            }
-        }
-
-        private DateTime RandomDay()
-        {
-            Random gen = new Random();
-            DateTime start = new DateTime(2005, 1, 1);
-            int range = (DateTime.Today - start).Days;
-            return start.AddDays(gen.Next(range));
-        }
+       
 
         public static ucReports Instance => _instanceMembers ?? (_instanceMembers = new ucReports());
 
@@ -155,367 +158,394 @@ namespace GymSys
         {
             fromDateTime = fromDateTime.Date;
             toDateTime = toDateTime.Date.AddDays(1).AddSeconds(-5);
-
-            var scans = from scan in db.Scans
-                        where scan.Date >= fromDateTime && scan.Date <= toDateTime
-                        orderby scan.Date descending
-                        select new
-                        {
-                            scan.Members.Id,
-                            Nume = scan.Members.Name,
-                            Prenume = scan.Members.Surname,
-                            Cod = scan.Members.Code,
-                            Data_nastere = scan.Members.Birthdate,
-                            Data_inregistrare = scan.Members.Created,
-                            Data_scanare = scan.Date,
-                            Utilizator_activ = scan.Members.IsActive,
-                            Abonament_activ = scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
-                        };
-
-            if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtScanMember.Text))
+            using (var db = new LocalDBEntities())
             {
-                searchValue = txtScanMember.Text;
-            }
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                if (searchValue.Contains(" "))
+                var scans = from scan in db.Scans
+                    where scan.Date >= fromDateTime && scan.Date <= toDateTime
+                    orderby scan.Date descending
+                    select new
+                    {
+                        scan.Members.Id,
+                        Nume = scan.Members.Name,
+                        Prenume = scan.Members.Surname,
+                        Cod = scan.Members.Code,
+                        Data_nastere = scan.Members.Birthdate,
+                        Data_inregistrare = scan.Members.Created,
+                        Data_scanare = scan.Date,
+                        Utilizator_activ = scan.Members.IsActive,
+                        Abonament_activ =
+                            scan.Members.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) >
+                            0
+                    };
+
+                if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtScanMember.Text))
                 {
-                    var delimiter = ' ';
-                    var substrings = searchValue.Split(delimiter);
-                    var firstSubstring = substrings[0];
-                    if (substrings.Length == 1)
+                    searchValue = txtScanMember.Text;
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (searchValue.Contains(" "))
                     {
-                        scans =
-                            scans.Where(
-                                m =>
-                                    m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
-                    }
-                    else if (substrings.Length == 2)
-                    {
-                        var secondSubstring = substrings[1];
-                        if (!string.IsNullOrEmpty(secondSubstring))
+                        var delimiter = ' ';
+                        var substrings = searchValue.Split(delimiter);
+                        var firstSubstring = substrings[0];
+                        if (substrings.Length == 1)
                         {
                             scans =
                                 scans.Where(
                                     m =>
-                                        (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
-                                        (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                                        m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
                         }
-                        else
+                        else if (substrings.Length == 2)
                         {
-                            scans =
-                           scans.Where(
-                               m =>
-                                   m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                            var secondSubstring = substrings[1];
+                            if (!string.IsNullOrEmpty(secondSubstring))
+                            {
+                                scans =
+                                    scans.Where(
+                                        m =>
+                                            (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
+                                            (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                            }
+                            else
+                            {
+                                scans =
+                                    scans.Where(
+                                        m =>
+                                            m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                            }
                         }
                     }
-                }
-                else
-                {
-                    scans =
-                     scans.Where(
-                         m =>
-                             m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
-                             m.Cod.StartsWith(searchValue));
+                    else
+                    {
+                        scans =
+                            scans.Where(
+                                m =>
+                                    m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
+                                    m.Cod.StartsWith(searchValue));
+                    }
                 }
 
+                lblTotalScansCount.Text = scans.Count().ToString();
+
+                dataGridViewScansR.DataSource = scans.ToList();
+
+                var dataGridViewColumn = dataGridViewScansR.Columns["Data_nastere"];
+                if (dataGridViewColumn != null)
+                    dataGridViewColumn.HeaderText = "Data nastere";
+                var gridViewColumn = dataGridViewScansR.Columns["Data_inregistrare"];
+                if (gridViewColumn != null)
+                    gridViewColumn.HeaderText = "Data inregistrare";
+                var viewColumn = dataGridViewScansR.Columns["Data_scanare"];
+                if (viewColumn != null)
+                    viewColumn.HeaderText = "Data scanare";
+                var column = dataGridViewScansR.Columns["Utilizator_activ"];
+                if (column != null)
+                    column.HeaderText = "Utilizator activ";
+                var o = dataGridViewScansR.Columns["Abonament_activ"];
+                if (o != null)
+                    o.HeaderText = "Abonament activ";
+
+
+                var id = dataGridViewScansR.Columns["Id"];
+                if (id != null) id.Visible = false;
+
+                dataGridViewScansR.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScansR.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                var scansByMonth = from p in scans
+                    where p.Data_scanare >= fromDateTime && p.Data_scanare <= toDateTime
+                    group p by new {month = p.Data_scanare.Month, year = p.Data_scanare.Year}
+                    into d
+                    select new {An = d.Key.year, Luna = d.Key.month, Numar_scanari = d.Count()};
+
+                dataGridViewScandGBM.DataSource = scansByMonth.ToList();
+                var q = dataGridViewScandGBM.Columns["Numar_scanari"];
+                if (q != null)
+                    q.HeaderText = "Numar scanari";
+                dataGridViewScandGBM.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScandGBM.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewScandGBM.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-            lblTotalScansCount.Text = scans.Count().ToString();
-
-            dataGridViewScansR.DataSource = scans.ToList();
-            var dataGridViewColumn = dataGridViewScansR.Columns["Data_nastere"];
-            if (dataGridViewColumn != null)
-                dataGridViewColumn.HeaderText = "Data nastere";
-            var gridViewColumn = dataGridViewScansR.Columns["Data_inregistrare"];
-            if (gridViewColumn != null)
-                gridViewColumn.HeaderText = "Data inregistrare";
-            var viewColumn = dataGridViewScansR.Columns["Data_scanare"];
-            if (viewColumn != null)
-                viewColumn.HeaderText = "Data scanare";
-            var column = dataGridViewScansR.Columns["Utilizator_activ"];
-            if (column != null)
-                column.HeaderText = "Utilizator activ";
-            var o = dataGridViewScansR.Columns["Abonament_activ"];
-            if (o != null)
-                o.HeaderText = "Abonament activ";
-
-
-            var id = dataGridViewScansR.Columns["Id"];
-            if (id != null) id.Visible = false;
-
-            dataGridViewScansR.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScansR.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            var scansByMonth = from p in scans
-                               where p.Data_scanare >= fromDateTime && p.Data_scanare <= toDateTime
-                               group p by new { month = p.Data_scanare.Month, year = p.Data_scanare.Year } into d
-                               select new { An = d.Key.year, Luna = d.Key.month, Numar_scanari = d.Count() };
-
-            dataGridViewScandGBM.DataSource = scansByMonth.ToList();
-            var q = dataGridViewScandGBM.Columns["Numar_scanari"];
-            if (q != null)
-                q.HeaderText = "Numar scanari";
-            dataGridViewScandGBM.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScandGBM.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewScandGBM.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void LoadMembersReport(DateTime fromDateTime, DateTime toDateTime, string searchValue)
         {
             fromDateTime = fromDateTime.Date;
             toDateTime = toDateTime.Date.AddDays(1).AddSeconds(-5);
-
-            var members = from member in db.Members
-                          where member.Created >= fromDateTime && member.Created <= toDateTime
-                          orderby member.Created descending
-                          select new
-                          {
-                              member.Id,
-                              Nume = member.Name,
-                              Prenume = member.Surname,
-                              Cod = member.Code,
-                              Data_nastere = member.Birthdate,
-                              Data_inregistrare = member.Created,
-                              Ultima_scanare = db.Scans.Where(s => s.IdMember == member.Id).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault(),
-                              Utilizator_activ = member.IsActive,
-                              Abonament_activ = member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
-                          };
-            if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtMember.Text))
+            using (var db = new LocalDBEntities())
             {
-                searchValue = txtMember.Text;
-            }
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                if (searchValue.Contains(" "))
+                var members = from member in db.Members
+                    where member.Created >= fromDateTime && member.Created <= toDateTime
+                    orderby member.Created descending
+                    select new
+                    {
+                        member.Id,
+                        Nume = member.Name,
+                        Prenume = member.Surname,
+                        Cod = member.Code,
+                        Data_nastere = member.Birthdate,
+                        Data_inregistrare = member.Created,
+                        Ultima_scanare =
+                            db.Scans.Where(s => s.IdMember == member.Id)
+                                .OrderByDescending(s => s.Id)
+                                .Select(s => s.Date)
+                                .FirstOrDefault(),
+                        Utilizator_activ = member.IsActive,
+                        Abonament_activ =
+                            member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0
+                    };
+                if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtMember.Text))
                 {
-                    var delimiter = ' ';
-                    var substrings = searchValue.Split(delimiter);
-                    var firstSubstring = substrings[0];
-                    if (substrings.Length == 1)
+                    searchValue = txtMember.Text;
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (searchValue.Contains(" "))
                     {
-                        members =
-                            members.Where(
-                                m =>
-                                    m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
-                    }
-                    else if (substrings.Length == 2)
-                    {
-                        var secondSubstring = substrings[1];
-                        if (!string.IsNullOrEmpty(secondSubstring))
-                        {
-                            members =
-                                members.Where(
-                                    m =>
-                                        (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
-                                        (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
-                        }
-                        else
+                        var delimiter = ' ';
+                        var substrings = searchValue.Split(delimiter);
+                        var firstSubstring = substrings[0];
+                        if (substrings.Length == 1)
                         {
                             members =
                                 members.Where(
                                     m =>
                                         m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
                         }
+                        else if (substrings.Length == 2)
+                        {
+                            var secondSubstring = substrings[1];
+                            if (!string.IsNullOrEmpty(secondSubstring))
+                            {
+                                members =
+                                    members.Where(
+                                        m =>
+                                            (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
+                                            (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                            }
+                            else
+                            {
+                                members =
+                                    members.Where(
+                                        m =>
+                                            m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                            }
+                        }
                     }
-                }
-                else
-                {
-                    members =
-                        members.Where(
-                            m =>
-                                m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
-                                m.Cod.StartsWith(searchValue));
+                    else
+                    {
+                        members =
+                            members.Where(
+                                m =>
+                                    m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
+                                    m.Cod.StartsWith(searchValue));
+                    }
+
                 }
 
+                dataGridViewMembersRep.DataSource = members.ToList();
+                var viewColumn = dataGridViewMembersRep.Columns["Data_nastere"];
+                if (viewColumn != null)
+                    viewColumn.HeaderText = "Data nastere";
+                var column = dataGridViewMembersRep.Columns["Data_inregistrare"];
+                if (column != null)
+                    column.HeaderText = "Data inregistrare";
+                var o = dataGridViewMembersRep.Columns["Ultima_scanare"];
+                if (o != null)
+                    o.HeaderText = "Ultima scanare";
+                var dataGridViewColumn1 = dataGridViewMembersRep.Columns["Utilizator_activ"];
+                if (dataGridViewColumn1 != null)
+                    dataGridViewColumn1.HeaderText = "Utilizator activ";
+                var gridViewColumn1 = dataGridViewMembersRep.Columns["Abonament_activ"];
+                if (gridViewColumn1 != null)
+                    gridViewColumn1.HeaderText = "Abonament activ";
+                var id = dataGridViewMembersRep.Columns["Id"];
+                if (id != null) id.Visible = false;
+
+                lblTotalCount.Text = members.Count().ToString();
+
+                lblCountActiveMembers.Text = members.Count(m => m.Abonament_activ).ToString();
+
+                var newMembersByMonth = from p in members
+                    where p.Data_inregistrare >= fromDateTime && p.Data_inregistrare <= toDateTime
+                    group p by new {month = p.Data_inregistrare.Month, year = p.Data_inregistrare.Year}
+                    into d
+                    select new {An = d.Key.year, Luna = d.Key.month, Membri_noi = d.Count()};
+
+                dataGridViewCountByMonth.DataSource =
+                    newMembersByMonth.OrderByDescending(s => s.An).ThenByDescending(s => s.Luna).ToList();
+
+                var gridViewColumn = dataGridViewCountByMonth.Columns["Membri_noi"];
+                if (gridViewColumn != null)
+                    gridViewColumn.HeaderText = "Membri noi";
+
+                dataGridViewCountByMonth.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewCountByMonth.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewCountByMonth.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                //
+
+                var dataGridViewColumn = dataGridViewMembersRep.Columns["Id"];
+                if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+
+                dataGridViewMembersRep.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembersRep.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-
-            dataGridViewMembersRep.DataSource = members.ToList();
-            var viewColumn = dataGridViewMembersRep.Columns["Data_nastere"];
-            if (viewColumn != null)
-                viewColumn.HeaderText = "Data nastere";
-            var column = dataGridViewMembersRep.Columns["Data_inregistrare"];
-            if (column != null)
-                column.HeaderText = "Data inregistrare";
-            var o = dataGridViewMembersRep.Columns["Ultima_scanare"];
-            if (o != null)
-                o.HeaderText = "Ultima scanare";
-            var dataGridViewColumn1 = dataGridViewMembersRep.Columns["Utilizator_activ"];
-            if (dataGridViewColumn1 != null)
-                dataGridViewColumn1.HeaderText = "Utilizator activ";
-            var gridViewColumn1 = dataGridViewMembersRep.Columns["Abonament_activ"];
-            if (gridViewColumn1 != null)
-                gridViewColumn1.HeaderText = "Abonament activ";
-            var id = dataGridViewMembersRep.Columns["Id"];
-            if (id != null) id.Visible = false;
-
-            lblTotalCount.Text = members.Count().ToString();
-
-            lblCountActiveMembers.Text = members.Count(m => m.Abonament_activ).ToString();
-
-            var newMembersByMonth = from p in members
-                                    where p.Data_inregistrare >= fromDateTime && p.Data_inregistrare <= toDateTime
-                                    group p by new { month = p.Data_inregistrare.Month, year = p.Data_inregistrare.Year } into d
-                                    select new { An = d.Key.year, Luna = d.Key.month, Membri_noi = d.Count() };
-
-            dataGridViewCountByMonth.DataSource = newMembersByMonth.OrderByDescending(s => s.An).ThenByDescending(s => s.Luna).ToList();
-
-            var gridViewColumn = dataGridViewCountByMonth.Columns["Membri_noi"];
-            if (gridViewColumn != null)
-                gridViewColumn.HeaderText = "Membri noi";
-
-            dataGridViewCountByMonth.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCountByMonth.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCountByMonth.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //
-
-            var dataGridViewColumn = dataGridViewMembersRep.Columns["Id"];
-            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
-
-            dataGridViewMembersRep.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembersRep.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void LoadMembershipReport(DateTime fromDateTime, DateTime toDateTime, string searchValue)
         {
             fromDateTime = fromDateTime.Date;
             toDateTime = toDateTime.Date.AddDays(1).AddSeconds(-5);
-
-            var membershipList =
-                db.Memberships.Where(
-                    membership => membership.StartDate >= fromDateTime && membership.StartDate <= toDateTime)
-                    .OrderByDescending(membership => membership.Id).ToList()
-                    .Select(membership => new
-                    {
-                        membership.Id,
-                        Nume = membership.Members.Name,
-                        Prenume = membership.Members.Surname,
-                        Cod = membership.Members.Code,
-                        Data_inscriere = membership.Members.Created,
-                        Tip_abonament = membership.MembershipType.Type,
-                        Data_inceput_abonament = membership.StartDate,
-                        Data_incheiere_abonament = membership.EndDate.Date,
-                        Total_abonamente =
-                            db.Memberships.Count(
-                                s =>
-                                    s.IdMember == membership.Members.Id && s.StartDate >= fromDateTime &&
-                                    s.StartDate <= toDateTime),
-                        Utilizator_activ = membership.Members.IsActive,
-                        Abonament_activ = membership.StartDate <= DateTime.Now && membership.EndDate >= DateTime.Now
-                    });
-            if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtMemberMembershipR.Text))
+            using (var db = new LocalDBEntities())
             {
-                searchValue = txtMemberMembershipR.Text;
-            }
-            if (!string.IsNullOrEmpty(searchValue))
-            {
-                if (searchValue.Contains(" "))
+                var membershipList =
+                    db.Memberships.Where(
+                        membership => membership.StartDate >= fromDateTime && membership.StartDate <= toDateTime)
+                        .OrderByDescending(membership => membership.Id)
+                        .Select(membership => new
+                        {
+                            membership.Id,
+                            Nume = membership.Members.Name,
+                            Prenume = membership.Members.Surname,
+                            Cod = membership.Members.Code,
+                            Data_inscriere = membership.Members.Created,
+                            Tip_abonament = membership.MembershipType.Type,
+                            Data_inceput_abonament = membership.StartDate,
+                            Data_incheiere_abonament = membership.EndDate,
+                            Total_abonamente =
+                                db.Memberships.Count(
+                                    s =>
+                                        s.IdMember == membership.Members.Id && s.StartDate >= fromDateTime &&
+                                        s.StartDate <= toDateTime),
+                            Utilizator_activ = membership.Members.IsActive,
+                            Abonament_activ = membership.StartDate <= DateTime.Now && membership.EndDate >= DateTime.Now
+                        });
+                if (string.IsNullOrEmpty(searchValue) && !string.IsNullOrEmpty(txtMemberMembershipR.Text))
                 {
-                    var delimiter = ' ';
-                    var substrings = searchValue.Split(delimiter);
-                    var firstSubstring = substrings[0];
-                    if (substrings.Length == 1)
+                    searchValue = txtMemberMembershipR.Text;
+                }
+                if (!string.IsNullOrEmpty(searchValue))
+                {
+                    if (searchValue.Contains(" "))
                     {
-                        membershipList =
-                            membershipList.Where(
-                                m =>
-                                    m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
-                    }
-                    else if (substrings.Length == 2)
-                    {
-                        var secondSubstring = substrings[1];
-                        if (!string.IsNullOrEmpty(secondSubstring))
+                        var delimiter = ' ';
+                        var substrings = searchValue.Split(delimiter);
+                        var firstSubstring = substrings[0];
+                        if (substrings.Length == 1)
                         {
                             membershipList =
                                 membershipList.Where(
                                     m =>
-                                        (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
-                                        (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                                        m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
                         }
-                        else
+                        else if (substrings.Length == 2)
                         {
-                            membershipList =
-                           membershipList.Where(
-                               m =>
-                                   m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                            var secondSubstring = substrings[1];
+                            if (!string.IsNullOrEmpty(secondSubstring))
+                            {
+                                membershipList =
+                                    membershipList.Where(
+                                        m =>
+                                            (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
+                                            (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                            }
+                            else
+                            {
+                                membershipList =
+                                    membershipList.Where(
+                                        m =>
+                                            m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                            }
                         }
                     }
+                    else
+                    {
+                        membershipList =
+                            membershipList.Where(
+                                m =>
+                                    m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
+                                    m.Cod.StartsWith(searchValue));
+                    }
                 }
-                else
+
+                dataGridViewMembershipR.DataSource = membershipList.ToList().Select(membership => new
                 {
-                    membershipList =
-                     membershipList.Where(
-                         m =>
-                             m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
-                             m.Cod.StartsWith(searchValue));
-                }
+                    membership.Id, membership.Nume, membership.Prenume, membership.Cod, membership.Data_inscriere, membership.Tip_abonament,
+                    membership.Data_inceput_abonament, Data_incheiere_abonament = membership.Data_incheiere_abonament.Date,
+                    Total_abonamente = db.Memberships.Count(s => s.IdMember == membership.Id && s.StartDate >= fromDateTime && s.StartDate <= toDateTime),
+                    Utilizator_activ = membership.Abonament_activ, Abonament_activ = membership.Data_inceput_abonament <= DateTime.Now 
+                    && membership.Data_incheiere_abonament >= DateTime.Now
+                }).ToList();
+
+                var dataGridViewColumn = dataGridViewMembershipR.Columns["Data_inscriere"];
+                if (dataGridViewColumn != null)
+                    dataGridViewColumn.HeaderText = "Data inscriere";
+                var gridViewColumn = dataGridViewMembershipR.Columns["Tip_abonament"];
+                if (gridViewColumn != null)
+                    gridViewColumn.HeaderText = "Tip abonament";
+                var viewColumn = dataGridViewMembershipR.Columns["Data_inceput_abonament"];
+                if (viewColumn != null)
+                    viewColumn.HeaderText = "Data inceput abonament";
+                var column = dataGridViewMembershipR.Columns["Data_incheiere_abonament"];
+                if (column != null)
+                    column.HeaderText = "Data incheiere abonament";
+                var o = dataGridViewMembershipR.Columns["Total_abonamente"];
+                if (o != null)
+                    o.HeaderText = "Total abonamente";
+                var dataGridViewColumn1 = dataGridViewMembershipR.Columns["Utilizator_activ"];
+                if (dataGridViewColumn1 != null)
+                    dataGridViewColumn1.HeaderText = "Utilizator activ";
+                var gridViewColumn1 = dataGridViewMembershipR.Columns["Abonament_activ"];
+                if (gridViewColumn1 != null)
+                    gridViewColumn1.HeaderText = "Abonament activ";
+
+                var id = dataGridViewMembershipR.Columns["Id"];
+                if (id != null) id.Visible = false;
+
+                lblTotalMembership.Text = membershipList.Count().ToString();
+                lblActiveCount.Text = membershipList.Count(m => m.Abonament_activ).ToString();
+                lblInactiveCount.Text =
+                    (membershipList.Count() - membershipList.Count(m => m.Abonament_activ)).ToString();
+
+                var newMembershipsByMonth = from p in membershipList
+                    where p.Data_inceput_abonament >= fromDateTime && p.Data_inceput_abonament <= toDateTime
+                    group p by new {month = p.Data_inceput_abonament.Month, year = p.Data_inceput_abonament.Year}
+                    into d
+                    select new {An = d.Key.year, Luna = d.Key.month, Numar_abonamente = d.Count()};
+
+                dataGridViewMembershipGroupByMonthR.DataSource =
+                    newMembershipsByMonth.OrderByDescending(d => d.An).ThenByDescending(d => d.Luna).ToList();
+                var gridViewColumn12 = dataGridViewMembershipGroupByMonthR.Columns["Numar_abonamente"];
+                if (gridViewColumn12 != null)
+                    gridViewColumn12.HeaderText = "Numar abonamente";
+
+                dataGridViewMembershipR.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGridViewMembershipR.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-
-            dataGridViewMembershipR.DataSource = membershipList.ToList();
-
-            var dataGridViewColumn = dataGridViewMembershipR.Columns["Data_inscriere"];
-            if (dataGridViewColumn != null)
-                dataGridViewColumn.HeaderText = "Data inscriere";
-            var gridViewColumn = dataGridViewMembershipR.Columns["Tip_abonament"];
-            if (gridViewColumn != null)
-                gridViewColumn.HeaderText = "Tip abonament";
-            var viewColumn = dataGridViewMembershipR.Columns["Data_inceput_abonament"];
-            if (viewColumn != null)
-                viewColumn.HeaderText = "Data inceput abonament";
-            var column = dataGridViewMembershipR.Columns["Data_incheiere_abonament"];
-            if (column != null)
-                column.HeaderText = "Data incheiere abonament";
-            var o = dataGridViewMembershipR.Columns["Total_abonamente"];
-            if (o != null)
-                o.HeaderText = "Total abonamente";
-            var dataGridViewColumn1 = dataGridViewMembershipR.Columns["Utilizator_activ"];
-            if (dataGridViewColumn1 != null)
-                dataGridViewColumn1.HeaderText = "Utilizator activ";
-            var gridViewColumn1 = dataGridViewMembershipR.Columns["Abonament_activ"];
-            if (gridViewColumn1 != null)
-                gridViewColumn1.HeaderText = "Abonament activ";
-
-            var id = dataGridViewMembershipR.Columns["Id"];
-            if (id != null) id.Visible = false;
-
-            lblTotalMembership.Text = membershipList.Count().ToString();
-            lblActiveCount.Text = membershipList.Count(m => m.Abonament_activ).ToString();
-            lblInactiveCount.Text = (membershipList.Count() - membershipList.Count(m => m.Abonament_activ)).ToString();
-
-            var newMembershipsByMonth = from p in membershipList
-                                        where p.Data_inceput_abonament >= fromDateTime && p.Data_inceput_abonament <= toDateTime
-                                        group p by new { month = p.Data_inceput_abonament.Month, year = p.Data_inceput_abonament.Year } into d
-                                        select new { An = d.Key.year, Luna = d.Key.month, Numar_abonamente = d.Count() };
-
-            dataGridViewMembershipGroupByMonthR.DataSource = newMembershipsByMonth.OrderByDescending(d => d.An).ThenByDescending(d => d.Luna).ToList();
-            var gridViewColumn12 = dataGridViewMembershipGroupByMonthR.Columns["Numar_abonamente"];
-            if (gridViewColumn12 != null)
-                gridViewColumn12.HeaderText = "Numar abonamente";
-
-            dataGridViewMembershipR.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewMembershipR.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)

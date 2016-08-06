@@ -7,7 +7,6 @@ namespace GymSys
 {
     public partial class ucMembers : UserControl
     {
-        LocalDBEntities db = new LocalDBEntities();
         private static ucMembers _instanceMembers;
         private int _membersSelectedRow = 0;
         private int _membershipSelectedRow = 0;
@@ -30,29 +29,32 @@ namespace GymSys
 
         private void ProcessDeleteMember()
         {
-            int idmember = 0;
+            int idmember;
 
             Members memberToDelete = null;
-            foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
+            using (var db = new LocalDBEntities())
             {
-                string id = row.Cells[0].Value.ToString();
-                int.TryParse(id, out idmember);
-                memberToDelete = db.Members.FirstOrDefault(m => m.Id == idmember);
-
-            }
-            if (memberToDelete != null)
-            {
-                var confirmResult =
-                    MessageBox.Show(
-                        "Sunteti siguri ca doriti sa stergeti utilizatorul selectat?", "Confirm!!",
-                        MessageBoxButtons.YesNo);
-                if (confirmResult == DialogResult.Yes)
+                foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
                 {
-                    memberToDelete.IsActive = false;
-                    db.SaveChanges();
-                    Instance.LoadMembers(Actions.Operations.DeleteMember, txtSearchMembers.Text);
+                    string id = row.Cells[0].Value.ToString();
+                    int.TryParse(id, out idmember);
+                    memberToDelete = db.Members.FirstOrDefault(m => m.Id == idmember);
 
-                    RefreshDashboard();
+                }
+                if (memberToDelete != null)
+                {
+                    var confirmResult =
+                        MessageBox.Show(
+                            "Sunteti siguri ca doriti sa stergeti utilizatorul selectat?", "Confirm!!",
+                            MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        memberToDelete.IsActive = false;
+                        db.SaveChanges();
+                        Instance.LoadMembers(Actions.Operations.DeleteMember, txtSearchMembers.Text);
+
+                        RefreshDashboard();
+                    }
                 }
             }
         }
@@ -68,71 +70,75 @@ namespace GymSys
 
         public void LoadSubscription(Actions.Operations operation)
         {
-            if (dataGVMembers.SelectedRows.Count == 1)
+            using (var db = new LocalDBEntities())
             {
-                lblUserMembership.Visible = true;
-                foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
+                if (dataGVMembers.SelectedRows.Count == 1)
                 {
-                    int idint;
-                    string id = row.Cells[0].Value.ToString();
-                    int.TryParse(id, out idint);
+                    lblUserMembership.Visible = true;
+                    foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
+                    {
+                        int idint;
+                        string id = row.Cells[0].Value.ToString();
+                        int.TryParse(id, out idint);
 
-                    var membershipHist =
-                        db.Memberships.Where(membership => membership.IdMember == idint && membership.IsActive)
-                            .OrderByDescending(membership => membership.Id).ToList()
-                            .Select(membership => new
-                            {
-                                membership.Id,
-                                Tip_abonament = membership.MembershipType.Type,
-                                Data_inceput_abonament = membership.StartDate,
-                                Data_sfarsit_abonament = membership.EndDate.Date,
-                                Status =
-                                    membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate
-                                        ? "Activ"
-                                        : "Inactiv"
-                            });
+                        var membershipHist =
+                            db.Memberships.Where(membership => membership.IdMember == idint && membership.IsActive)
+                                .OrderByDescending(membership => membership.Id).ToList()
+                                .Select(membership => new
+                                {
+                                    membership.Id,
+                                    Tip_abonament = membership.MembershipType.Type,
+                                    Data_inceput_abonament = membership.StartDate,
+                                    Data_sfarsit_abonament = membership.EndDate.Date,
+                                    Status =
+                                        membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate
+                                            ? "Activ"
+                                            : "Inactiv"
+                                });
 
 
-                    dataGvMembershipHist.DataSource = membershipHist.ToList();
-                    var gridViewColumn = dataGvMembershipHist.Columns["Data_inceput_abonament"];
-                    if (gridViewColumn != null)
-                        gridViewColumn.HeaderText = "Data inceput abonament";
-                    var viewColumn = dataGvMembershipHist.Columns["Data_sfarsit_abonament"];
-                    if (viewColumn != null)
-                        viewColumn.HeaderText = "Data sfarsit abonament";
-                    var column = dataGvMembershipHist.Columns["Tip_abonament"];
-                    if (column != null)
-                        column.HeaderText = "Tip abonament";
+                        dataGvMembershipHist.DataSource = membershipHist.ToList();
+                        var gridViewColumn = dataGvMembershipHist.Columns["Data_inceput_abonament"];
+                        if (gridViewColumn != null)
+                            gridViewColumn.HeaderText = "Data inceput abonament";
+                        var viewColumn = dataGvMembershipHist.Columns["Data_sfarsit_abonament"];
+                        if (viewColumn != null)
+                            viewColumn.HeaderText = "Data sfarsit abonament";
+                        var column = dataGvMembershipHist.Columns["Tip_abonament"];
+                        if (column != null)
+                            column.HeaderText = "Tip abonament";
 
-                    dataGvMembershipHist.Visible = true;
-                    var dataGridViewColumn = dataGvMembershipHist.Columns["Id"];
-                    if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
-                    dataGvMembershipHist.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGvMembershipHist.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGvMembershipHist.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGvMembershipHist.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dataGvMembershipHist.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        dataGvMembershipHist.Visible = true;
+                        var dataGridViewColumn = dataGvMembershipHist.Columns["Id"];
+                        if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+                        dataGvMembershipHist.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        dataGvMembershipHist.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        dataGvMembershipHist.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        dataGvMembershipHist.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        dataGvMembershipHist.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                    }
                 }
-            }
-            else
-            {
-                dataGvMembershipHist.Visible = false;
-                lblUserMembership.Visible = false;
-            }
-            if (operation == Actions.Operations.DeleteMemberhip)
-            {
-                if (_membersSelectedRow > 0)
+                else
                 {
-                    dataGVMembers.ClearSelection();
-                    dataGVMembers.Rows[_membersSelectedRow].Selected = true;
+                    dataGvMembershipHist.Visible = false;
+                    lblUserMembership.Visible = false;
                 }
-            }
-            if (operation == Actions.Operations.EditSubscription)
-            {
-                if (_membershipSelectedRow > 0)
+                if (operation == Actions.Operations.DeleteMemberhip)
                 {
-                    dataGvMembershipHist.ClearSelection();
-                    dataGvMembershipHist.Rows[_membershipSelectedRow].Selected = true;
+                    if (_membersSelectedRow > 0)
+                    {
+                        dataGVMembers.ClearSelection();
+                        dataGVMembers.Rows[_membersSelectedRow].Selected = true;
+                    }
+                }
+                if (operation == Actions.Operations.EditSubscription)
+                {
+                    if (_membershipSelectedRow > 0)
+                    {
+                        dataGvMembershipHist.ClearSelection();
+                        dataGvMembershipHist.Rows[_membershipSelectedRow].Selected = true;
+                    }
                 }
             }
         }
@@ -147,100 +153,108 @@ namespace GymSys
             {
                 txtSearchMembers.Clear();
             }
-            var members = from member in db.Members
-                          where member.IsActive
-                          orderby member.Created descending
-                          select new
-                          {
-                              member.Id,
-                              Nume = member.Name,
-                              Prenume = member.Surname,
-                              Cod = member.Code,
-                              Activ = member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
-                              Data_nastere = member.Birthdate,
-                              Data_inregistrare = member.Created,
-                              Ultima_scanare = db.Scans.Where(s => s.IdMember == member.Id).OrderByDescending(s => s.Id).Select(s => s.Date).FirstOrDefault()
-                          };
-
-            if (!string.IsNullOrEmpty(searchValue))
+            using (var db = new LocalDBEntities())
             {
-                if (searchValue.Contains(" "))
+                var members = from member in db.Members
+                              where member.IsActive
+                              orderby member.Created descending
+                              select new
+                              {
+                                  member.Id,
+                                  Nume = member.Name,
+                                  Prenume = member.Surname,
+                                  Cod = member.Code,
+                                  Activ =
+                                      member.Memberships.Count(a => a.StartDate <= DateTime.Now && a.EndDate >= DateTime.Now) > 0,
+                                  Data_nastere = member.Birthdate,
+                                  Data_inregistrare = member.Created,
+                                  Ultima_scanare =
+                                      db.Scans.Where(s => s.IdMember == member.Id)
+                                          .OrderByDescending(s => s.Id)
+                                          .Select(s => s.Date)
+                                          .FirstOrDefault()
+                              };
+
+                if (!string.IsNullOrEmpty(searchValue))
                 {
-                    var delimiter = ' ';
-                    var substrings = searchValue.Split(delimiter);
-                    var firstSubstring = substrings[0];
-                    if (substrings.Length == 1)
+                    if (searchValue.Contains(" "))
                     {
-                        members =
-                            members.Where(
-                                m =>
-                                    m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
-                    }
-                    else if (substrings.Length == 2)
-                    {
-                        var secondSubstring = substrings[1];
-                        if (!string.IsNullOrEmpty(secondSubstring))
+                        var delimiter = ' ';
+                        var substrings = searchValue.Split(delimiter);
+                        var firstSubstring = substrings[0];
+                        if (substrings.Length == 1)
                         {
                             members =
                                 members.Where(
                                     m =>
-                                        (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
-                                        (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                                        m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
                         }
-                        else
+                        else if (substrings.Length == 2)
                         {
-                            members =
-                           members.Where(
-                               m =>
-                                   m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                            var secondSubstring = substrings[1];
+                            if (!string.IsNullOrEmpty(secondSubstring))
+                            {
+                                members =
+                                    members.Where(
+                                        m =>
+                                            (m.Nume.StartsWith(firstSubstring) && m.Prenume.StartsWith(secondSubstring)) ||
+                                            (m.Nume.StartsWith(secondSubstring) && m.Prenume.StartsWith(firstSubstring)));
+                            }
+                            else
+                            {
+                                members =
+                                    members.Where(
+                                        m =>
+                                            m.Nume.StartsWith(firstSubstring) || m.Prenume.StartsWith(firstSubstring));
+                            }
                         }
                     }
+                    else
+                    {
+                        members =
+                            members.Where(
+                                m =>
+                                    m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
+                                    m.Cod.StartsWith(searchValue));
+                    }
+
                 }
-                else
+                lblTotalCount.Text = members.Count().ToString();
+
+                dataGVMembers.DataSource = members.ToList();
+                var gridViewColumn = dataGVMembers.Columns["Data_nastere"];
+                if (gridViewColumn != null)
+                    gridViewColumn.HeaderText = "Data nastere";
+                var viewColumn = dataGVMembers.Columns["Data_inregistrare"];
+                if (viewColumn != null)
+                    viewColumn.HeaderText = "Data inregistrare";
+                var column = dataGVMembers.Columns["Ultima_scanare"];
+                if (column != null)
+                    column.HeaderText = "Ultima scanare";
+
+                var dataGridViewColumn = dataGVMembers.Columns["Id"];
+                if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
+                dataGVMembers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGVMembers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGVMembers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGVMembers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGVMembers.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGVMembers.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                dataGVMembers.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+                if (operation != Actions.Operations.DeleteMember)
                 {
-                    members =
-                     members.Where(
-                         m =>
-                             m.Nume.StartsWith(searchValue) || m.Prenume.StartsWith(searchValue) ||
-                             m.Cod.StartsWith(searchValue));
+                    if (_membersSelectedRow > 0 && dataGVMembers.Rows.Count > _membersSelectedRow)
+                    {
+                        dataGVMembers.ClearSelection();
+                        dataGVMembers.Rows[_membersSelectedRow].Selected = true;
+                    }
                 }
 
-            }
-            lblTotalCount.Text = members.Count().ToString();
-
-            dataGVMembers.DataSource = members.ToList();
-            var gridViewColumn = dataGVMembers.Columns["Data_nastere"];
-            if (gridViewColumn != null)
-                gridViewColumn.HeaderText = "Data nastere";
-            var viewColumn = dataGVMembers.Columns["Data_inregistrare"];
-            if (viewColumn != null)
-                viewColumn.HeaderText = "Data inregistrare";
-            var column = dataGVMembers.Columns["Ultima_scanare"];
-            if (column != null)
-                column.HeaderText = "Ultima scanare";
-
-            var dataGridViewColumn = dataGVMembers.Columns["Id"];
-            if (dataGridViewColumn != null) dataGridViewColumn.Visible = false;
-            dataGVMembers.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGVMembers.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGVMembers.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGVMembers.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGVMembers.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGVMembers.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGVMembers.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-            if (operation != Actions.Operations.DeleteMember)
-            {
-                if (_membersSelectedRow > 0 && dataGVMembers.Rows.Count > _membersSelectedRow)
+                if (!members.Any())
                 {
-                    dataGVMembers.ClearSelection();
-                    dataGVMembers.Rows[_membersSelectedRow].Selected = true;
+                    btnMembership.Visible = false;
                 }
-            }
-
-            if (!members.Any())
-            {
-                btnMembership.Visible = false;
             }
         }
 
@@ -286,30 +300,33 @@ namespace GymSys
 
         private void MyMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            switch (e.ClickedItem.Name)
+            using (var db = new LocalDBEntities())
             {
-                case "Editare":
-                    foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
-                    {
-                        int idint;
-                        string id = row.Cells[0].Value.ToString();
-                        int.TryParse(id, out idint);
-                        var member = db.Members.FirstOrDefault(m => m.Id == idint);
-                        if (addSubscription == null)
+                switch (e.ClickedItem.Name)
+                {
+                    case "Editare":
+                        foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
                         {
-                            addSubscription = new NewMemberForm(member, null, Actions.Operations.EditMember,
-                                txtSearchMembers.Text, string.Empty);
-                            addSubscription.Show();
+                            int idint;
+                            string id = row.Cells[0].Value.ToString();
+                            int.TryParse(id, out idint);
+                            var member = db.Members.FirstOrDefault(m => m.Id == idint);
+                            if (addSubscription == null)
+                            {
+                                addSubscription = new NewMemberForm(member, null, Actions.Operations.EditMember,
+                                    txtSearchMembers.Text, string.Empty);
+                                addSubscription.Show();
+                            }
+                            else
+                            {
+                                addSubscription.Show();
+                            }
                         }
-                        else
-                        {
-                            addSubscription.Show();
-                        }
-                    }
-                    break;
-                case "Stergere":
-                    ProcessDeleteMember();
-                    break;
+                        break;
+                    case "Stergere":
+                        ProcessDeleteMember();
+                        break;
+                }
             }
         }
 
@@ -325,24 +342,27 @@ namespace GymSys
 
         private void btnMembership_Click(object sender, EventArgs e)
         {
-            if (dataGVMembers.SelectedRows.Count == 1)
-                foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
-                {
-                    int idint;
-                    string id = row.Cells[0].Value.ToString();
-                    int.TryParse(id, out idint);
-                    var member = db.Members.FirstOrDefault(m => m.Id == idint);
-                    if (addSubscription == null)
+            using (var db = new LocalDBEntities())
+            {
+                if (dataGVMembers.SelectedRows.Count == 1)
+                    foreach (DataGridViewRow row in dataGVMembers.SelectedRows)
                     {
-                        addSubscription = new NewMemberForm(member, null,
-                            Actions.Operations.AddSubscription, txtSearchMembers.Text, string.Empty);
-                        addSubscription.Show();
+                        int idint;
+                        string id = row.Cells[0].Value.ToString();
+                        int.TryParse(id, out idint);
+                        var member = db.Members.FirstOrDefault(m => m.Id == idint);
+                        if (addSubscription == null)
+                        {
+                            addSubscription = new NewMemberForm(member, null,
+                                Actions.Operations.AddSubscription, txtSearchMembers.Text, string.Empty);
+                            addSubscription.Show();
+                        }
+                        else
+                        {
+                            addSubscription.Show();
+                        }
                     }
-                    else
-                    {
-                        addSubscription.Show();
-                    }
-                }
+            }
         }
 
         private void dataGvMembershipHist_MouseClick(object sender, MouseEventArgs e)
@@ -374,56 +394,60 @@ namespace GymSys
 
         private void MembershipMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            switch (e.ClickedItem.Name)
+            using (var db = new LocalDBEntities())
             {
-                case "Editare":
-                    if (dataGvMembershipHist.SelectedRows.Count == 1)
-                        foreach (DataGridViewRow row in dataGvMembershipHist.SelectedRows)
-                        {
-                            int idint;
-                            string id = row.Cells[0].Value.ToString();
-                            int.TryParse(id, out idint);
-                            var membership = db.Memberships.FirstOrDefault(m => m.Id == idint);
-
-                            var membershipUpdated = from item in db.Memberships
-                                                    where item.Id == idint
-                                                    select new
-                                                    {
-                                                        item.StartDate,
-                                                        item.EndDate,
-                                                        item.IdMembershipType
-                                                    };
-
-                            if (membership != null)
+                switch (e.ClickedItem.Name)
+                {
+                    case "Editare":
+                        if (dataGvMembershipHist.SelectedRows.Count == 1)
+                            foreach (DataGridViewRow row in dataGvMembershipHist.SelectedRows)
                             {
-                                membership.StartDate = membershipUpdated.Select(m => m.StartDate).FirstOrDefault();
-                                membership.EndDate = membershipUpdated.Select(m => m.EndDate).FirstOrDefault();
-                                membership.IdMembershipType = membershipUpdated.Select(m => m.IdMembershipType).FirstOrDefault();
+                                int idint;
+                                string id = row.Cells[0].Value.ToString();
+                                int.TryParse(id, out idint);
+                                var membership = db.Memberships.FirstOrDefault(m => m.Id == idint);
 
-                                if (editSubscription == null)
+                                var membershipUpdated = from item in db.Memberships
+                                                        where item.Id == idint
+                                                        select new
+                                                        {
+                                                            item.StartDate,
+                                                            item.EndDate,
+                                                            item.IdMembershipType
+                                                        };
+
+                                if (membership != null)
                                 {
-                                    editSubscription = new NewMemberForm(null, membership,
-                                        Actions.Operations.EditSubscription, txtSearchMembers.Text, string.Empty);
-                                    editSubscription.Show();
-                                }
-                                else
-                                {
-                                    editSubscription.Show();
+                                    membership.StartDate = membershipUpdated.Select(m => m.StartDate).FirstOrDefault();
+                                    membership.EndDate = membershipUpdated.Select(m => m.EndDate).FirstOrDefault();
+                                    membership.IdMembershipType =
+                                        membershipUpdated.Select(m => m.IdMembershipType).FirstOrDefault();
+
+                                    if (editSubscription == null)
+                                    {
+                                        editSubscription = new NewMemberForm(null, membership,
+                                            Actions.Operations.EditSubscription, txtSearchMembers.Text, string.Empty);
+                                        editSubscription.Show();
+                                    }
+                                    else
+                                    {
+                                        editSubscription.Show();
+                                    }
                                 }
                             }
-                        }
-                    break;
-                case "Stergere":
-                    try
-                    {
-                        ProcessDeleteMembership();
+                        break;
+                    case "Stergere":
+                        try
+                        {
+                            ProcessDeleteMembership();
 
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "ProcessDeleteMembership");
-                    }
-                    break;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "ProcessDeleteMembership");
+                        }
+                        break;
+                }
             }
         }
 
@@ -431,26 +455,29 @@ namespace GymSys
         {
             int idmembership;
             Memberships membershipToDelete = null;
-            foreach (DataGridViewRow row in dataGvMembershipHist.SelectedRows)
+            using (var db = new LocalDBEntities())
             {
-                string id = row.Cells[0].Value.ToString();
-                int.TryParse(id, out idmembership);
-                membershipToDelete = db.Memberships.FirstOrDefault(m => m.Id == idmembership);
-            }
-            if (membershipToDelete != null)
-            {
-                var confirmResult =
-                    MessageBox.Show(
-                        "Sunteti siguri ca doriti sa stergeti abonamentu selectat?", "Confirm!",
-                        MessageBoxButtons.YesNo);
-                if (confirmResult == DialogResult.Yes)
+                foreach (DataGridViewRow row in dataGvMembershipHist.SelectedRows)
                 {
-                    membershipToDelete.IsActive = false;
-                    db.SaveChanges();
+                    string id = row.Cells[0].Value.ToString();
+                    int.TryParse(id, out idmembership);
+                    membershipToDelete = db.Memberships.FirstOrDefault(m => m.Id == idmembership);
+                }
+                if (membershipToDelete != null)
+                {
+                    var confirmResult =
+                        MessageBox.Show(
+                            "Sunteti siguri ca doriti sa stergeti abonamentu selectat?", "Confirm!",
+                            MessageBoxButtons.YesNo);
+                    if (confirmResult == DialogResult.Yes)
+                    {
+                        membershipToDelete.IsActive = false;
+                        db.SaveChanges();
 
-                    Instance.LoadSubscription(Actions.Operations.DeleteMemberhip);
+                        Instance.LoadSubscription(Actions.Operations.DeleteMemberhip);
 
-                    RefreshDashboard();
+                        RefreshDashboard();
+                    }
                 }
             }
         }
