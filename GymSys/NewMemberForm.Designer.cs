@@ -253,7 +253,7 @@
             this.lblEndDateMembership.Name = "lblEndDateMembership";
             this.lblEndDateMembership.Size = new System.Drawing.Size(155, 17);
             this.lblEndDateMembership.TabIndex = 29;
-            this.lblEndDateMembership.Text = "Data sfarsit abonament";
+            this.lblEndDateMembership.Text = "Data incheiere abonament";
             // 
             // txtIdMembership
             // 

@@ -207,51 +207,58 @@ namespace GymSys
 
                     if (scannedMember != null)
                     {
-
-                        var membership =
-                            db.Memberships.Where(
-                                s =>
-                                    s.IdMember == scannedMember.Id && s.StartDate <= dateTodayMax &&
-                                    s.EndDate > dateTodayMin)
-                                .Select(s => s)
-                                .OrderByDescending(s => s.Id)
-                                .FirstOrDefault();
-                        if (membership != null)
+                        if (scannedMember.IsActive == true)
                         {
-                            if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > _dateToday) == 0)
+                            var membership =
+                                db.Memberships.Where(
+                                    s =>
+                                        s.IdMember == scannedMember.Id && s.StartDate <= dateTodayMax &&
+                                        s.EndDate > dateTodayMin && s.IsActive)
+                                    .Select(s => s)
+                                    .OrderByDescending(s => s.Id)
+                                    .FirstOrDefault();
+                            if (membership != null)
                             {
-                                Scans scan = new Scans
+                                if (db.Scans.Count(s => s.IdMember == scannedMember.Id && s.Date > _dateToday) == 0)
                                 {
-                                    IdMember = scannedMember.Id,
-                                    Date = DateTime.Now
-                                };
-                                db.Scans.Add(scan);
-                                db.SaveChanges();
-                                SetUpLastScanned(scannedMember, membership);
-                                LoadScanList(false);
+                                    Scans scan = new Scans
+                                    {
+                                        IdMember = scannedMember.Id,
+                                        Date = DateTime.Now
+                                    };
+                                    db.Scans.Add(scan);
+                                    db.SaveChanges();
+                                    SetUpLastScanned(scannedMember, membership);
+                                    LoadScanList(false);
+                                }
+                                else
+                                {
+                                    SetUpLastScanned(scannedMember, membership);
+                                }
                             }
                             else
                             {
-                                SetUpLastScanned(scannedMember, membership);
+                                DialogResult dialogResult =
+                                    MessageBox.Show(
+                                        "Abonatul nu are nici un abonament activ. Doriti sa adaugati un abonament nou?",
+                                        "Abonament inactiv", MessageBoxButtons.YesNo);
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    NewMemberForm addSubscription = new NewMemberForm(scannedMember, null,
+                                        Actions.Operations.AddSubscription, string.Empty, txtScanedCode.Text);
+                                    addSubscription.Show();
+                                }
+                                else if (dialogResult == DialogResult.No)
+                                {
+                                    //do something else
+                                }
+
                             }
                         }
                         else
                         {
-                            DialogResult dialogResult =
-                                MessageBox.Show(
-                                    "Abonatul nu are nici un abonament activ. Doriti sa adaugati un abonament nou?",
-                                    "Abonament inactiv", MessageBoxButtons.YesNo);
-                            if (dialogResult == DialogResult.Yes)
-                            {
-                                NewMemberForm addSubscription = new NewMemberForm(scannedMember, null,
-                                    Actions.Operations.AddSubscription, string.Empty, txtScanedCode.Text);
-                                addSubscription.Show();
-                            }
-                            else if (dialogResult == DialogResult.No)
-                            {
-                                //do something else
-                            }
-
+                            MessageBox.Show(
+                                "Acest utilizator a fost sters. Va rugam adaugati o inregistrare cu un card nou.");
                         }
                     }
                     else

@@ -3764,7 +3764,7 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-341573036</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-341573036</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-341573036</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.CrisanFlavius.com</td><td>0</td><td/><td>874826487</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>linkedin.com/in/flavius-crisan-68915391</td><td>0</td><td/><td>1009029877</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td>CrisanFlavius</td><td>0</td><td/><td>874826487</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>-341536172</td></row>
 		<row><td>ID_STRING4</td><td>1033</td><td>LAUNCH~1.EXE|Launch GymSys.exe</td><td>0</td><td/><td>203733557</td></row>

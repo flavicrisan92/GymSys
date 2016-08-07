@@ -92,7 +92,7 @@ namespace GymSys
                                     Tip_abonament = membership.MembershipType.Type,
                                     Data_inceput_abonament = membership.StartDate.ToString("dd/MM/yyyy HH:mm",
                                 CultureInfo.InvariantCulture),
-                                    Data_sfarsit_abonament = membership.EndDate.Date.ToString("dd/MM/yyyy",
+                                    Data_incheiere_abonament = membership.EndDate.Date.ToString("dd/MM/yyyy",
                                 CultureInfo.InvariantCulture),
                                     Status =
                                         membership.StartDate <= DateTime.Now && DateTime.Now < membership.EndDate
@@ -105,9 +105,9 @@ namespace GymSys
                         var gridViewColumn = dataGvMembershipHist.Columns["Data_inceput_abonament"];
                         if (gridViewColumn != null)
                             gridViewColumn.HeaderText = "Data inceput abonament";
-                        var viewColumn = dataGvMembershipHist.Columns["Data_sfarsit_abonament"];
+                        var viewColumn = dataGvMembershipHist.Columns["Data_incheiere_abonament"];
                         if (viewColumn != null)
-                            viewColumn.HeaderText = "Data sfarsit abonament";
+                            viewColumn.HeaderText = "Data incheiere abonament";
                         var column = dataGvMembershipHist.Columns["Tip_abonament"];
                         if (column != null)
                             column.HeaderText = "Tip abonament";
@@ -234,7 +234,7 @@ namespace GymSys
                     s.Activ,
                     Data_nastere = s.Data_nastere.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                     Data_inregistrare = s.Data_inregistrare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
-                    Ultima_scanare=s.Ultima_scanare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture)
+                    Ultima_scanare = s.Ultima_scanare.Year != 00001? s.Ultima_scanare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture) : " "
                 }).ToList();
                 var gridViewColumn = dataGVMembers.Columns["Data_nastere"];
                 if (gridViewColumn != null)

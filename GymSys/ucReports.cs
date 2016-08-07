@@ -278,7 +278,7 @@ namespace GymSys
                     into d
                                    select new { An = d.Key.year, Luna = d.Key.month, Numar_scanari = d.Count() };
 
-                dataGridViewScandGBM.DataSource = scansByMonth.ToList();
+                dataGridViewScandGBM.DataSource = scansByMonth.OrderByDescending(a=>a.An).ThenByDescending(a=>a.Luna).ToList();
                 var q = dataGridViewScandGBM.Columns["Numar_scanari"];
                 if (q != null)
                     q.HeaderText = "Numar scanari";
@@ -305,7 +305,7 @@ namespace GymSys
                                   Cod = member.Code,
                                   Data_nastere = member.Birthdate,
                                   Data_inregistrare = member.Created,
-                                  Ultima_scanare =
+                                  Ultima_scanare = 
                                       db.Scans.Where(s => s.IdMember == member.Id)
                                           .OrderByDescending(s => s.Id)
                                           .Select(s => s.Date)
@@ -371,7 +371,7 @@ namespace GymSys
                     s.Cod,
                     Data_nastere = s.Data_nastere.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                     Data_inregistrare = s.Data_inregistrare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
-                    Ultima_scanare = s.Ultima_scanare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture),
+                    Ultima_scanare = s.Ultima_scanare.Year != 00001 ? s.Ultima_scanare.ToString("dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture) : " ",
                     s.Utilizator_activ,
                     s.Abonament_activ
                 }).ToList();

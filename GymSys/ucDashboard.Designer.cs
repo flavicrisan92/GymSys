@@ -447,7 +447,7 @@
             this.lblEDLastS.Name = "lblEDLastS";
             this.lblEDLastS.Size = new System.Drawing.Size(80, 17);
             this.lblEDLastS.TabIndex = 3;
-            this.lblEDLastS.Text = "Data sfarsit";
+            this.lblEDLastS.Text = "Data incheiere";
             // 
             // lblSDLastSub
             // 
