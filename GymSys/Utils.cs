@@ -47,8 +47,9 @@ namespace GymSys
             return result.ToString(CultureInfo.InvariantCulture);
         }
 
-        public static bool ValidateNewUserAndMembership(int id, string name, string surname, string code, string numericPeriod, int membershipType, Actions.Operations operation)
+        public static bool ValidateNewUserAndMembership(int id, string name, string surname, string code, string numericPeriod, int membershipType, DateTime fromDateM, DateTime toDateM, Actions.Operations operation)
         {
+            fromDateM = fromDateM.Date;
             if (string.IsNullOrEmpty(code))
             {
                 ShowRequiredMessage();
@@ -77,6 +78,11 @@ namespace GymSys
             if (membershipType < 0)
             {
                 ShowRequiredMessage();
+                return false;
+            }
+            if (fromDateM > toDateM)
+            {
+                MessageBox.Show("Data de incheiere a abonamentului este mai mica decat data de inceput!");
                 return false;
             }
             return true;

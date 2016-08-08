@@ -231,7 +231,7 @@ namespace GymSys
         private void ProcessEditMember()
         {
             if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text,
-                numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddMember))
+                numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, dateTimePickerStartMembership.Value, dateTimePickerEndDateMembership.Value, Actions.Operations.AddMember))
             {
                 var member = db.Members.FirstOrDefault(m => m.Id == _currentMemberOnEdit);
                 if (!db.Members.Any(m => m.Code == txtCode.Text && m.Id != _currentMemberOnEdit))
@@ -264,7 +264,7 @@ namespace GymSys
 
         private void ProcessAddMembership()
         {
-            if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddSubscription))
+            if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, dateTimePickerStartMembership.Value, dateTimePickerEndDateMembership.Value, Actions.Operations.AddSubscription))
             {
                 Members member = null;
                 //Get member
@@ -310,7 +310,7 @@ namespace GymSys
         //Crate new member, add new membership and add scan
         private void ProcessAddMember()
         {
-            if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, Actions.Operations.AddMember))
+            if (Utils.ValidateNewUserAndMembership(_currentMemberOnEdit, txtName.Text, txtSurname.Text, txtCode.Text, numericUpDownPeriod.Text, comboBoxMembershipType.SelectedIndex, dateTimePickerStartMembership.Value, dateTimePickerEndDateMembership.Value, Actions.Operations.AddMember))
             {
                 int code;
                 int.TryParse(txtCode.Text, out code);
